@@ -6,7 +6,6 @@ import { Inicio } from "./pages/inicio";
 import { Login } from "./pages/login";
 import { PersonalData } from "./pages/personalData";
 import { Homepage } from "./pages/homepage";
-import injectContext from "./store/appContext";
 import { Profile } from "./pages/profile";
 import { Info } from "./pages/info";
 import { Plans } from "./pages/plans";
@@ -15,6 +14,7 @@ import { PersonalPlan } from "./pages/personalPlan";
 import { Time } from "./pages/time";
 import { Exercise } from "./pages/exercise";
 import { Booking } from "./pages/booking";
+import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
