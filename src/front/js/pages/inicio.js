@@ -9,7 +9,7 @@ export const Inicio = () => {
 	return (
 		<div className="text-center mt-5">
 			<h1>INICIO</h1>
-			<Link to="/login">Login</Link>
+			<Link to="/login"><button>Comenzamos</button></Link>
 		</div>
 	);
 };
