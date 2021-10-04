@@ -14,7 +14,6 @@ import { PersonalPlan } from "./pages/personalPlan";
 import { Time } from "./pages/time";
 import { Exercise } from "./pages/exercise";
 import { Booking } from "./pages/booking";
-
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
