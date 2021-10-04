@@ -3,12 +3,12 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 
-export const Login = () => {
+export const Inicio = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="text-center mt-5">
-			<Link to="/personal-data">Login</Link>
+			<Link to="/login">Login</Link>
 		</div>
 	);
 };
