@@ -5,7 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Inicio } from "./pages/inicio";
 import { Login } from "./pages/login";
 import { PersonalData } from "./pages/personal-data";
-import {Homepage} from "./pages/homepage";
+import { Homepage } from "./pages/homepage";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
