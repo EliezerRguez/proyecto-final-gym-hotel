@@ -8,7 +8,7 @@ export const Info = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1>INFORMARION</h1>
+			<h1>INFORMATION</h1>
 		</div>
 	);
 };
