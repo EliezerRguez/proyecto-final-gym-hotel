@@ -4,6 +4,10 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Inicio } from "./pages/inicio";
 import { Login } from "./pages/login";
+
+import { PersonalData } from "./pages/personal-data";
+import { Homepage } from "./pages/homepage";
+
 import { PersonalData } from "./pages/personalData";
 import { Homepage } from "./pages/homepage";
 import { Profile } from "./pages/profile";
@@ -14,6 +18,7 @@ import { PersonalPlan } from "./pages/personalPlan";
 import { Time } from "./pages/time";
 import { Exercise } from "./pages/exercise";
 import { Booking } from "./pages/booking";
+
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
