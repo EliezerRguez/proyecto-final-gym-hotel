@@ -4,10 +4,6 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Inicio } from "./pages/inicio";
 import { Login } from "./pages/login";
-
-import { PersonalData } from "./pages/personal-data";
-import { Homepage } from "./pages/homepage";
-
 import { PersonalData } from "./pages/personalData";
 import { Homepage } from "./pages/homepage";
 import { Profile } from "./pages/profile";

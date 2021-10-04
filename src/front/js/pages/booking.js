@@ -9,8 +9,7 @@ export const Booking = () => {
 	return (
 		<div className="text-center mt-5">
 			<h1>BOOKING</h1>
-            <Link to="/profile">Profile</Link>
+			<Link to="/profile">Profile</Link>
 		</div>
 	);
 };
-
