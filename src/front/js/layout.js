@@ -4,10 +4,17 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Inicio } from "./pages/inicio";
 import { Login } from "./pages/login";
-import { PersonalData } from "./pages/personal-data";
-import {Homepage} from "./pages/homepage";
+import { PersonalData } from "./pages/personalData";
+import { Homepage } from "./pages/homepage";
+import { Profile } from "./pages/profile";
+import { Info } from "./pages/info";
+import { Plans } from "./pages/plans";
+import { Awards } from "./pages/awards";
+import { PersonalPlan } from "./pages/personalPlan";
+import { Time } from "./pages/time";
+import { Exercise } from "./pages/exercise";
+import { Booking } from "./pages/booking";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -34,6 +41,30 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/homepage">
 							<Homepage />
+						</Route>
+						<Route exact path="/profile">
+							<Profile />
+						</Route>
+						<Route exact path="/info">
+							<Info />
+						</Route>
+						<Route exact path="/plans">
+							<Plans />
+						</Route>
+						<Route exact path="/awards">
+							<Awards />
+						</Route>
+						<Route exact path="/personal-plan">
+							<PersonalPlan />
+						</Route>
+						<Route exact path="/time">
+							<Time />
+						</Route>
+						<Route exact path="/exercise">
+							<Exercise />
+						</Route>
+						<Route exact path="/booking">
+							<Booking />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
