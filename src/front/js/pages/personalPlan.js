@@ -3,14 +3,13 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 
-export const Profile = () => {
+export const PersonalPlan = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="text-center mt-5">
-			<h1>PROFILE</h1>
-			<Link to="/personal-plan">PERSONAL PLAN</Link>
-			<Link to="/time">TIEMPO</Link>
+			<h1>PERSONAL PLAN</h1>
+			<Link to="/exercise">EXERCISE</Link>
 		</div>
 	);
 };
