@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 
-export const Home = () => {
+export const Homepage = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
