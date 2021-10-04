@@ -8,7 +8,7 @@ export const PersonalData = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<Link to="/home">Sign Up</Link>
+			<Link to="/homepage">Sign Up</Link>
 		</div>
 	);
 };
