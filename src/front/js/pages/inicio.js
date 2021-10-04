@@ -9,11 +9,11 @@ export const Inicio = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1>INICIO</h1>
+			<h1>Wellcome to Apptivate</h1>
 			<Link to="/login">
-				<button className="mt-5" size="lg">
-					Comenzamos
-				</button>
+				<Button className="mt-5" size="lg">
+					Let´s start
+				</Button>
 			</Link>
 		</div>
 	);
