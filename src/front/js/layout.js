@@ -14,6 +14,7 @@ import { PersonalPlan } from "./pages/personalPlan";
 import { Time } from "./pages/time";
 import { Exercise } from "./pages/exercise";
 import { Booking } from "./pages/booking";
+import { Customize } from "./pages/customize";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -65,6 +66,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/booking">
 							<Booking />
+						</Route>
+						<Route exact path="/customize">
+							<Customize />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
