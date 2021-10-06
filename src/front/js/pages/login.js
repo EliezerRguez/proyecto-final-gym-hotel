@@ -22,7 +22,7 @@ export const Login = () => {
 					<Form.Label>Room number</Form.Label>
 					<Form.Control type="password" placeholder="Room Number" />
 				</Form.Group>
-				<Link to="/personalData">
+				<Link to="/personal-data">
 					<Button variant="primary" type="submit">
 						Log me in!
 					</Button>
