@@ -62,19 +62,19 @@ export const PersonalData = () => {
 								type="radio"
 								label="Una vez a la semana"
 								name="formHorizontalRadios"
-								id="formHorizontalRadios1"
+								id="formHorizontalRadios3"
 							/>
 							<Form.Check
 								type="radio"
 								label="Dos o tres veces por semana"
 								name="formHorizontalRadios"
-								id="formHorizontalRadios2"
+								id="formHorizontalRadios4"
 							/>
 							<Form.Check
 								type="radio"
 								label="Más de tres veces a la semana"
 								name="formHorizontalRadios"
-								id="formHorizontalRadios3"
+								id="formHorizontalRadios5"
 							/>
 						</Col>
 					</Form.Group>
