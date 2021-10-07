@@ -10,16 +10,17 @@ export const Time = () => {
 	return (
 		<div className="text-center mt-5">
 			<h1>TIME</h1>
-			<Badge bg="success">tiempo total</Badge> <Badge bg="danger">tiempo último ejercicio</Badge>{" "}
-			<Badge bg="warning" text="dark">
+			<Badge className="mb-2" bg="success">
+				tiempo total
+			</Badge>
+			<ProgressBar className="mx-4" animated now={45} />
+			<Badge className="my-3" bg="warning" text="dark">
 				tiempo del día
 			</Badge>
-			<h4> Hasta la siguiente insignia</h4>
-			<ProgressBar className="m-4">
-				<ProgressBar striped variant="success" now={35} key={1} />
-				<ProgressBar variant="warning" now={20} key={2} />
-				<ProgressBar striped variant="danger" now={10} key={3} />
-			</ProgressBar>
+			<ProgressBar className="mx-4" animated now={20} />
+			<div className="mb-2">
+				<h3>Las siguientes insignias que puedes ganar son:</h3>
+			</div>
 		</div>
 	);
 };
