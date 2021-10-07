@@ -5,6 +5,7 @@ import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const Exercise = () => {
 	const { store, actions } = useContext(Context);
@@ -66,7 +67,9 @@ export const Exercise = () => {
 				</Row>
 				<Row>
 					<Col xs={6} className="text-center my-4">
-						<Button variant="outline-primary">List of exercises</Button>
+						<Button variant="outline-primary">
+							<Link to="/personal-plan">List of exercises</Link>
+						</Button>
 					</Col>
 					<Col xs={6} className="text-center my-4">
 						<Button variant="primary">Next exercise</Button>
