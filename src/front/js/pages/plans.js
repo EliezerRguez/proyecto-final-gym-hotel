@@ -29,7 +29,7 @@ export const Plans = () => {
 				<Card.Body>
 					<Card.Text>
 						<div>Lorem ipsum</div>
-						<Link to="/booking">BOOKING</Link>
+						<Link to="/customize">CUSTOMIZE</Link>
 					</Card.Text>
 				</Card.Body>
 			</Card>
