@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 //import "../../styles/home.scss";
-
+import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 
 export const Booking = () => {
@@ -22,7 +22,7 @@ export const Booking = () => {
 			<h1>BOOKING</h1>
 			<Link to="/profile">Profile</Link>
 			<div>
-				<Calendar value={date} onClickDay={onClickDay} />
+				<Calendar value={date} onClickDay={onClickDay} className="calendar" />
 			</div>
 			{showModal ? (
 				<div>
