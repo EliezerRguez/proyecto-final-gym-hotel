@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 //import "../../styles/home.scss";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export const Booking = () => {
 	const { store, actions } = useContext(Context);
@@ -26,7 +28,20 @@ export const Booking = () => {
 			</div>
 			{showModal ? (
 				<div>
-					<p>Hola soy un modal</p>
+					<Modal.Dialog>
+						<Modal.Header closeButton>
+							<Modal.Title>Available Hours</Modal.Title>
+						</Modal.Header>
+
+						<Modal.Body>
+							<p>All hours goes here!</p>
+						</Modal.Body>
+
+						<Modal.Footer>
+							<Button variant="secondary">Close</Button>
+							<Button variant="primary">Book</Button>
+						</Modal.Footer>
+					</Modal.Dialog>
 				</div>
 			) : null}
 		</div>
