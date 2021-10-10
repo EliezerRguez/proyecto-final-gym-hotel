@@ -1,24 +1,34 @@
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 
 db = SQLAlchemy()
 
+
 awards_client = db.Table('awards',
+
     db.Column('award_id', db.Integer, db.ForeignKey('award.id'), primary_key=True),
     db.Column('client_id', db.Integer, db.ForeignKey('client.id'), primary_key=True)
 )
 
+
 bookings_client = db.Table('bookings',
+
     db.Column('booking_id', db.Integer, db.ForeignKey('booking.id'), primary_key=True),
     db.Column('client_id', db.Integer, db.ForeignKey('client.id'), primary_key=True)
 )
 
+
 exercises_plan = db.Table('exercises',
+
     db.Column('exercise_id', db.Integer, db.ForeignKey('exercise.id'), primary_key=True),
     db.Column('plan_id', db.Integer, db.ForeignKey('plan.id'), primary_key=True)
 )
 
+
+
 plans_stay = db.Table('plans',
+
     db.Column('stay_id', db.Integer, db.ForeignKey('stay.id'), primary_key=True),
     db.Column('plan_id', db.Integer, db.ForeignKey('plan.id'), primary_key=True)
 )
@@ -30,6 +40,7 @@ class Client(db.Model):
     weight = db.Column(db.Integer, unique=False, nullable=False)
     height = db.Column(db.Integer, unique=False, nullable=False)
     weeklyexercise = db.Column(db.Integer, unique=False, nullable=False)
+
     stay_id = db.Column(db.Integer, unique=False, nullable=False)
     stay = db.relationship('Stay', backref='client', lazy=True)
     plan_id = db.Column(db.Integer, db.ForeignKey('plan.id'),
@@ -133,6 +144,7 @@ class Exercise(db.Model):
     machine_id = db.Column(db.Integer, db.ForeignKey('machine.id'),
         nullable=False)
     machine = db.relationship('Machine', backref='exercise', lazy=True)
+
 
     
     def __repr__(self):
