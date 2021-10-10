@@ -46,9 +46,9 @@ class Client(db.Model):
     plan_id = db.Column(db.Integer, db.ForeignKey('plan.id'),
         nullable=False)
     plan = db.relationship('Plan', backref='client', lazy=True)
-    bookings_client = db.relationship('Booking', secondary=bookings, lazy='subquery',
+    bookings_client = db.relationship('Booking', secondary=bookings_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
-    awards_client = db.relationship('Award', secondary=awards, lazy='subquery',
+    awards_client = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
 
 
@@ -163,7 +163,7 @@ class Stay(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)  
     from_day = db.Column(db.Integer, unique=False, nullable=False)
     to_day = db.Column(db.Integer, unique=False, nullable=False)
-    plans = db.relationship('Plan', secondary=plans, lazy='subquery',
+    plans_stay = db.relationship('Plan', secondary=plans_stay, lazy='subquery',
        backref=db.backref('stays', lazy=True))
     
     def __repr__(self):
