@@ -14,21 +14,21 @@ export const PersonalData = () => {
 		<div className="container">
 			<Form>
 				<h1>PERSONAL DATA</h1>
-				<Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+				<Form.Group as={Row} className="mb-3" controlId="formHorizontalNumber">
 					<Form.Label column sm={2}>
-						Altura
+						Altura en cm
 					</Form.Label>
 					<Col sm={10}>
-						<Form.Control type="email" placeholder="Indicanos tu altura" />
+						<Form.Control type="number" placeholder="Indicanos tu altura" />
 					</Col>
 				</Form.Group>
 
-				<Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+				<Form.Group as={Row} className="mb-3" controlId="formHorizontalNumber">
 					<Form.Label column sm={2}>
-						Peso
+						Peso en kg
 					</Form.Label>
 					<Col sm={10}>
-						<Form.Control type="password" placeholder="Indicanos tu peso" />
+						<Form.Control type="number" placeholder="Indicanos tu peso" />
 					</Col>
 				</Form.Group>
 				<fieldset>

@@ -1,24 +1,34 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
+
 db = SQLAlchemy()
 
-awards = db.Table('awards',
+
+awards_client = db.Table('awards',
+
     db.Column('award_id', db.Integer, db.ForeignKey('award.id'), primary_key=True),
     db.Column('client_id', db.Integer, db.ForeignKey('client.id'), primary_key=True)
 )
 
-bookings = db.Table('bookings',
+
+bookings_client = db.Table('bookings',
+
     db.Column('booking_id', db.Integer, db.ForeignKey('booking.id'), primary_key=True),
     db.Column('client_id', db.Integer, db.ForeignKey('client.id'), primary_key=True)
 )
 
-exercises = db.Table('exercises',
+
+exercises_plan = db.Table('exercises',
+
     db.Column('exercise_id', db.Integer, db.ForeignKey('exercise.id'), primary_key=True),
     db.Column('plan_id', db.Integer, db.ForeignKey('plan.id'), primary_key=True)
 )
 
-plans = db.Table('plans',
+
+
+plans_stay = db.Table('plans',
+
     db.Column('stay_id', db.Integer, db.ForeignKey('stay.id'), primary_key=True),
     db.Column('plan_id', db.Integer, db.ForeignKey('plan.id'), primary_key=True)
 )
@@ -30,13 +40,15 @@ class Client(db.Model):
     weight = db.Column(db.Integer, unique=False, nullable=False)
     height = db.Column(db.Integer, unique=False, nullable=False)
     weeklyexercise = db.Column(db.Integer, unique=False, nullable=False)
-    stay = db.Column(db.Integer, unique=False, nullable=False)
+
+    stay_id = db.Column(db.Integer, unique=False, nullable=False)
+    stay = db.relationship('Stay', backref='client', lazy=True)
     plan_id = db.Column(db.Integer, db.ForeignKey('plan.id'),
         nullable=False)
-    plans = db.relationship('Plan', backref='client', lazy=True)
-    bookings = db.relationship('Booking', secondary=bookings, lazy='subquery',
+    plan = db.relationship('Plan', backref='client', lazy=True)
+    bookings_client = db.relationship('Booking', secondary=bookings, lazy='subquery',
        backref=db.backref('clients', lazy=True))
-    awards = db.relationship('Award', secondary=awards, lazy='subquery',
+    awards_client = db.relationship('Award', secondary=awards, lazy='subquery',
        backref=db.backref('clients', lazy=True))
 
 
@@ -131,7 +143,8 @@ class Exercise(db.Model):
     time =db.Column(db.Integer, unique=False, nullable=False)
     machine_id = db.Column(db.Integer, db.ForeignKey('machine.id'),
         nullable=False)
-    machines = db.relationship('Machine', backref='exercise', lazy=True)
+    machine = db.relationship('Machine', backref='exercise', lazy=True)
+
 
     
     def __repr__(self):
@@ -147,9 +160,9 @@ class Exercise(db.Model):
 
 class Stay(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=False, nullable=False)
-    from_day = db.Column(db.DateTime, unique=False, nullable=False)
-    to_day = db.Column(db.DateTime, unique=False, nullable=False)
+    name = db.Column(db.String(120), unique=False, nullable=False)  
+    from_day = db.Column(db.Integer, unique=False, nullable=False)
+    to_day = db.Column(db.Integer, unique=False, nullable=False)
     plans = db.relationship('Plan', secondary=plans, lazy='subquery',
        backref=db.backref('stays', lazy=True))
     
