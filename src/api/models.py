@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 db = SQLAlchemy()
 
@@ -147,8 +148,8 @@ class Exercise(db.Model):
 class Stay(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    from_day = db.Column(db.Integer, unique=False, nullable=False)
-    to_day = db.Column(db.Integer, unique=False, nullable=False)
+    from_day = db.Column(db.DateTime, unique=False, nullable=False)
+    to_day = db.Column(db.DateTime, unique=False, nullable=False)
     plans = db.relationship('Plan', secondary=plans, lazy='subquery',
        backref=db.backref('stays', lazy=True))
     
