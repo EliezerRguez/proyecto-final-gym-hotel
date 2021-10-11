@@ -16,3 +16,21 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route("/personaldata", methods=["POST"])
+def personal_data():
+   height = request.json.get("height",None)
+   weight = request.json.get("height", None)
+   gender = request.json.get("gender", None)
+   weeklyexercise = request.json.get("weeklyexercise", None)
+   
+  
+    
+   client = Client(height = height, weight = weight, gender = gender, weeklyexercise = weeklyexercise)
+   #json= request.get_json()
+
+   db.session.add(client)
+   db.session.commit()
+       
+
+   return jsonify([]), 200

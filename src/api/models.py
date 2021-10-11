@@ -40,7 +40,7 @@ class Client(db.Model):
     weight = db.Column(db.Integer, unique=False, nullable=False)
     height = db.Column(db.Integer, unique=False, nullable=False)
     weeklyexercise = db.Column(db.Integer, unique=False, nullable=False)
-
+    
     stay_id = db.Column(db.Integer, db.ForeignKey('stay.id'),
         nullable=False)
     stay = db.relationship('Stay', backref='client', lazy=True)
