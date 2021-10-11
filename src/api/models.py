@@ -41,7 +41,8 @@ class Client(db.Model):
     height = db.Column(db.Integer, unique=False, nullable=False)
     weeklyexercise = db.Column(db.Integer, unique=False, nullable=False)
 
-    stay_id = db.Column(db.Integer, unique=False, nullable=False)
+    stay_id = db.Column(db.Integer, db.ForeignKey('stay.id'),
+        nullable=False)
     stay = db.relationship('Stay', backref='client', lazy=True)
     plan_id = db.Column(db.Integer, db.ForeignKey('plan.id'),
         nullable=False)
