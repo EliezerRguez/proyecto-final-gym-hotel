@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+
 
 
 db = SQLAlchemy()
@@ -36,7 +36,8 @@ plans_stay = db.Table('plans',
 class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    room = db.Column(db.Integer, unique=False, nullable=False)
+    gender = db.Column(db.String(120), unique=True, nullable=False)
+    room = db.Column(db.Integer, unique=True, nullable=False)
     weight = db.Column(db.Integer, unique=False, nullable=False)
     height = db.Column(db.Integer, unique=False, nullable=False)
     weeklyexercise = db.Column(db.Integer, unique=False, nullable=False)
@@ -60,7 +61,11 @@ class Client(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password, its a security breach
+            "gender": self.gender,
+            "room": self.room,
+            "weight": self.weight,
+            "height": self.height,
+            "weeklyexercise": self.weeklyexercise
         }
 
 class Plan(db.Model):
@@ -76,10 +81,9 @@ class Plan(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
             "time": self.time,
             "difficulty": self.difficulty
-           
-            # do not serialize the password, its a security breach
         }
         
 class Machine(db.Model):
@@ -94,7 +98,6 @@ class Machine(db.Model):
         return {
             "id": self.id,
             "name": self.name
-            # do not serialize the password, its a security breach
         }
 
 class Booking(db.Model):
@@ -142,10 +145,10 @@ class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     time =db.Column(db.Integer, unique=False, nullable=False)
+    detail = db.Column(db.String(120), unique=False, nullable=False)
     machine_id = db.Column(db.Integer, db.ForeignKey('machine.id'),
         nullable=False)
     machine = db.relationship('Machine', backref='exercise', lazy=True)
-
 
     
     def __repr__(self):
@@ -156,6 +159,8 @@ class Exercise(db.Model):
             "id": self.id,
             "name": self.name,
             "time": self.time,
+            "detail": self.detail,
+            "machine_id": self.machine_id
              # do not serialize the password, its a security breach
         }
 
@@ -175,6 +180,6 @@ class Stay(db.Model):
             "id": self.id,
             "name": self.name,
             "from_day": self.from_day,
-            "from_day":self.to_day
+            "to_day":self.to_day
              # do not serialize the password, its a security breach
         }
