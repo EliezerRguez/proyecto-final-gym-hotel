@@ -36,11 +36,13 @@ plans_stay = db.Table('plans',
 class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    gender = db.Column(db.String(120), unique=True, nullable=False)
+
     room = db.Column(db.Integer, unique=True, nullable=False)
-    weight = db.Column(db.Integer, unique=False, nullable=False)
-    height = db.Column(db.Integer, unique=False, nullable=False)
-    weeklyexercise = db.Column(db.Integer, unique=False, nullable=False)
+    gender = db.Column(db.String(120), unique=False, nullable=True)
+    weight = db.Column(db.Integer, unique=False, nullable=True)
+    height = db.Column(db.Integer, unique=False, nullable=True)
+    weekly_exercise = db.Column(db.Integer, unique=False, nullable=True)
+
     stay_id = db.Column(db.Integer, db.ForeignKey('stay.id'),
         nullable=False)
     stay = db.relationship('Stay', backref='client', lazy=True)
@@ -64,14 +66,19 @@ class Client(db.Model):
             "room": self.room,
             "weight": self.weight,
             "height": self.height,
-            "weeklyexercise": self.weeklyexercise
+
+            "weekly_exercise": self.weekly_exercise,
+            "stay_id": self.stay_id,
+            "plan_id": self.plan_id
+
+
         }
 
 class Plan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     time = db.Column(db.String(120), unique=False, nullable=False)
-    difficulty = db.Column(db.String(120), unique=False, nullable=False)
+    difficulty = db.Column(db.Integer, unique=False, nullable=False)
    
     
     def __repr__(self):
@@ -116,14 +123,14 @@ class Booking(db.Model):
             "hour": self.hour,
             "month": self.month,
             "year": self.year
-            # do not serialize the password, its a security breach
+           
         }
 
 
 class Award(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    totaltime = db.Column(db.Integer, unique=False, nullable=False)
+    total_time = db.Column(db.Integer, unique=False, nullable=False)
     discount = db.Column(db.Integer, unique=False, nullable=False)
    
     
@@ -134,9 +141,9 @@ class Award(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "totaltime": self.totaltime,
+            "total_time": self.total_time,
             "discount": self.discount
-            # do not serialize the password, its a security breach
+            
         }
 
 
@@ -160,14 +167,17 @@ class Exercise(db.Model):
             "time": self.time,
             "detail": self.detail,
             "machine_id": self.machine_id
-             # do not serialize the password, its a security breach
+
         }
 
 class Stay(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)  
     from_day = db.Column(db.Integer, unique=False, nullable=False)
-    to_day = db.Column(db.Integer, unique=False, nullable=False)
+
+    to_day = db.Column(db.Integer, unique=False, nullable=True)
+
+
     plans_stay = db.relationship('Plan', secondary=plans_stay, lazy='subquery',
        backref=db.backref('stays', lazy=True))
     
@@ -180,5 +190,5 @@ class Stay(db.Model):
             "name": self.name,
             "from_day": self.from_day,
             "to_day":self.to_day
-             # do not serialize the password, its a security breach
+
         }
