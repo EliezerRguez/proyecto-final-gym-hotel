@@ -47,7 +47,7 @@ class Client(db.Model):
         nullable=False)
     stay = db.relationship('Stay', backref='client', lazy=True)
     plan_id = db.Column(db.Integer, db.ForeignKey('plan.id'),
-        nullable=False)
+        nullable=True)
     plan = db.relationship('Plan', backref='client', lazy=True)
     bookings_client = db.relationship('Booking', secondary=bookings_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
