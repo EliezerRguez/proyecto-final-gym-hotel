@@ -2,11 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-<<<<<<< HEAD
-from api.models import db, Client, Stay
-=======
 from api.models import db, Client, Plan, Machine, Booking, Award, Exercise, Stay
->>>>>>> 2a4e64329619d875e92b157471e0c51d8553c84d
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token,jwt_required, get_jwt_identity
 
@@ -25,31 +21,6 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-<<<<<<< HEAD
-@api.route('/create/stay', methods=['GET'])
-def list_of_stays():
-    stay1 = Stay(
-     name = "corta estancia",
-     from_day = "1",
-     to_day = "4",
-    )
-    db.session.add(stay1)
-    stay2 = Stay(
-     name = "media estancia",
-     from_day = "5",
-     to_day = "10",
-    )
-    db.session.add(stay2)
-    stay3 = Stay(
-     name = "larga estancia",
-     from_day = "11",
-     to_day = "1000",
-    )
-    db.session.add(stay3)
-    db.session.commit()
-    return jsonify("stay ok"), 200
-
-=======
 
 @api.route("/login", methods=["POST"])
 def create_token():
@@ -204,7 +175,6 @@ def list_of_stays():
     db.session.commit()
 
     return jsonify("stay ok"), 200
->>>>>>> 2a4e64329619d875e92b157471e0c51d8553c84d
 
 @api.route('/stays', methods=['GET'])
 def get_stays():
@@ -212,27 +182,6 @@ def get_stays():
     stays = list(map(lambda stay : stay.serialize(), stays))
     return jsonify(stays), 200
 
-<<<<<<< HEAD
-@api.route("/personaldata", methods=["POST"])
-def personal_data():
-    email = request.json.get("email",None)
-    gender = request.json.get("gender", None)
-    room = request.json.get("room",None)
-    height = request.json.get("height",None)
-    weight = request.json.get("weight", None)
-    weeklyexercise = request.json.get("weeklyexercise", None)
-    stay_id =  request.json.get("stay_id", None)
-    plan_id = request.json.get("plan_id", None)
-    
-    client = Client(email = email, gender = gender, room = room, height = height, weight = weight, weeklyexercise = weeklyexercise, stay_id = stay_id, plan_id = plan_id)
-   #json= request.get_json()
-
-    db.session.add(client)
-    db.session.commit()
-       
-
-    return jsonify([]), 200
-=======
 
 @api.route('/create/award', methods=['GET'])
 def list_of_awards():
@@ -398,4 +347,3 @@ def get_plan(client_id):
 
 #@api.route("/plans/<int:plan_id>/exercises/<int:excercise_id>", methods=["GET"])
 
->>>>>>> 2a4e64329619d875e92b157471e0c51d8553c84d
