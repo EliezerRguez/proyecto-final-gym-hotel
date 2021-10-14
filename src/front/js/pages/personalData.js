@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
@@ -6,20 +6,55 @@ import { Form } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { useHistory } from "react-router-dom";
 
 export const PersonalData = () => {
 	const { store, actions } = useContext(Context);
 
+	const [height, setHeight] = useState(" ");
+	const [weight, setWeight] = useState(" ");
+	const [gender, setGender] = useState("");
+	const [weeklyexercise, setWeeklyexercise] = useState([]);
+
+	let history = useHistory();
+
+	async function personalData(event) {
+		event.preventDefault();
+		console.log("hasta qui llega");
+
+		const response = await fetch(`${process.env.BACKEND_URL}/api/response`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				height: height,
+				weight: weight,
+				gender: gender,
+				weeklyexercise: weeklyexercise
+			})
+		});
+		console.log(response);
+		const responseJson = await response.json();
+		history.push("/profile");
+		return responseJson;
+	}
+
 	return (
 		<div className="container">
-			<Form>
+			<Form onSubmit={personalData}>
 				<h1>PERSONAL DATA</h1>
 				<Form.Group as={Row} className="mb-3" controlId="formHorizontalNumber">
 					<Form.Label column sm={2}>
 						Altura en cm
 					</Form.Label>
 					<Col sm={10}>
-						<Form.Control type="number" placeholder="Indicanos tu altura" />
+						<Form.Control
+							type="number"
+							placeholder="Indicanos tu altura"
+							onChange={event => setHeight(event.target.value)}
+							required
+						/>
 					</Col>
 				</Form.Group>
 
@@ -28,7 +63,12 @@ export const PersonalData = () => {
 						Peso en kg
 					</Form.Label>
 					<Col sm={10}>
-						<Form.Control type="number" placeholder="Indicanos tu peso" />
+						<Form.Control
+							type="number"
+							placeholder="Indicanos tu peso"
+							onChange={event => setWeight(event.target.value)}
+							required
+						/>
 					</Col>
 				</Form.Group>
 				<fieldset>
@@ -40,14 +80,20 @@ export const PersonalData = () => {
 							<Form.Check
 								type="radio"
 								label="Femenino"
-								name="formHorizontalRadios"
+								name="formHorizontalRadiosgender"
 								id="formHorizontalRadios1"
+								onChange={event => setGender(event.target.value)}
+								required
+								value="Femenino"
 							/>
 							<Form.Check
 								type="radio"
 								label="Masculino"
-								name="formHorizontalRadios"
+								name="formHorizontalRadiosgender"
 								id="formHorizontalRadios2"
+								onChange={event => setGender(event.target.value)}
+								required
+								value="Masculino"
 							/>
 						</Col>
 					</Form.Group>
@@ -63,18 +109,27 @@ export const PersonalData = () => {
 								label="Una vez a la semana"
 								name="formHorizontalRadios"
 								id="formHorizontalRadios3"
+								onChange={event => setWeeklyexercise(event.target.value)}
+								required
+								value="1"
 							/>
 							<Form.Check
 								type="radio"
 								label="Dos o tres veces por semana"
 								name="formHorizontalRadios"
 								id="formHorizontalRadios4"
+								onChange={event => setWeeklyexercise(event.target.value)}
+								required
+								value="2"
 							/>
 							<Form.Check
 								type="radio"
 								label="Más de tres veces a la semana"
 								name="formHorizontalRadios"
 								id="formHorizontalRadios5"
+								onChange={event => setWeeklyexercise(event.target.value)}
+								required
+								value="4"
 							/>
 						</Col>
 					</Form.Group>
@@ -82,9 +137,7 @@ export const PersonalData = () => {
 
 				<Form.Group as={Row} className="mb-3">
 					<Col sm={{ span: 10, offset: 2 }}>
-						<Link to="/homepage">
-							<Button type="submit">Save</Button>
-						</Link>
+						<Button type="submit">Save</Button>
 					</Col>
 				</Form.Group>
 			</Form>
