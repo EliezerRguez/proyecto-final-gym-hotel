@@ -9,6 +9,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Image from "react-bootstrap/Image";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+
 import "../../styles/home.scss";
 
 export const Profile = () => {
@@ -49,43 +50,42 @@ export const Profile = () => {
 			</Card>
 			<Row className="mb-4">
 				<h1> AWARDS </h1>
-				<Col xs={4} md={4}>
-					<Image src="holder.js/171x180" rounded />
-				</Col>
-				<Col xs={4} md={4}>
-					<Image src="holder.js/171x180" roundedCircle />
-				</Col>
-				<Col xs={4} md={4}>
-					<Image src="holder.js/171x180" thumbnail />
-				</Col>
+				<Container>
+					<Row className="mx-3">
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" roundedCircle />
+						</Col>
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" roundedCircle />
+						</Col>
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" thumbnailCircle />
+						</Col>
+					</Row>
+					<Row className="mx-3">
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" roundedCircle />
+						</Col>
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" roundedCircle />
+						</Col>
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" thumbnailCircle />
+						</Col>
+					</Row>
+					<Row className="mx-3">
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" roundedCircle />
+						</Col>
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" roundedCircle />
+						</Col>
+						<Col xs={4} md={4}>
+							<Image src="holder.js/171x180" thumbnailCircle />
+						</Col>
+					</Row>
+				</Container>
 			</Row>
-
-			<Container>
-				<Row>
-					<Col xs={4} md={4}>
-						<Image src="holder.js/171x180" rounded />
-					</Col>
-					<Col xs={4} md={4}>
-						<Image src="holder.js/171x180" roundedCircle />
-					</Col>
-					<Col xs={4} md={4}>
-						<Image src="holder.js/171x180" thumbnail />
-					</Col>
-				</Row>
-			</Container>
-			<Container>
-				<Row>
-					<Col xs={4} md={4}>
-						<Image src="holder.js/171x180" rounded />
-					</Col>
-					<Col xs={4} md={4}>
-						<Image src="holder.js/171x180" roundedCircle />
-					</Col>
-					<Col xs={4} md={4}>
-						<Image src="holder.js/171x180" thumbnail />
-					</Col>
-				</Row>
-			</Container>
 		</div>
 	);
 };
