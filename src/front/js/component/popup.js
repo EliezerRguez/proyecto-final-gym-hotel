@@ -1,6 +1,8 @@
 
 import Modal from 'react-bootstrap/Modal'
 
+//hay que conectarlo
+
 
 function Qrcode() {
     const [show, setShow] = useState(false);
