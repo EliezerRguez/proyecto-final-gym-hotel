@@ -154,7 +154,7 @@ class Exercise(db.Model):
     detail = db.Column(db.String(120), unique=False, nullable=False)
     machine_id = db.Column(db.Integer, db.ForeignKey('machine.id'),
         nullable=False)
-    machine = db.relationship('Machine', backref='exercise', lazy=True)
+    machine = db.relationship('Machine', backref='exercises', lazy=True)
 
     
     def __repr__(self):

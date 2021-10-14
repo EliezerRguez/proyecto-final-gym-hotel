@@ -60,10 +60,10 @@ def register_booking():
     month = request.json.get("month", None)
     year = request.json.get("year", None)
    
-    client = Client(gender=gender, weight=weight, height=height, weekly_exercise=weekly_exercise)
+    booking = Booking(day=day, hour=hour, month=month, year=year)
     json= request.get_json()
 
-    db.session.add(client)
+    db.session.add(booking)
     db.session.commit()
        
 
@@ -123,7 +123,7 @@ def list_of_exercises():
      name = "cardio",
      time = 10,
      detail = "velocidad 6.5",
-     machine_id = 2,
+     machine_id = 1,
     )
 
     db.session.add(exercise1)
@@ -188,63 +188,63 @@ def list_of_awards():
 
     award1 = Award(
      name = "Aficionado",
-     totaltime = "20",
+     total_time = "20",
      discount = "5",
     )
     db.session.add(award1)
 
     award2 = Award(
      name = "Primera clase completa",
-     totaltime = "45",
+     total_time = "45",
      discount = "10",
     )
     db.session.add(award2)
 
     award3 = Award(
      name = "Anda, vamos mejorando",
-     totaltime = "75",
+     total_time = "75",
      discount = "12",
     )
     db.session.add(award3)
 
     award4 = Award(
      name = "WOW",
-     totaltime = "105",
+     total_time = "105",
      discount = "15",
     )
     db.session.add(award4)
 
     award5 = Award(
      name = "A mitad de lo gordo",
-     totaltime = "150",
+     total_time = "150",
      discount = "20",
     )
     db.session.add(award5)
 
     award6 = Award(
      name = "Wapura",
-     totaltime = "200",
+     total_time = "200",
      discount = "25",
     )
     db.session.add(award6)
 
     award7 = Award(
      name = "GYM GYM GYM",
-     totaltime = "250",
+     total_time = "250",
      discount = "30",
     )
     db.session.add(award7)
 
     award8 = Award(
      name = "uuuuuuuh",
-     totaltime = "350",
+     total_time = "350",
      discount = "35",
     )
     db.session.add(award8)
 
     award9 = Award(
      name = "Vigorexia",
-     totaltime = "900",
+     total_time = "900",
      discount = "50",
     )
     db.session.add(award9)
@@ -303,9 +303,35 @@ def get_one_exercise(plan_id):
     exercise = Exercise.query.get(exercise_id)
     return jsonify(exercise.serialize()), 200
 
-#@app.route("/plans/<int:excercise_id>", methods=["GET"])
-#def get_one_exercise(plan_id):
- #   exercise = Exercise.query.get(exercise_id)
+@api.route('/create/client', methods=['GET'])
+def list_of_clients():
+    client = Client(
+        email = "chiara@gmail.com",
+        room = 606
+    )
+    db.session.add(client)
+
+    client2 = Client(
+        email = "eliezer@gmail.com",
+        room = 506
+    )
+    db.session.add(client2)
+    db.session.commit()
+
+    
+    return jsonify("client ok"), 200
+
+@api.route('/clients', methods=['GET'])
+def get_clients():
+    clients = Client.query.all()
+    clients = list(map(lambda client : client.serialize(), clients))
+    return jsonify(clients), 200
+
+@app.route("/profile/<int:client_id>", methods=["GET"])
+def get_plan(client_id):
+    client = Client.query.get(client_id)
+    if client.plan_id is null:
+        print()
   #  return jsonify(exercise.serialize()), 200
 
 #@app.route("/plans/<int:plan_id>/exercises/<int:excercise_id>", methods=["GET"])
