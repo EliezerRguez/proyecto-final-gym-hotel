@@ -16,7 +16,7 @@ import { Exercise } from "./pages/exercise";
 import { Booking } from "./pages/booking";
 import { Customize } from "./pages/customize";
 import injectContext from "./store/appContext";
-import { Navbar } from "./component/navbar";
+import { Navbars } from "./component/navbars";
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -29,7 +29,7 @@ const Layout = () => {
 		<div>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					<Navbar />
+					<Navbars />
 					<Switch>
 						<Route exact path="/">
 							<Inicio />

@@ -344,12 +344,12 @@ def get_plans():
     plans = list(map(lambda plan : plan.serialize(), plans))
     return jsonify(plans), 200
 
-@app.route("/plans/<int:plan_id>", methods=["GET"])
+@api.route("/plans/<int:plan_id>", methods=["GET"])
 def get_one_plan(plan_id):
     plan = Plan.query.get(plan_id)
     return jsonify(plan.serialize()), 200
 
-@app.route("/exercises/<int:excercise_id>", methods=["GET"])
+@api.route("/exercises/<int:excercise_id>", methods=["GET"])
 def get_one_exercise(plan_id):
     exercise = Exercise.query.get(exercise_id)
     return jsonify(exercise.serialize()), 200
@@ -358,15 +358,25 @@ def get_one_exercise(plan_id):
 def list_of_clients():
     client = Client(
         email = "chiara@gmail.com",
-        room = 606
+        room = 606,
+        stay_id = 1
     )
     db.session.add(client)
 
     client2 = Client(
         email = "eliezer@gmail.com",
-        room = 506
+        room = 506,
+        stay_id = 2
     )
     db.session.add(client2)
+
+    client3 = Client(
+        email = "almu@gmail.com",
+        room = 806,
+        stay_id = 2,
+        plan_id = 2
+    )
+    db.session.add(client3)
     db.session.commit()
 
     
@@ -378,13 +388,14 @@ def get_clients():
     clients = list(map(lambda client : client.serialize(), clients))
     return jsonify(clients), 200
 
-@app.route("/profile/<int:client_id>", methods=["GET"])
+@api.route("/profile/<int:client_id>", methods=["GET"])
 def get_plan(client_id):
     client = Client.query.get(client_id)
-    if client.plan_id is null:
-        print()
-  #  return jsonify(exercise.serialize()), 200
+    if client.plan_id is None:
+        return jsonify("Selecciona tu plan")
+       
+    return jsonify(client.serialize()), 200
 
-#@app.route("/plans/<int:plan_id>/exercises/<int:excercise_id>", methods=["GET"])
+#@api.route("/plans/<int:plan_id>/exercises/<int:excercise_id>", methods=["GET"])
 
 >>>>>>> 2a4e64329619d875e92b157471e0c51d8553c84d
