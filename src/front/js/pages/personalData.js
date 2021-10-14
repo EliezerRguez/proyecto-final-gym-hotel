@@ -22,7 +22,7 @@ export const PersonalData = () => {
 		event.preventDefault();
 		console.log("hasta qui llega");
 
-		const response = await fetch("https://3001-pink-warbler-ydr25axk.ws-eu18.gitpod.io/api/personaldata", {
+		const response = await fetch(`${process.env.BACKEND_URL}/api/response`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
