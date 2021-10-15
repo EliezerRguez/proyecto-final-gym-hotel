@@ -341,9 +341,14 @@ def get_clients():
 def get_plan(client_id):
     client = Client.query.get(client_id)
     if client.plan_id is None:
-        return jsonify("Selecciona tu plan")
+       return jsonify("Selecciona tu plan")
        
     return jsonify(client.serialize()), 200
 
-#@api.route("/plans/<int:plan_id>/exercises/<int:excercise_id>", methods=["GET"])
-
+@api.route("profile/<int:client_id>/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
+def get_one_exercise_from_profile(client_id, plan_id, exercise_id):
+    client = Client.query.get(client_id)
+    plan = Client.query.get(plan_id)
+    exercise = Exercise.query.get(exercise_id)
+   
+    return jsonify(exercise.serialize()), 200

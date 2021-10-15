@@ -79,7 +79,8 @@ class Plan(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     time = db.Column(db.String(120), unique=False, nullable=False)
     difficulty = db.Column(db.Integer, unique=False, nullable=False)
-   
+    exercises_plan = db.relationship('Exercise', secondary=exercises_plan, lazy='subquery',
+       backref=db.backref('plans', lazy=True))
     
     def __repr__(self):
         return '<Plan %r>' % self.name
