@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Client, Plan, Machine, Booking, Award, Exercise, Stay
+from api.models import db, Client, Plan, Machine, Booking, Award, Exercise, Stay, Gym
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token,jwt_required, get_jwt_identity
 
@@ -27,7 +27,7 @@ def create_token():
     email = request.json.get("email", None)
     room = request.json.get("room", None)
    
-    client = Client.query.filter_by(email=email, room=room).first()
+    client = Client.query.get(email=email, room=room).first()
     if client is None:
         
         return jsonify({"msg": "Bad email or room"}), 401
@@ -53,23 +53,54 @@ def register_personaldata():
 
     return jsonify([]), 200
       
-@api.route("/booking", methods=["POST"])
-def register_booking():
-    day = request.json.get("day", None)
-    hour = request.json.get("hour", None)
-    month = request.json.get("month", None)
-    year = request.json.get("year", None)
-   
-    booking = Booking(day=day, hour=hour, month=month, year=year)
+@api.route("/create-booking", methods=["POST"])
+def create_booking():
     json= request.get_json()
+    day = json.get("day", None)
+    hour = json.get("hour", None)
+    month =json.get("month", None)
+    year = json.get("year", None)
+    minutes = json.get("minutes", None)
+   
+    gym = Gym.quey.get(1)  
+    capacity= gym.capacity
+    Booking.query.filter_by(day=day,year=year,hour=hour,month=month, minutes=minutes).count()  
+    
+    if capacity_used >= capacity:
+        return jsonify({"aforo limitado"}),401
+
+    booking= Booking(
+        day=day,
+        year=year,
+        hour=hour,
+        month=month, 
+        minutes=minutes
+    )
 
     db.session.add(booking)
     db.session.commit()
        
+   
+    return jsonify(booking.serialize()), 200
 
-    return jsonify([]), 200
+@api.route('/create/gym', methods=['GET'])
+def list_of_gyms():
 
-         
+    gym = Gym(
+     capacity = "10"     
+    )
+    db.session.add(gym)
+    gym2 = Gym(
+     capacity = "5"     
+    )
+    db.session.add(gym2)
+     
+    db.session.commit()
+    gyms = Gym.query.all()
+    gyms = list(map(lambda gym : gym.serialize(), gyms))
+    return jsonify(gyms), 200
+    
+       
 
 @api.route('/create/machine', methods=['GET'])
 def list_of_machines():
@@ -103,8 +134,6 @@ def list_of_machines():
      name = "maquina de abdominales",
     )
     db.session.add(machine6)
-    
-    
     db.session.commit()
 
     return jsonify("machine ok"), 200
