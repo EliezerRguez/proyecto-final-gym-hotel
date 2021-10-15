@@ -14,7 +14,7 @@ export const PersonalData = () => {
 	const [height, setHeight] = useState(" ");
 	const [weight, setWeight] = useState(" ");
 	const [gender, setGender] = useState("");
-	const [weeklyexercise, setWeeklyexercise] = useState([]);
+	const [weekly_exercise, setWeekly_exercise] = useState([]);
 
 	let history = useHistory();
 
@@ -22,7 +22,7 @@ export const PersonalData = () => {
 		event.preventDefault();
 		console.log("hasta qui llega");
 
-		const response = await fetch(`${process.env.BACKEND_URL}/api/response`, {
+		const response = await fetch(`${process.env.BACKEND_URL}/api/personal-data`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -31,7 +31,7 @@ export const PersonalData = () => {
 				height: height,
 				weight: weight,
 				gender: gender,
-				weeklyexercise: weeklyexercise
+				weekly_exercise: weekly_exercise
 			})
 		});
 		console.log(response);
@@ -109,7 +109,7 @@ export const PersonalData = () => {
 								label="Una vez a la semana"
 								name="formHorizontalRadios"
 								id="formHorizontalRadios3"
-								onChange={event => setWeeklyexercise(event.target.value)}
+								onChange={event => setWeekly_exercise(event.target.value)}
 								required
 								value="1"
 							/>
@@ -118,7 +118,7 @@ export const PersonalData = () => {
 								label="Dos o tres veces por semana"
 								name="formHorizontalRadios"
 								id="formHorizontalRadios4"
-								onChange={event => setWeeklyexercise(event.target.value)}
+								onChange={event => setWeekly_exercise(event.target.value)}
 								required
 								value="2"
 							/>
@@ -127,7 +127,7 @@ export const PersonalData = () => {
 								label="Más de tres veces a la semana"
 								name="formHorizontalRadios"
 								id="formHorizontalRadios5"
-								onChange={event => setWeeklyexercise(event.target.value)}
+								onChange={event => setWeekly_exercise(event.target.value)}
 								required
 								value="4"
 							/>
