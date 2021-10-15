@@ -75,12 +75,12 @@ def register_booking():
 def list_of_machines():
 
     machine1 = Machine(
-     name = "cinta de correr",
+     name = "Cinta de correr",
     )
     db.session.add(machine1)
     
     machine2=  Machine(
-     name = "kettlebell",
+     name = "Kettlebell",
     )
     db.session.add(machine2)
 
@@ -90,20 +90,34 @@ def list_of_machines():
     db.session.add(machine3)
 
     machine4=  Machine(
-     name = "eliptica",
+     name = "Elíptica",
     )
     db.session.add(machine4)
 
     machine5=  Machine(
-     name = "bicicleta",
+     name = "Bicicleta estática",
     )
     db.session.add(machine5)
 
     machine6=  Machine(
-     name = "maquina de abdominales",
+     name = "Máquina de abdominales",
     )
     db.session.add(machine6)
+
+    machine7=  Machine(
+     name = "Banca",
+    )
+    db.session.add(machine7)
     
+    machine8=  Machine(
+     name = "Remo",
+    )
+    db.session.add(machine8)
+
+    machine9=  Machine(
+     name = "Rack con poleas",
+    )
+    db.session.add(machine9)
     
     db.session.commit()
 
