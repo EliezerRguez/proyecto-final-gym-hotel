@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -6,34 +6,37 @@ import Card from "react-bootstrap/Card";
 import "../../styles/home.scss";
 
 export const Plans = () => {
+	const [plans, setPlans] = useState([]);
 	const { store, actions } = useContext(Context);
 
-	return (
-		<div className="text-center mt-5">
-			<h1>PLAN</h1>
-			<Card className="mx-4">
-				<Card.Img variant="top" src="holder.js/100px180" />
-				PLAN SEGUN ESTANCIA
-				<Card.Body>
-					<Card.Text>
-						<div>Lorem ipsum</div>
-						<Link to="/booking">BOOKING</Link>
-					</Card.Text>
-				</Card.Body>
-			</Card>
-			<br />
+	async function getPlans() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/plans");
 
-			<Card className="mx-4">
-				<Card.Img variant="top" src="holder.js/100px180" />
-				CUSTOMIZE
-				<Card.Body>
-					<Card.Text>
-						<div>Lorem ipsum</div>
-						<Link to="/customize">CUSTOMIZE</Link>
-					</Card.Text>
-				</Card.Body>
-			</Card>
-			<br />
+		const responseJson = await response.json();
+		setPlans(responseJson.results);
+	}
+	useEffect(() => {
+		getPlans();
+	}, []);
+	return (
+		<div className="container">
+			<h1>PLAN</h1>
+			<div className="row flex-nowrap ">
+				{" "}
+				{plans.map(plan => {
+					return (
+						<div className="card col-3 m-4" key={plan.name}>
+							<button
+								className="fas fa-heart"
+								onClick={() => {
+									actions.addPlan(plan.name);
+								}}
+							/>
+							<Link to="/booking">BOOKING</Link>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 };

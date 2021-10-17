@@ -83,6 +83,7 @@
 		"react": "^16.8.4",
 		"react-advanced-datetimerange-picker": "^1.0.14",
 		"react-appointment-picker": "^3.2.0",
+		"react-availability-calendar": "^0.3.13",
 		"react-bootstrap": "^2.0.0-rc.0",
 		"react-calendar": "^3.4.0",
 		"react-dom": "^16.8.4",
