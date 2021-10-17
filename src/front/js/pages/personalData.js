@@ -1,4 +1,3 @@
-
 import React, { useContext, useState, useEffect } from "react";
 
 import { Context } from "../store/appContext";
@@ -24,13 +23,14 @@ export const PersonalData = () => {
 		console.log("hasta qui llega");
 		const token = localStorage.getItem("jwt-token");
 
-		//if (gender !== null) {	history.push("/homepage")}
+		if (gender !== null) {
+			history.push("/homepage");
+		}
 		const response = await fetch(process.env.BACKEND_URL + "/api/personal-data", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + token
-
 			},
 			body: JSON.stringify({
 				height: height,

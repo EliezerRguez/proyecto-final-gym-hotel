@@ -32,13 +32,18 @@ export const Login = () => {
 		} else if (response.status === 400) {
 			throw "Invalid email or password format";
 		}
+
 		const data = await response.json();
 		// save your token in the localStorage
 		//also you should set your user into the store using the setStore function
 		localStorage.setItem("jwt-token", data.token);
 		actions.setClientToken(data.token);
 
-		history.push("/personal-data");
+		if (data.client_gender != null) {
+			history.push("/homepage");
+		} else {
+			history.push("/personal-data");
+		}
 	}
 
 	return (

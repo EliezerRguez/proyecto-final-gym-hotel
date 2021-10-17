@@ -24,16 +24,15 @@ def handle_hello():
 @api.route("/login", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
-    room = request.json.get("room", None)
-   
+    room = request.json.get("room", None) 
+
     client = Client.query.filter_by(email=email, room=room).first()
     if client is None:
         
         return jsonify({"msg": "Bad email or room"}), 401
-    
    
     access_token = create_access_token(identity=client.id)
-    return jsonify({ "token": access_token, "client_id": client.id })
+    return jsonify({ "token": access_token, "client_id": client.id, "client_gender":client.gender})
 
 
 @api.route("/personal-data", methods=["POST"])
