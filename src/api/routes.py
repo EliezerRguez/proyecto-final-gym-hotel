@@ -21,13 +21,12 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-
 @api.route("/login", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
     room = request.json.get("room", None)
    
-    client = Client.query.get(email=email, room=room).first()
+    client = Client.query.filter_by(email=email, room=room).first()
     if client is None:
         
         return jsonify({"msg": "Bad email or room"}), 401
@@ -38,20 +37,26 @@ def create_token():
 
 
 @api.route("/personal-data", methods=["POST"])
+@jwt_required()
 def register_personaldata():
-    gender = request.json.get("gender", None)
-    weight = request.json.get("weight", None)
-    height = request.json.get("height", None)
-    weekly_exercise = request.json.get("weekly_exercise", None)
-   
-    client = Client(gender=gender, weight=weight, height=height, weekly_exercise=weekly_exercise)
     json= request.get_json()
-
-    db.session.add(client)
-    db.session.commit()
-       
-
-    return jsonify([]), 200
+    gender = json.get("gender", None)
+    weight = json.get("weight", None)
+    height = json.get("height", None)
+    weekly_exercise = json.get("weekly_exercise",None)
+    
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    print(current_client_id)
+    
+    client.gender=gender
+    client.weight=weight
+    client.height=height
+    client.weekly_exercise=weekly_exercise
+    
+    client.save()
+          
+    return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise }), 200
       
 @api.route("/create-booking", methods=["POST"])
 def create_booking():
@@ -62,7 +67,7 @@ def create_booking():
     year = json.get("year", None)
     minutes = json.get("minutes", None)
    
-    gym = Gym.quey.get(1)  
+    gym = Gym.query.get(1)  
     capacity= gym.capacity
     Booking.query.filter_by(day=day,year=year,hour=hour,month=month, minutes=minutes).count()  
     
@@ -77,8 +82,7 @@ def create_booking():
         minutes=minutes
     )
 
-    db.session.add(booking)
-    db.session.commit()
+    booking.save()
        
    
     return jsonify(booking.serialize()), 200
@@ -102,8 +106,8 @@ def list_of_gyms():
     
        
 
-@api.route('/create/machine', methods=['GET'])
-def list_of_machines():
+@api.route('/create/all-things', methods=['GET'])
+def list_of_things():
 
     machine1 = Machine(
      name = "cinta de correr",
@@ -134,20 +138,7 @@ def list_of_machines():
      name = "maquina de abdominales",
     )
     db.session.add(machine6)
-    db.session.commit()
-
-    return jsonify("machine ok"), 200
-
-
-@api.route('/machines', methods=['GET'])
-def get_machines():
-    machines = Machine.query.all()
-    machines = list(map(lambda machine : machine.serialize(), machines))
-    return jsonify(machines), 200
-
-@api.route('/create/exercise', methods=['GET'])
-def list_of_exercises():
-
+   
     exercise1 = Exercise(
      name = "cardio",
      time = 10,
@@ -165,21 +156,7 @@ def list_of_exercises():
     )
 
     db.session.add(exercise2)
-    db.session.commit()
-
-    return jsonify("exercise ok"), 200
-
-@api.route('/exercises', methods=['GET'])
-def get_exercises():
-    exercises = Exercise.query.all()
-    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
-    return jsonify(exercises), 200
-
-
-
-@api.route('/create/stay', methods=['GET'])
-def list_of_stays():
-
+    
     stay1 = Stay(
      name = "corta estancia",
      from_day = 1,
@@ -200,20 +177,6 @@ def list_of_stays():
      to_day = 1000,
     )
     db.session.add(stay3)
-    
-    db.session.commit()
-
-    return jsonify("stay ok"), 200
-
-@api.route('/stays', methods=['GET'])
-def get_stays():
-    stays = Stay.query.all()
-    stays = list(map(lambda stay : stay.serialize(), stays))
-    return jsonify(stays), 200
-
-
-@api.route('/create/award', methods=['GET'])
-def list_of_awards():
 
     award1 = Award(
      name = "Aficionado",
@@ -278,19 +241,6 @@ def list_of_awards():
     )
     db.session.add(award9)
 
-    db.session.commit()
-
-    return jsonify("award ok"), 200
-
-@api.route('/awards', methods=['GET'])
-def get_awards():
-    awards = Award.query.all()
-    awards = list(map(lambda award : award.serialize(), awards))
-    return jsonify(awards), 200
-
-@api.route('/create/plan', methods=['GET'])
-def list_of_plans():
-
     plan1 = Plan(
      name = "Bajar el buffet",
      time = "135",
@@ -311,29 +261,7 @@ def list_of_plans():
      difficulty = "5",
     )
     db.session.add(plan3)
-    
-    db.session.commit()
 
-    return jsonify("plan ok"), 200
-
-@api.route('/plans', methods=['GET'])
-def get_plans():
-    plans = Plan.query.all()
-    plans = list(map(lambda plan : plan.serialize(), plans))
-    return jsonify(plans), 200
-
-@api.route("/plans/<int:plan_id>", methods=["GET"])
-def get_one_plan(plan_id):
-    plan = Plan.query.get(plan_id)
-    return jsonify(plan.serialize()), 200
-
-@api.route("/exercises/<int:excercise_id>", methods=["GET"])
-def get_one_exercise(plan_id):
-    exercise = Exercise.query.get(exercise_id)
-    return jsonify(exercise.serialize()), 200
-
-@api.route('/create/client', methods=['GET'])
-def list_of_clients():
     client = Client(
         email = "chiara@gmail.com",
         room = 606,
@@ -355,10 +283,53 @@ def list_of_clients():
         plan_id = 2
     )
     db.session.add(client3)
-    db.session.commit()
 
-    
-    return jsonify("client ok"), 200
+    return jsonify("things ok"), 200
+
+
+@api.route('/machines', methods=['GET'])
+def get_machines():
+    machines = Machine.query.all()
+    machines = list(map(lambda machine : machine.serialize(), machines))
+    return jsonify(machines), 200
+
+
+@api.route('/exercises', methods=['GET'])
+def get_exercises():
+    exercises = Exercise.query.all()
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    return jsonify(exercises), 200
+
+
+@api.route('/stays', methods=['GET'])
+def get_stays():
+    stays = Stay.query.all()
+    stays = list(map(lambda stay : stay.serialize(), stays))
+    return jsonify(stays), 200
+
+
+@api.route('/awards', methods=['GET'])
+def get_awards():
+    awards = Award.query.all()
+    awards = list(map(lambda award : award.serialize(), awards))
+    return jsonify(awards), 200
+
+@api.route('/plans', methods=['GET'])
+def get_plans():
+    plans = Plan.query.all()
+    plans = list(map(lambda plan : plan.serialize(), plans))
+    return jsonify(plans), 200
+
+@api.route("/plans/<int:plan_id>", methods=["GET"])
+def get_one_plan(plan_id):
+    plan = Plan.query.get(plan_id)
+    return jsonify(plan.serialize()), 200
+
+@api.route("/exercises/<int:excercise_id>", methods=["GET"])
+def get_one_exercise(plan_id):
+    exercise = Exercise.query.get(exercise_id)
+    return jsonify(exercise.serialize()), 200
+
 
 @api.route('/clients', methods=['GET'])
 def get_clients():
@@ -374,10 +345,12 @@ def get_plan(client_id):
        
     return jsonify(client.serialize()), 200
 
-@api.route("profile/<int:client_id>/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
+@api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(client_id, plan_id, exercise_id):
-    client = Client.query.get(client_id)
-    plan = Client.query.get(plan_id)
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    plan = Client.plan
     exercise = Exercise.query.get(exercise_id)
    
     return jsonify(exercise.serialize()), 200

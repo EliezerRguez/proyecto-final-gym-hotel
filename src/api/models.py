@@ -26,32 +26,34 @@ exercises_plan = db.Table('exercises',
 )
 
 
-
 plans_stay = db.Table('plans',
 
     db.Column('stay_id', db.Integer, db.ForeignKey('stay.id'), primary_key=True),
     db.Column('plan_id', db.Integer, db.ForeignKey('plan.id'), primary_key=True)
 )
 
-class Client(db.Model):
+class SaveAll:
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+class Client(db.Model,SaveAll):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-
     room = db.Column(db.Integer, unique=True, nullable=False)
     gender = db.Column(db.String(120), unique=False, nullable=True)
     weight = db.Column(db.Integer, unique=False, nullable=True)
     height = db.Column(db.Integer, unique=False, nullable=True)
     weekly_exercise = db.Column(db.Integer, unique=False, nullable=True)
-
     stay_id = db.Column(db.Integer, db.ForeignKey('stay.id'),
         nullable=False)
     stay = db.relationship('Stay', backref='client', lazy=True)
     plan_id = db.Column(db.Integer, db.ForeignKey('plan.id'),
         nullable=True)
     plan = db.relationship('Plan', backref='client', lazy=True)
-    bookings_client = db.relationship('Booking', secondary=bookings_client, lazy='subquery',
+    bookings = db.relationship('Booking', secondary=bookings_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
-    awards_client = db.relationship('Award', secondary=awards_client, lazy='subquery',
+    awards = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
 
 
@@ -66,12 +68,9 @@ class Client(db.Model):
             "room": self.room,
             "weight": self.weight,
             "height": self.height,
-
             "weekly_exercise": self.weekly_exercise,
             "stay_id": self.stay_id,
             "plan_id": self.plan_id
-
-
         }
 
 class Plan(db.Model):
@@ -79,7 +78,7 @@ class Plan(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     time = db.Column(db.String(120), unique=False, nullable=False)
     difficulty = db.Column(db.Integer, unique=False, nullable=False)
-    exercises_plan = db.relationship('Exercise', secondary=exercises_plan, lazy='subquery',
+    exercises = db.relationship('Exercise', secondary=exercises_plan, lazy='subquery',
        backref=db.backref('plans', lazy=True))
     
     def __repr__(self):
@@ -107,7 +106,7 @@ class Machine(db.Model):
             "name": self.name
         }
 
-class Booking(db.Model):
+class Booking(db.Model, SaveAll):
     id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.Integer, unique=False, nullable=False)
     hour = db.Column(db.Integer, unique=False, nullable=False)
@@ -150,7 +149,6 @@ class Award(db.Model):
             "name": self.name,
             "total_time": self.total_time,
             "discount": self.discount
-            
         }
 
 
@@ -174,18 +172,14 @@ class Exercise(db.Model):
             "time": self.time,
             "detail": self.detail,
             "machine_id": self.machine_id
-
         }
 
 class Stay(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)  
     from_day = db.Column(db.Integer, unique=False, nullable=False)
-
     to_day = db.Column(db.Integer, unique=False, nullable=True)
-
-
-    plans_stay = db.relationship('Plan', secondary=plans_stay, lazy='subquery',
+    plans = db.relationship('Plan', secondary=plans_stay, lazy='subquery',
        backref=db.backref('stays', lazy=True))
     
     def __repr__(self):
@@ -197,7 +191,6 @@ class Stay(db.Model):
             "name": self.name,
             "from_day": self.from_day,
             "to_day":self.to_day
-
         }
 
  
