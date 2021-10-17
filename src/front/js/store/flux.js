@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			plan: null,
+			plans: [],
 			client_token: null
 		},
 		actions: {
@@ -44,8 +44,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			addPlan: plan => {
-				setStore({ plans: [...getStore().plans, plan] });
+			addPlans: name => {
+				setStore({ plans: [...getStore().plans, name] });
 			},
 			setClientToken: token => {
 				setStore({ client_token: token });

@@ -8,24 +8,29 @@ import "../../styles/home.scss";
 export const Plans = () => {
 	const [plans, setPlans] = useState([]);
 	const { store, actions } = useContext(Context);
+	//const token = localStorage.getItem("jwt-token");
 
-	async function getPlans() {
+	async function getPlan() {
 		const response = await fetch(process.env.BACKEND_URL + "/api/plans");
-
+		console.log(response);
 		const responseJson = await response.json();
-		setPlans(responseJson.results);
+		setPlans(responseJson);
+		console.log(responseJson);
 	}
 	useEffect(() => {
-		getPlans();
+		getPlan();
 	}, []);
 	return (
 		<div className="container">
 			<h1>PLAN</h1>
+
 			<div className="row flex-nowrap ">
-				{" "}
 				{plans.map(plan => {
 					return (
-						<div className="card col-3 m-4" key={plan.name}>
+						<div className="card col-3 m-4" key={plan.id}>
+							<h5>{plan.name}</h5>
+							<h5>{plan.time}</h5>
+							<h5>{plan.difficulty}</h5>
 							<button
 								className="fas fa-heart"
 								onClick={() => {
@@ -36,6 +41,21 @@ export const Plans = () => {
 						</div>
 					);
 				})}
+			</div>
+			<div className="row flex-nowrap ">
+				<Card className="mx-4">
+					<Card.Img variant="top" src="holder.js/100px180" />
+					Imagen de perfil persona
+					<Card.Body>
+						<Card.Text>
+							<Link to="/customize">
+								<Button className="mt-5" size="lg">
+									PLAN CUSTOMIZE
+								</Button>
+							</Link>
+						</Card.Text>
+					</Card.Body>
+				</Card>
 			</div>
 		</div>
 	);
