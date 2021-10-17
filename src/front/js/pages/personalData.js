@@ -1,4 +1,6 @@
+
 import React, { useContext, useState, useEffect } from "react";
+
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { Form } from "react-bootstrap";
@@ -28,6 +30,7 @@ export const PersonalData = () => {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + token
+
 			},
 			body: JSON.stringify({
 				height: height,
