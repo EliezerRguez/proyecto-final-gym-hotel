@@ -284,6 +284,8 @@ def list_of_things():
     )
     db.session.add(client3)
 
+    db.session.commit()
+
     return jsonify("things ok"), 200
 
 
