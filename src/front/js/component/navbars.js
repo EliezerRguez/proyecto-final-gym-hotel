@@ -10,8 +10,9 @@ export const Navbars = () => {
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mx-3">
 					<Nav.Link href="/profile">My profile</Nav.Link>
-					<Nav.Link href="/personal-plan">My plan</Nav.Link>
+					<Nav.Link href="/homepage">Home</Nav.Link>
 					<Nav.Link href="/booking">Booking</Nav.Link>
+					<Nav.Link href="/login">Logout</Nav.Link>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>

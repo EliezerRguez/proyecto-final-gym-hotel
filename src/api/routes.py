@@ -338,13 +338,13 @@ def get_clients():
     clients = list(map(lambda client : client.serialize(), clients))
     return jsonify(clients), 200
 
-@api.route("/profile/<int:client_id>", methods=["GET"])
-def get_plan(client_id):
-    client = Client.query.get(client_id)
-    if client.plan_id is None:
-       return jsonify("Selecciona tu plan")
-       
-    return jsonify(client.serialize()), 200
+@api.route("/profile/<int:plan_id>", methods=["GET"])
+def get_plan(plan_id):
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    plan = Plan.query.get(plan_id)
+    
+    return jsonify(plan.serialize()), 200
 
 @api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
 @jwt_required()
