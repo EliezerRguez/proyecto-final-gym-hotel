@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -6,34 +6,57 @@ import Card from "react-bootstrap/Card";
 import "../../styles/home.scss";
 
 export const Plans = () => {
+	const [plans, setPlans] = useState([]);
 	const { store, actions } = useContext(Context);
+	//const token = localStorage.getItem("jwt-token");
 
+	async function getPlan() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/plans");
+		console.log(response);
+		const responseJson = await response.json();
+		setPlans(responseJson);
+		console.log(responseJson);
+	}
+	useEffect(() => {
+		getPlan();
+	}, []);
 	return (
-		<div className="text-center mt-5">
+		<div className="container">
 			<h1>PLAN</h1>
-			<Card className="mx-4">
-				<Card.Img variant="top" src="holder.js/100px180" />
-				PLAN SEGUN ESTANCIA
-				<Card.Body>
-					<Card.Text>
-						<div>Lorem ipsum</div>
-						<Link to="/booking">BOOKING</Link>
-					</Card.Text>
-				</Card.Body>
-			</Card>
-			<br />
 
-			<Card className="mx-4">
-				<Card.Img variant="top" src="holder.js/100px180" />
-				CUSTOMIZE
-				<Card.Body>
-					<Card.Text>
-						<div>Lorem ipsum</div>
-						<Link to="/customize">CUSTOMIZE</Link>
-					</Card.Text>
-				</Card.Body>
-			</Card>
-			<br />
+			<div className="row flex-nowrap ">
+				{plans.map(plan => {
+					return (
+						<div className="card col-3 m-4" key={plan.id}>
+							<h5>{plan.name}</h5>
+							<h5>{plan.time}</h5>
+							<h5>{plan.difficulty}</h5>
+							<button
+								className="fas fa-heart"
+								onClick={() => {
+									actions.addPlan(plan.name);
+								}}
+							/>
+							<Link to="/booking">BOOKING</Link>
+						</div>
+					);
+				})}
+			</div>
+			<div className="row flex-nowrap ">
+				<Card className="mx-4">
+					<Card.Img variant="top" src="holder.js/100px180" />
+					Imagen de perfil persona
+					<Card.Body>
+						<Card.Text>
+							<Link to="/customize">
+								<Button className="mt-5" size="lg">
+									PLAN CUSTOMIZE
+								</Button>
+							</Link>
+						</Card.Text>
+					</Card.Body>
+				</Card>
+			</div>
 		</div>
 	);
 };

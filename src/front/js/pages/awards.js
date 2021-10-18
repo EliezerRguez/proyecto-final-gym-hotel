@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import Image from "react-bootstrap/Image";
@@ -8,6 +8,7 @@ import { Col } from "react-bootstrap";
 
 export const Awards = () => {
 	const { store, actions } = useContext(Context);
+	const { awards, setAwards } = useState(" ");
 
 	return (
 		<div className="text-center mt-5">

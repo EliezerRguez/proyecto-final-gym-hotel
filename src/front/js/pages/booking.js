@@ -13,9 +13,9 @@ export const Booking = () => {
 	const [date, setDate] = useState(new Date());
 	const [showModal, setShowModal] = useState(false);
 
-	const onClickDay = date => {
+	const NewDate = date => {
 		setShowModal(true);
-		console.log("clickDay", { date });
+		console.log("!!!", { date });
 	};
 
 	console.log(date);
@@ -24,7 +24,7 @@ export const Booking = () => {
 			<h1>BOOKING</h1>
 			<Link to="/profile">Profile</Link>
 			<div>
-				<Calendar value={date} onClickDay={onClickDay} className="calendar" />
+				<Calendar value={date} onChange={NewDate} className="calendar" />
 			</div>
 			{showModal ? (
 				<div>
@@ -35,6 +35,18 @@ export const Booking = () => {
 
 						<Modal.Body>
 							<p>All hours goes here!</p>
+							<Modal.Body>
+								<Button>10:00-10:45</Button>
+								<Button>10:45-11:30</Button>
+								<Button>11:30-12:15</Button>
+								<Button>12:15-13:00</Button>
+								<Button>16:00-16:45</Button>
+								<Button>16:45-17:30</Button>
+								<Button>17:30-18:15</Button>
+								<Button>18:15-19:00</Button>
+								<Button>21:00-21:45</Button>
+								<Button>21:45-22:30</Button>
+							</Modal.Body>
 						</Modal.Body>
 
 						<Modal.Footer>

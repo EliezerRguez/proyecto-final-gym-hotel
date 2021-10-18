@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 import { Form } from "react-bootstrap";
 import { Row } from "react-bootstrap";
@@ -15,17 +15,22 @@ export const PersonalData = () => {
 	const [weight, setWeight] = useState(" ");
 	const [gender, setGender] = useState("");
 	const [weekly_exercise, setWeekly_exercise] = useState([]);
-
+	const [data, setData] = useState(" ");
 	let history = useHistory();
 
-	async function personalData(event) {
+	async function getPersonalData(event) {
 		event.preventDefault();
 		console.log("hasta qui llega");
+		const token = localStorage.getItem("jwt-token");
 
-		const response = await fetch(`${process.env.BACKEND_URL}/api/personal-data`, {
+		if (gender !== null) {
+			history.push("/homepage");
+		}
+		const response = await fetch(process.env.BACKEND_URL + "/api/personal-data", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
 			},
 			body: JSON.stringify({
 				height: height,
@@ -36,13 +41,17 @@ export const PersonalData = () => {
 		});
 		console.log(response);
 		const responseJson = await response.json();
-		history.push("/profile");
-		return responseJson;
+		setData(responseJson);
+		history.push("/homepage");
 	}
+
+	useEffect(() => {
+		if (store.client_token === null) history.push("/login");
+	}, []);
 
 	return (
 		<div className="container">
-			<Form onSubmit={personalData}>
+			<Form onSubmit={getPersonalData}>
 				<h1>PERSONAL DATA</h1>
 				<Form.Group as={Row} className="mb-3" controlId="formHorizontalNumber">
 					<Form.Label column sm={2}>
