@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -51,10 +50,10 @@ export const Exercise = () => {
 				</Row>
 				<Row>
 					<Col xs={4} className="mb-4">
-						<span>{exercises.time}</span>
+						<span>{singleExercise.time}</span>
 					</Col>
 					<Col xs={4} className="mb-4">
-						<span>{exercises.details}</span>
+						<span>{singleExercise.details}</span>
 					</Col>
 					<Col xs={4} className="mb-4">
 						<span>10 reps each</span>

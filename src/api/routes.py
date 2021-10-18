@@ -484,6 +484,7 @@ def get_plan(client_id):
        
     return jsonify(client.serialize()), 200
 
+
 @api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
 @jwt_required()
 def get_one_exercise_from_profile(client_id, plan_id, exercise_id):
