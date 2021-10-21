@@ -54,16 +54,10 @@ def register_personaldata():
     client.height=height
     client.weekly_exercise=weekly_exercise
 
-    if weekly_exercise == 1:
-        client.plan_id = 1
-    if weekly_exercise == 2:
-        client.plan_id = 2
-    if weekly_exercise == 4:
-        client.plan_id = 3
     
     client.save()
           
-    return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise, "plan_id": plan_id }), 200
+    return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise}), 200
       
 @api.route("/create-booking", methods=["POST"])
 def create_booking():
@@ -482,15 +476,41 @@ def get_clients():
     clients = list(map(lambda client : client.serialize(), clients))
     return jsonify(clients), 200
 
-@api.route("/profile/<int:client_id>", methods=["GET"])
+@api.route("/profile", methods=["GET"])
 @jwt_required()
-def get_plan(client_id):
-    client = Client.query.get(client_id)
-    if client.plan_id is None:
-       return jsonify("Selecciona tu plan")
+def get_plan():
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+
+    if client.stay_id == 1:
+        client.plan_id = 1
+    if client.stay_id == 2:
+        client.plan_id = 2
+    if client.stay_id == 3:
+        client.plan_id = 3
+
        
     return jsonify(client.serialize()), 200
 
+@api.route('/select-a-plan', methods=['GET'])
+@jwt_required()
+def select_a_plan():
+    #stay= Client.query.get(stay_id)
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    print(client)
+    print(client.stay)
+    print(client.stay.plan)
+    #if stay == 1:
+     #   plans_stay = 1
+    #if stay == 2:
+     #   plans_stay = 2
+    #if stay == 3:
+     #   plans_stay = 3
+    client.stay.plans_stay[0]
+ 
+    return jsonify(plan_stay.serialize()), 200
 
 @api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
 @jwt_required()
