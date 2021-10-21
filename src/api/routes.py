@@ -47,16 +47,23 @@ def register_personaldata():
     
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-    print(current_client_id)
+   
     
     client.gender=gender
     client.weight=weight
     client.height=height
     client.weekly_exercise=weekly_exercise
+
+    if weekly_exercise == 1:
+        client.plan_id = 1
+    if weekly_exercise == 2:
+        client.plan_id = 2
+    if weekly_exercise == 4:
+        client.plan_id = 3
     
     client.save()
           
-    return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise }), 200
+    return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise, "plan_id": plan_id }), 200
       
 @api.route("/create-booking", methods=["POST"])
 def create_booking():
