@@ -18,6 +18,13 @@ bookings_client = db.Table('bookings',
     db.Column('client_id', db.Integer, db.ForeignKey('client.id'), primary_key=True)
 )
 
+client_exercise_time = db.Table('exercise_time',
+
+    db.Column('time_id', db.Integer, db.ForeignKey('time.id'), primary_key=True),
+    db.Column('client_id', db.Integer, db.ForeignKey('client.id'), primary_key=True)
+)
+
+
 
 exercises_plan = db.Table('exercises',
 
@@ -31,6 +38,7 @@ plans_stay = db.Table('plans',
     db.Column('stay_id', db.Integer, db.ForeignKey('stay.id'), primary_key=True),
     db.Column('plan_id', db.Integer, db.ForeignKey('plan.id'), primary_key=True)
 )
+
 
 class SaveAll:
     def save(self):
@@ -55,6 +63,9 @@ class Client(db.Model,SaveAll):
        backref=db.backref('clients', lazy=True))
     awards = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
+    time_id = db.Column(db.Integer, db.ForeignKey('time.id'),
+        nullable=False)
+    time = db.relationship('Time', backref='client', lazy=True)
 
 
     def __repr__(self):
@@ -205,4 +216,19 @@ class Gym(db.Model):
         return {
             "id": self.id,
             "capacity": self.capacity            
+        }
+
+class Time(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    client_exercise_time = db.Column(db.Integer, unique=False, nullable=False)
+    client_total_time = db.Column(db.Integer, unique=False, nullable=False)
+
+    def __repr__(self):
+        return '<Time %r>' % self.client_exercise_time
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "client_exercise_time": self.client_exercise_time,
+            "client_total_time": self.client_total_time     
         }
