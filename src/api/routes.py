@@ -495,3 +495,26 @@ def get_one_exercise_from_profile(client_id, plan_id, exercise_id):
     exercise = Exercise.query.get(exercise_id)
    
     return jsonify(exercise.serialize()), 200
+
+@api.route("/time", methods=["GET"])
+def get_time(client_id):
+
+    time = Time.query.all()
+
+    return jsonify(time.serialize()), 200
+
+@api.route("/profile/<int:client_id>/time", methods=["GET"])
+def get_time(time_id):
+
+    client = Client.query.get(time_id)
+
+
+
+    return jsonify(time.serialize()), 200
+
+@api.route("/profile/<int:client_id>/time", methods=["POST"])
+def get_time(client_id):
+
+    client = Time.query.get(client_id)
+
+    return jsonify(time.serialize()), 200
