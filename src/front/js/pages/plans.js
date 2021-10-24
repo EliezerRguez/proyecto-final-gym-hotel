@@ -8,10 +8,15 @@ import "../../styles/home.scss";
 export const Plans = () => {
 	const [plans, setPlans] = useState([]);
 	const { store, actions } = useContext(Context);
-	//const token = localStorage.getItem("jwt-token");
+	const token = localStorage.getItem("jwt-token");
 
 	async function getPlan() {
-		const response = await fetch(process.env.BACKEND_URL + "/api/plans");
+		const response = await fetch(process.env.BACKEND_URL + "/api/select-a-plan", {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
 		console.log(response);
 		const responseJson = await response.json();
 		setPlans(responseJson);

@@ -154,7 +154,7 @@ def list_of_things():
      name = "Cardio en cinta",
      time = 10,
      detail = "velocidad 6.5",
-     machine_id = 1,
+     machine = machine1,
     )
 
     db.session.add(exercise1)
@@ -163,7 +163,7 @@ def list_of_things():
      name = "Curl de biceps",
      time = 5,
      detail = "Maximas rondas de 10 repeticiones con 10kg",
-     machine_id = 3,
+     machine = machine2,
     )
 
     db.session.add(exercise2)
@@ -172,7 +172,7 @@ def list_of_things():
      name = "Flexion de triceps",
      time = 5,
      detail = "5 rondas de 10 repeticiones",
-     machine_id = 7,
+     machine = machine7,
     )
 
     db.session.add(exercise3)
@@ -181,7 +181,7 @@ def list_of_things():
      name = "Extension de triceps",
      time = 10,
      detail = "5 rondas de 12 repeticiones con disco de 10kg",
-     machine_id = 3,
+     machine = machine3,
     )
 
     db.session.add(exercise4)
@@ -190,7 +190,7 @@ def list_of_things():
      name = "Remo vertical",
      time = 10,
      detail = "5 rondas de 12 repeticiones con disco de 24kg",
-     machine_id = 3,
+     machine = machine3,
     )
 
     db.session.add(exercise5)
@@ -199,7 +199,7 @@ def list_of_things():
      name = "Press banca",
      time = 10,
      detail = "5 rondas de 12 repeticiones con 40kg",
-     machine_id = 7,
+     machine = machine7,
     )
 
     db.session.add(exercise6)
@@ -208,7 +208,7 @@ def list_of_things():
      name = "Flexiones",
      time = 5,
      detail = "5 rondas de 20 flexiones",
-     machine_id = 8,
+     machine = machine8,
     )
 
     db.session.add(exercise7)
@@ -217,7 +217,7 @@ def list_of_things():
      name = "Plancha",
      time = 5,
      detail = "4 rondas de un minuto de plancha isometrica",
-     machine_id = 8,
+     machine = machine8,
     )
 
     db.session.add(exercise8)
@@ -226,7 +226,7 @@ def list_of_things():
      name = "Thruster con barra",
      time = 10,
      detail = "5 rondas de 12 repeticiones con 20kg",
-     machine_id = 3,
+     machine = machine3,
     )
 
     db.session.add(exercise9)
@@ -235,7 +235,7 @@ def list_of_things():
      name = "Cargadas",
      time = 10,
      detail = "5 rondas de 10 repeticiones con 20kg",
-     machine_id = 3,
+     machine = machine3,
     )
 
     db.session.add(exercise10)
@@ -244,7 +244,7 @@ def list_of_things():
      name = "Front squat con barra",
      time = 5,
      detail = "5 rondas de 10 front squat con peso de 20kg",
-     machine_id = 3,
+     machine = machine3,
     )
 
     db.session.add(exercise11)
@@ -253,7 +253,7 @@ def list_of_things():
      name = "Back squat con barra",
      time = 5,
      detail = "5 rondas de 10 back squat con peso de 20kg",
-     machine_id = 3,
+     machine = machine3,
     )
 
     db.session.add(exercise12)
@@ -262,7 +262,7 @@ def list_of_things():
      name = "Swing de Kettlebell",
      time = 10,
      detail = "5 rondas de 20 repeticiones (10 swing de kettlebell con cada mano)",
-     machine_id = 2,
+     machine = machine2,
     )
 
     db.session.add(exercise13)
@@ -271,7 +271,7 @@ def list_of_things():
      name = "Abdominales",
      time = 10,
      detail = "5 rondas de 30 abdominales",
-     machine_id = 6,
+     machine = machine6,
     )
 
     db.session.add(exercise14)
@@ -280,7 +280,7 @@ def list_of_things():
      name = "Cardio con eliptica",
      time = 10,
      detail = "10 minutos de cardio en la eliptica",
-     machine_id = 4,
+     machine = machine4,
     )
 
     db.session.add(exercise15)
@@ -289,31 +289,10 @@ def list_of_things():
      name = "Cardio con bicicleta",
      time = 10,
      detail = "10 minutos de cardio en la bicicleta estatica",
-     machine_id = 5,
+     machine = machine5,
     )
 
     db.session.add(exercise16)
-    
-    stay1 = Stay(
-     name = "corta estancia",
-     from_day = 1,
-     to_day = 4,
-    )
-    db.session.add(stay1)
-    
-    stay2 = Stay(
-     name = "media estancia",
-     from_day = 5,
-     to_day = 10,
-    )
-    db.session.add(stay2)
-
-    stay3 = Stay(
-     name = "larga estancia",
-     from_day = 11,
-     to_day = 1000,
-    )
-    db.session.add(stay3)
 
     award1 = Award(
      name = "Aficionado",
@@ -399,25 +378,52 @@ def list_of_things():
     )
     db.session.add(plan3)
 
+    stay1 = Stay(
+     id = 1,
+     name = "corta estancia",
+     from_day = 1,
+     to_day = 4,
+     plans = [plan1] 
+    )
+    db.session.add(stay1)
+    
+    stay2 = Stay(
+     id = 2,
+     name = "media estancia",
+     from_day = 5,
+     to_day = 10,
+     plans = [plan2] 
+    )
+    db.session.add(stay2)
+
+    stay3 = Stay(
+     id = 3,
+     name = "larga estancia",
+     from_day = 11,
+     to_day = 1000,
+     plans = [plan3] 
+    )
+    db.session.add(stay3)
+
     client = Client(
         email = "chiara@gmail.com",
         room = 606,
-        stay_id = 1
+        stay = stay1
     )
     db.session.add(client)
 
     client2 = Client(
         email = "eliezer@gmail.com",
         room = 506,
-        stay_id = 2
+        stay =  stay2
     )
     db.session.add(client2)
 
     client3 = Client(
         email = "almu@gmail.com",
         room = 806,
-        stay_id = 2,
-        plan_id = 2
+        stay =  stay2,
+        plan = plan2
     )
     db.session.add(client3)
 
@@ -496,21 +502,23 @@ def get_plan():
 @api.route('/select-a-plan', methods=['GET'])
 @jwt_required()
 def select_a_plan():
-    #stay= Client.query.get(stay_id)
+   
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
     print(client)
     print(client.stay)
-    print(client.stay.plan)
+    print(client.stay.plans)
     #if stay == 1:
      #   plans_stay = 1
     #if stay == 2:
      #   plans_stay = 2
     #if stay == 3:
      #   plans_stay = 3
-    client.stay.plans_stay[0]
- 
-    return jsonify(plan_stay.serialize()), 200
+    plan = client.stay.plans[0]
+    
+
+
+    return jsonify(plans.serialize()), 200
 
 @api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
 @jwt_required()
@@ -531,17 +539,10 @@ def get_time(client_id):
     return jsonify(time.serialize()), 200
 
 @api.route("/profile/<int:client_id>/time", methods=["GET"])
-def get_time(time_id):
+def get_a_time(time_id):
 
     client = Client.query.get(time_id)
 
 
-
-    return jsonify(time.serialize()), 200
-
-@api.route("/profile/<int:client_id>/time", methods=["POST"])
-def get_time(client_id):
-
-    client = Time.query.get(client_id)
 
     return jsonify(time.serialize()), 200

@@ -13,21 +13,21 @@ import { Col } from "react-bootstrap";
 import "../../styles/home.scss";
 
 export const Profile = () => {
-	  const [plans, setPlans] = useState([]);
-	  const [time, setTime] = useState([])
-	  const { store, actions } = useContext(Context);
-		//const token = localStorage.getItem("jwt-token");
-	
-		async function getPlan() {
-			const response = await fetch(process.env.BACKEND_URL + "/api/plans");
-			console.log(response);
-			const responseJson = await response.json();
-			setPlans(responseJson);
-			console.log(responseJson);
-		}
-		useEffect(() => {
-			getPlan();
-		}, []);
+	const [plans, setPlans] = useState([]);
+	const [time, setTime] = useState([]);
+	const { store, actions } = useContext(Context);
+	//const token = localStorage.getItem("jwt-token");
+
+	async function getPlan() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/plans");
+		console.log(response);
+		const responseJson = await response.json();
+		setPlans(responseJson);
+		console.log(responseJson);
+	}
+	useEffect(() => {
+		getPlan();
+	}, []);
 
 	return (
 		<div className="container">
