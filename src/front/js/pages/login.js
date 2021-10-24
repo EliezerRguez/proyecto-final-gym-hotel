@@ -47,33 +47,32 @@ export const Login = () => {
 	}
 
 	return (
-		<div className="container">
-			<h1>LOG IN</h1>
-			<Form onSubmit={login}>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
-					<Form.Control
-						type="email"
-						placeholder="Enter email"
-						onChange={event => setEmail(event.target.value)}
-						required
-					/>
-					<Form.Text className="text-muted">We ll never share your email with anyone else.</Form.Text>
-				</Form.Group>
+		<div className="container h-100 login p-0">
+			<div className="login-area text-light h-100 p-4 text-center">
+				<h1>WELCOME TO APPTIVATE</h1>
+				<Form onSubmit={login}>
+					<Form.Group className="my-4" controlId="formBasicEmail">
+						<Form.Control
+							type="email"
+							placeholder="Enter email"
+							onChange={event => setEmail(event.target.value)}
+							required
+						/>
+					</Form.Group>
 
-				<Form.Group className="mb-3" controlId="formBasicPassword">
-					<Form.Label>Room number</Form.Label>
-					<Form.Control
-						type="password"
-						placeholder="Room Number"
-						onChange={event => setRoom(event.target.value)}
-						required
-					/>
-				</Form.Group>
-				<Button variant="primary" type="submit">
-					Log me in!
-				</Button>
-			</Form>
+					<Form.Group className="mb-4" controlId="formBasicPassword">
+						<Form.Control
+							type="password"
+							placeholder="Room Number"
+							onChange={event => setRoom(event.target.value)}
+							required
+						/>
+					</Form.Group>
+					<Button className="w-100 button-login" type="submit" size="lg">
+						<span className="text-dark fw-bold">LOG ME IN!</span>
+					</Button>
+				</Form>
+			</div>
 		</div>
 	);
 };

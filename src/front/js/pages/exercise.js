@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Time from "../component/timer";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -60,23 +61,8 @@ export const Exercise = () => {
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={6} className="px-2">
-						<div className="text-center">TIMER</div>
-					</Col>
-					<Col xs={2} className="px-2">
-						<Button className="p-2" variant="primary">
-							Start
-						</Button>
-					</Col>
-					<Col xs={2} className="px-2">
-						<Button className="p-2" variant="danger">
-							Stop
-						</Button>
-					</Col>
-					<Col xs={2} className="px-2">
-						<Button className="p-2" variant="success">
-							Save
-						</Button>
+					<Col xs={12} className="px-2">
+						<Time />
 					</Col>
 				</Row>
 				<Row>
