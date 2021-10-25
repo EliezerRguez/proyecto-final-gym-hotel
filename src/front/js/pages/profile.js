@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
@@ -16,10 +16,15 @@ export const Profile = () => {
 	const [plans, setPlans] = useState([]);
 	const [time, setTime] = useState([]);
 	const { store, actions } = useContext(Context);
-	//const token = localStorage.getItem("jwt-token");
+	const token = localStorage.getItem("jwt-token");
 
 	async function getPlan() {
-		const response = await fetch(process.env.BACKEND_URL + "/api/plans");
+		const response = await fetch(process.env.BACKEND_URL + "/api/plans", {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
 		console.log(response);
 		const responseJson = await response.json();
 		setPlans(responseJson);
@@ -36,6 +41,7 @@ export const Profile = () => {
 				<Card>
 					<Card.Img variant="top" src="holder.js/100px160" />
 					<Card.Body>
+						<h5>{plans.id}</h5>
 						<Card.Title>Imagen plan chulo elegido</Card.Title>
 					</Card.Body>
 				</Card>

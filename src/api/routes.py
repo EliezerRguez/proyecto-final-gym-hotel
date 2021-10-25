@@ -482,22 +482,7 @@ def get_clients():
     clients = list(map(lambda client : client.serialize(), clients))
     return jsonify(clients), 200
 
-@api.route("/profile", methods=["GET"])
-@jwt_required()
-def get_plan():
 
-    current_client_id = get_jwt_identity()
-    client = Client.query.get(current_client_id)
-
-    if client.stay_id == 1:
-        client.plan_id = 1
-    if client.stay_id == 2:
-        client.plan_id = 2
-    if client.stay_id == 3:
-        client.plan_id = 3
-
-       
-    return jsonify(client.serialize()), 200
 
 @api.route('/select-a-plan', methods=['GET'])
 @jwt_required()
@@ -508,15 +493,9 @@ def select_a_plan():
     print(client)
     print(client.stay)
     print(client.stay.plans)
-    #if stay == 1:
-     #   plans_stay = 1
-    #if stay == 2:
-     #   plans_stay = 2
-    #if stay == 3:
-     #   plans_stay = 3
+   
     plan = client.stay.plans[0]
     
-
 
     return jsonify(plan.serialize()), 200
 
