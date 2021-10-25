@@ -24,15 +24,16 @@ def handle_hello():
 @api.route("/login", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
-    room = request.json.get("room", None) 
-
+    room = request.json.get("room", None)
+   
     client = Client.query.filter_by(email=email, room=room).first()
     if client is None:
         
         return jsonify({"msg": "Bad email or room"}), 401
+    
    
     access_token = create_access_token(identity=client.id)
-    return jsonify({ "token": access_token, "client_id": client.id, "client_gender":client.gender})
+    return jsonify({ "token": access_token, "client_id": client.id })
 
 
 @api.route("/personal-data", methods=["POST"])
@@ -46,16 +47,17 @@ def register_personaldata():
     
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-    print(current_client_id)
+   
     
     client.gender=gender
     client.weight=weight
     client.height=height
     client.weekly_exercise=weekly_exercise
+
     
     client.save()
           
-    return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise }), 200
+    return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise}), 200
       
 @api.route("/create-booking", methods=["POST"])
 def create_booking():
@@ -109,12 +111,12 @@ def list_of_gyms():
 def list_of_things():
 
     machine1 = Machine(
-     name = "cinta de correr",
+     name = "Cinta de correr",
     )
     db.session.add(machine1)
     
     machine2=  Machine(
-     name = "kettlebell",
+     name = "Kettlebell",
     )
     db.session.add(machine2)
 
@@ -124,58 +126,173 @@ def list_of_things():
     db.session.add(machine3)
 
     machine4=  Machine(
-     name = "eliptica",
+     name = "Eliptica",
     )
     db.session.add(machine4)
 
     machine5=  Machine(
-     name = "bicicleta",
+     name = "Bicicleta estatica",
     )
     db.session.add(machine5)
 
     machine6=  Machine(
-     name = "maquina de abdominales",
+     name = "Maquina de abdominales",
     )
     db.session.add(machine6)
+
+    machine7=  Machine(
+     name = "Banca",
+    )
+    db.session.add(machine7)
+
+    machine8=  Machine(
+     name = "Suelo",
+    )
+    db.session.add(machine8)
    
     exercise1 = Exercise(
-     name = "cardio",
+     name = "Cardio en cinta",
      time = 10,
      detail = "velocidad 6.5",
-     machine_id = 1,
+     machine = machine1,
     )
 
     db.session.add(exercise1)
     
     exercise2= Exercise(
-     name = "fuerza",
-     time = 20,
-     detail = "5 repeticiones de 10",
-     machine_id = 2,
+     name = "Curl de biceps",
+     time = 5,
+     detail = "Maximas rondas de 10 repeticiones con 10kg",
+     machine = machine2,
     )
 
     db.session.add(exercise2)
-    
-    stay1 = Stay(
-     name = "corta estancia",
-     from_day = 1,
-     to_day = 4,
-    )
-    db.session.add(stay1)
-    
-    stay2 = Stay(
-     name = "media estancia",
-     from_day = 5,
-     to_day = 10,
-    )
-    db.session.add(stay2)
 
-    stay3 = Stay(
-     name = "larga estancia",
-     from_day = 11,
-     to_day = 1000,
+    exercise3= Exercise(
+     name = "Flexion de triceps",
+     time = 5,
+     detail = "5 rondas de 10 repeticiones",
+     machine = machine7,
     )
-    db.session.add(stay3)
+
+    db.session.add(exercise3)
+
+    exercise4= Exercise(
+     name = "Extension de triceps",
+     time = 10,
+     detail = "5 rondas de 12 repeticiones con disco de 10kg",
+     machine = machine3,
+    )
+
+    db.session.add(exercise4)
+
+    exercise5= Exercise(
+     name = "Remo vertical",
+     time = 10,
+     detail = "5 rondas de 12 repeticiones con disco de 24kg",
+     machine = machine3,
+    )
+
+    db.session.add(exercise5)
+
+    exercise6= Exercise(
+     name = "Press banca",
+     time = 10,
+     detail = "5 rondas de 12 repeticiones con 40kg",
+     machine = machine7,
+    )
+
+    db.session.add(exercise6)
+
+    exercise7= Exercise(
+     name = "Flexiones",
+     time = 5,
+     detail = "5 rondas de 20 flexiones",
+     machine = machine8,
+    )
+
+    db.session.add(exercise7)
+
+    exercise8= Exercise(
+     name = "Plancha",
+     time = 5,
+     detail = "4 rondas de un minuto de plancha isometrica",
+     machine = machine8,
+    )
+
+    db.session.add(exercise8)
+
+    exercise9= Exercise(
+     name = "Thruster con barra",
+     time = 10,
+     detail = "5 rondas de 12 repeticiones con 20kg",
+     machine = machine3,
+    )
+
+    db.session.add(exercise9)
+
+    exercise10= Exercise(
+     name = "Cargadas",
+     time = 10,
+     detail = "5 rondas de 10 repeticiones con 20kg",
+     machine = machine3,
+    )
+
+    db.session.add(exercise10)
+
+    exercise11= Exercise(
+     name = "Front squat con barra",
+     time = 5,
+     detail = "5 rondas de 10 front squat con peso de 20kg",
+     machine = machine3,
+    )
+
+    db.session.add(exercise11)
+
+    exercise12= Exercise(
+     name = "Back squat con barra",
+     time = 5,
+     detail = "5 rondas de 10 back squat con peso de 20kg",
+     machine = machine3,
+    )
+
+    db.session.add(exercise12)
+
+    exercise13= Exercise(
+     name = "Swing de Kettlebell",
+     time = 10,
+     detail = "5 rondas de 20 repeticiones (10 swing de kettlebell con cada mano)",
+     machine = machine2,
+    )
+
+    db.session.add(exercise13)
+
+    exercise14= Exercise(
+     name = "Abdominales",
+     time = 10,
+     detail = "5 rondas de 30 abdominales",
+     machine = machine6,
+    )
+
+    db.session.add(exercise14)
+
+    exercise15= Exercise(
+     name = "Cardio con eliptica",
+     time = 10,
+     detail = "10 minutos de cardio en la eliptica",
+     machine = machine4,
+    )
+
+    db.session.add(exercise15)
+
+    exercise16= Exercise(
+     name = "Cardio con bicicleta",
+     time = 10,
+     detail = "10 minutos de cardio en la bicicleta estatica",
+     machine = machine5,
+    )
+
+    db.session.add(exercise16)
 
     award1 = Award(
      name = "Aficionado",
@@ -261,25 +378,52 @@ def list_of_things():
     )
     db.session.add(plan3)
 
+    stay1 = Stay(
+     id = 1,
+     name = "corta estancia",
+     from_day = 1,
+     to_day = 4,
+     plans = [plan1] 
+    )
+    db.session.add(stay1)
+    
+    stay2 = Stay(
+     id = 2,
+     name = "media estancia",
+     from_day = 5,
+     to_day = 10,
+     plans = [plan2] 
+    )
+    db.session.add(stay2)
+
+    stay3 = Stay(
+     id = 3,
+     name = "larga estancia",
+     from_day = 11,
+     to_day = 1000,
+     plans = [plan3] 
+    )
+    db.session.add(stay3)
+
     client = Client(
         email = "chiara@gmail.com",
         room = 606,
-        stay_id = 1
+        stay = stay1
     )
     db.session.add(client)
 
     client2 = Client(
         email = "eliezer@gmail.com",
         room = 506,
-        stay_id = 2
+        stay =  stay3
     )
     db.session.add(client2)
 
     client3 = Client(
         email = "almu@gmail.com",
         room = 806,
-        stay_id = 2,
-        plan_id = 2
+        stay =  stay2,
+        plan = plan2
     )
     db.session.add(client3)
 
@@ -326,8 +470,8 @@ def get_one_plan(plan_id):
     plan = Plan.query.get(plan_id)
     return jsonify(plan.serialize()), 200
 
-@api.route("/exercises/<int:excercise_id>", methods=["GET"])
-def get_one_exercise(plan_id):
+@api.route("/exercises/<int:exercise_id>", methods=["GET"])
+def get_one_exercise(exercise_id):
     exercise = Exercise.query.get(exercise_id)
     return jsonify(exercise.serialize()), 200
 
@@ -338,21 +482,30 @@ def get_clients():
     clients = list(map(lambda client : client.serialize(), clients))
     return jsonify(clients), 200
 
-@api.route("/profile/<int:plan_id>", methods=["GET"])
-def get_plan(plan_id):
+
+
+@api.route('/select-a-plan', methods=['GET'])
+@jwt_required()
+def select_a_plan():
+   
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-    plan = Plan.query.get(plan_id)
+    print(client)
+    print(client.stay)
+    print(client.stay.plans)
+   
+    plan = client.stay.plans[0]
     
+
     return jsonify(plan.serialize()), 200
 
 @api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
 @jwt_required()
 def get_one_exercise_from_profile(client_id, plan_id, exercise_id):
 
-    current_client_id = get_jwt_identity()
-    client = Client.query.get(current_client_id)
-    plan = Client.plan
+    #current_client_id = get_jwt_identity()
+    #client = Client.query.get(current_client_id)
+    #plan = Client.plan
     exercise = Exercise.query.get(exercise_id)
    
     return jsonify(exercise.serialize()), 200

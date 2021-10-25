@@ -19,6 +19,7 @@ bookings_client = db.Table('bookings',
 )
 
 
+
 exercises_plan = db.Table('exercises',
 
     db.Column('exercise_id', db.Integer, db.ForeignKey('exercise.id'), primary_key=True),
@@ -31,6 +32,7 @@ plans_stay = db.Table('plans',
     db.Column('stay_id', db.Integer, db.ForeignKey('stay.id'), primary_key=True),
     db.Column('plan_id', db.Integer, db.ForeignKey('plan.id'), primary_key=True)
 )
+
 
 class SaveAll:
     def save(self):
@@ -55,6 +57,7 @@ class Client(db.Model,SaveAll):
        backref=db.backref('clients', lazy=True))
     awards = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
+   
 
 
     def __repr__(self):
@@ -175,7 +178,7 @@ class Exercise(db.Model):
         }
 
 class Stay(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement= False)
     name = db.Column(db.String(120), unique=False, nullable=False)  
     from_day = db.Column(db.Integer, unique=False, nullable=False)
     to_day = db.Column(db.Integer, unique=False, nullable=True)
@@ -206,3 +209,4 @@ class Gym(db.Model):
             "id": self.id,
             "capacity": self.capacity            
         }
+

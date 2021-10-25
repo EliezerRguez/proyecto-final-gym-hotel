@@ -2,6 +2,8 @@
 import { Nav, Navbar } from "react-bootstrap";
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+import "../../styles/index.scss";
 
 export const Navbars = () => {
 	const { store, actions } = useContext(Context);
@@ -11,8 +13,12 @@ export const Navbars = () => {
 	}
 
 	return (
-		<Navbar collapseOnSelect expand="sm" bg="dark" variant="dark" className="lx-4">
-			<Navbar.Brand href="#home">APPTIVATE</Navbar.Brand>
+		<Navbar collapseOnSelect expand="sm" bg="dark" variant="dark" className="lx-4 p-3">
+			<Navbar.Brand>
+				<Link to="/homepage" className="text-light">
+					APPTIVATE
+				</Link>
+			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mx-3">

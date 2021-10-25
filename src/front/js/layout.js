@@ -26,7 +26,7 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div>
+		<div className="h-100">
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbars />
@@ -61,7 +61,7 @@ const Layout = () => {
 						<Route exact path="/time">
 							<Time />
 						</Route>
-						<Route exact path="/exercise">
+						<Route path="/exercise/:id">
 							<Exercise />
 						</Route>
 						<Route exact path="/booking">
