@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import { CardGroup } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Accordion from "react-bootstrap/Accordion";
+//import Accordion from "react-bootstrap/Accordion";
 import Image from "react-bootstrap/Image";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
@@ -34,6 +34,8 @@ export const Profile = () => {
 		getPlan();
 	}, []);
 
+	//REALIZAR FECTH DE LOS DATOS DE USUARIO CON EL PLAN ELEGIDO PARA COGER LOS DATOS DEL PLAN
+	//REALIZAR FECHT DEL PLAN ELEGIDO
 	return (
 		<div className="container">
 			<h1>PROFILE</h1>
