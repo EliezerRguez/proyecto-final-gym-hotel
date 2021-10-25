@@ -30,25 +30,17 @@ export const Plans = () => {
 			<h1>PLAN</h1>
 
 			<div className="row flex-nowrap ">
-				{plans.map(plan => {
-					return (
-						<div className="card col-3 m-4" key={plan.id}>
-							<h5>{plan.name}</h5>
-							<h5>{plan.time}</h5>
-							<h5>{plan.difficulty}</h5>
-							<button
-								className="fas fa-heart"
-								onClick={() => {
-									actions.addPlan(plan.name);
-								}}
-							/>
-							<Link to="/booking">BOOKING</Link>
-						</div>
-					);
-				})}
+				<Card className="m-4">
+					<h5>{plans.id}</h5>
+					<h5>{plans.name}</h5>
+					<h5> Tiempo total de ejecución: {plans.time}</h5>
+					<h5> Nivel de dificultad: {plans.difficulty}</h5>
+					<Link to="/booking">BOOKING</Link>
+				</Card>
 			</div>
+			<> </>
 			<div className="row flex-nowrap ">
-				<Card className="mx-4">
+				<Card className="m-4">
 					<Card.Img variant="top" src="holder.js/100px180" />
 					Imagen de perfil persona
 					<Card.Body>

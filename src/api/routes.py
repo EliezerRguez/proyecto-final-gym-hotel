@@ -518,7 +518,7 @@ def select_a_plan():
     
 
 
-    return jsonify(plans.serialize()), 200
+    return jsonify(plan.serialize()), 200
 
 @api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
 @jwt_required()
