@@ -3,27 +3,27 @@ import React, { useState, useRef } from "react";
 const Time = () => {
 	const [timer, setTimer] = useState(0);
 	const [isActive, setIsActive] = useState(false);
-	const [isPaused, setIsPaused] = useState(false);
+	const [isPaused, setIsPaused] = useState(true);
 	const [pulse, setPulse] = useState("");
 	const increment = useRef(null);
 
 	const handleStart = () => {
 		setIsActive(true);
-		setIsPaused(true);
+		setIsPaused(false);
 		increment.current = setInterval(() => {
 			setTimer(timer => timer + 1);
 		}, 1000);
 		setPulse("blob red");
 	};
 
-	const handlePause = () => {
+	const handleStop = () => {
 		clearInterval(increment.current);
-		setIsPaused(false);
+		setIsPaused(true);
 		setPulse("");
 	};
 
 	const handleResume = () => {
-		setIsPaused(true);
+		setIsPaused(false);
 		increment.current = setInterval(() => {
 			setTimer(timer => timer + 1);
 		}, 1000);
@@ -33,7 +33,7 @@ const Time = () => {
 	const handleReset = () => {
 		clearInterval(increment.current);
 		setIsActive(false);
-		setIsPaused(false);
+		setIsPaused(true);
 		setTimer(0);
 	};
 
@@ -48,20 +48,13 @@ const Time = () => {
 
 	return (
 		<div>
-			<div className="stopwatch-card">
+			<div className={`text-center timer ${pulse}`}>
 				<p>{formatTime()}</p>
 			</div>
 			<div className="buttons">
-				{!isActive && !isPaused ? (
-					<button onClick={handleStart}>Start</button>
-				) : isPaused ? (
-					<button onClick={handlePause}>Pause</button>
-				) : (
-					<button onClick={handleResume}>Resume</button>
-				)}
-				<button onClick={handleReset} disabled={!isActive}>
-					Reset
-				</button>
+				<button onClick={handleStart}>Start</button>
+				<button onClick={handleStop}>Stop</button>
+				<button onClick={handleReset}>Reset</button>
 			</div>
 		</div>
 	);
