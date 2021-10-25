@@ -35,7 +35,7 @@ export const Homepage = () => {
 						<Card.Text>
 							<Link to="/info">
 								<Button variant="primary" type="submit">
-									Cómo funciona y detalles gimnasio
+									Gym details
 								</Button>
 							</Link>
 						</Card.Text>
@@ -50,7 +50,7 @@ export const Homepage = () => {
 						<Card.Text>
 							<Link to="/plans">
 								<Button variant="primary" type="submit">
-									Plan que te proponemos y plan customize
+									OUR PLAN OR CUSTOMIZE PLAN
 								</Button>
 							</Link>
 						</Card.Text>
@@ -65,7 +65,7 @@ export const Homepage = () => {
 						<Card.Text>
 							<Link to="/awards">
 								<Button variant="primary" type="submit">
-									Todas las insignias disponibles y breve descripción premios
+									ALL AWARDS AND DESCRIPTION
 								</Button>
 							</Link>
 						</Card.Text>
