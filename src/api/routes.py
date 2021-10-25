@@ -415,7 +415,7 @@ def list_of_things():
     client2 = Client(
         email = "eliezer@gmail.com",
         room = 506,
-        stay =  stay2
+        stay =  stay3
     )
     db.session.add(client2)
 
