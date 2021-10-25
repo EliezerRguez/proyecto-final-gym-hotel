@@ -178,7 +178,7 @@ class Exercise(db.Model):
         }
 
 class Stay(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement= False)
     name = db.Column(db.String(120), unique=False, nullable=False)  
     from_day = db.Column(db.Integer, unique=False, nullable=False)
     to_day = db.Column(db.Integer, unique=False, nullable=True)
