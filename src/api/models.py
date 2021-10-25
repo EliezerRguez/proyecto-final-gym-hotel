@@ -63,9 +63,9 @@ class Client(db.Model,SaveAll):
        backref=db.backref('clients', lazy=True))
     awards = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
-    time_id = db.Column(db.Integer, db.ForeignKey('time.id'),
-        nullable=False)
-    time = db.relationship('Time', backref='client', lazy=True)
+    #time_id = db.Column(db.Integer, db.ForeignKey('time.id'),
+     #   nullable=False)
+    #time = db.relationship('Time', backref='client', lazy=True)
 
 
     def __repr__(self):
@@ -186,7 +186,7 @@ class Exercise(db.Model):
         }
 
 class Stay(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement= False)
     name = db.Column(db.String(120), unique=False, nullable=False)  
     from_day = db.Column(db.Integer, unique=False, nullable=False)
     to_day = db.Column(db.Integer, unique=False, nullable=True)
