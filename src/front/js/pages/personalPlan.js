@@ -4,18 +4,33 @@ import { Link } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import "../../styles/home.scss";
+import { Plans } from "./plans";
 
 export const PersonalPlan = () => {
 	const { store, actions } = useContext(Context);
 	const [exercises, setExercises] = useState([]);
+	//const token = localStorage.getItem("jwt-token");
+
+	//async function getExercises() {
+	//	const response = await fetch(store.plans, {
+	//		headers: {
+	//			"Content-Type": "application/json",
+	//			Authorization: "Bearer " + token
+	//		}
+	//	});
+	//	console.log(response);
+	//	const responseJson = await response.json();
+	//	setExercises(responseJson);
+	//	console.log(responseJson);
+	//}
+	//useEffect(() => {
+	//	state.actions.getaPlan();
+	//}, []);
 
 	async function getExercises() {
-		const response = await fetch(process.env.BACKEND_URL + "/api/exercises");
-		console.log(response);
-		const responseJson = await response.json();
 		setExercises(responseJson);
-		console.log(responseJson);
 	}
+
 	useEffect(() => {
 		getExercises();
 	}, []);

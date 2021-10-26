@@ -498,21 +498,31 @@ def select_a_plan():
    
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-    print(client)
-    print(client.stay)
-    print(client.stay.plans)
-   
+       
     plan = client.stay.plans[0]
     
 
     return jsonify(plan.serialize()), 200
 
+@api.route('/plan-selected', methods=['GET'])
+@jwt_required()
+def plan_selected():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    client.plan_id = client.stay.plans[0]
+    selected_plan = client.plan_id
+    
+
+    return jsonify(selected_plan.serialize()), 200
+ 
+
 @api.route("/plans/<int:plan_id>/exercises", methods=["GET"])
-#@jwt_required()
+@jwt_required()
 def get_one_exercise_from_profile():
 
-    #current_client_id = get_jwt_identity()
-    #client = Client.query.get(current_client_id)
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
     
     exercises = exercises.plan[0]
    

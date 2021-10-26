@@ -35,7 +35,13 @@ export const Plans = () => {
 					<h5>{plans.name}</h5>
 					<h5> Tiempo total de ejecución: {plans.time}</h5>
 					<h5> Nivel de dificultad: {plans.difficulty}</h5>
-					<Link to="/booking">BOOKING</Link>
+					<Button
+						className="plans"
+						onClick={() => {
+							actions.addPlans(plans.id);
+						}}>
+						Elegir este plan
+					</Button>
 				</Card>
 			</div>
 			<> </>
