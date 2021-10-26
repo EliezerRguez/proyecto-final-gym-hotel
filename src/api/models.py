@@ -111,12 +111,13 @@ class Machine(db.Model):
 
 class Booking(db.Model, SaveAll):
     id = db.Column(db.Integer, primary_key=True)
-    day = db.Column(db.Integer, unique=False, nullable=False)
-    hour = db.Column(db.Integer, unique=False, nullable=False)
-    minutes = db.Column(db.Integer, unique=False, nullable=False)
-    month = db.Column(db.Integer, unique=False, nullable=False)
-    year = db.Column(db.Integer, unique=False, nullable=False)
-    gym_id = db.Column(db.Integer, db.ForeignKey('gym.id'),
+    date = db.Column(db.datetime, unique=False, nullable=False)
+    #day = db.Column(db.Integer, unique=False, nullable=False)
+    #hour = db.Column(db.Integer, unique=False, nullable=False)
+    #minutes = db.Column(db.Integer, unique=False, nullable=False)
+    #month = db.Column(db.Integer, unique=False, nullable=False)
+    #year = db.Column(db.Integer, unique=False, nullable=False)
+    #gym_id = db.Column(db.Integer, db.ForeignKey('gym.id'),
         nullable=False)
     gym = db.relationship('Gym', backref='booking', lazy=True)
     
@@ -126,11 +127,7 @@ class Booking(db.Model, SaveAll):
     def serialize(self):
         return {
             "id": self.id,
-            "day": self.day,
-            "hour": self.hour,
-            "minutes": self.minutes,
-            "month": self.month,
-            "year": self.year,
+            "date": self.date,
             "gym_id": self.gym_id
            
         }

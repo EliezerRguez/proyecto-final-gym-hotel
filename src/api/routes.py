@@ -62,25 +62,16 @@ def register_personaldata():
 @api.route("/create-booking", methods=["POST"])
 def create_booking():
     json= request.get_json()
-    day = json.get("day", None)
-    hour = json.get("hour", None)
-    month =json.get("month", None)
-    year = json.get("year", None)
-    minutes = json.get("minutes", None)
-   
+    date = json.get("date", None)   
     gym = Gym.query.get(1)  
     capacity= gym.capacity
-    Booking.query.filter_by(day=day,year=year,hour=hour,month=month, minutes=minutes).count()  
+    capacity_used = Booking.query.filter_by(day=day,year=year,hour=hour,month=month, minutes=minutes).count()  
     
     if capacity_used >= capacity:
-        return jsonify({"aforo limitado"}),401
+        return jsonify({"Full capacity"}),401
 
     booking= Booking(
-        day=day,
-        year=year,
-        hour=hour,
-        month=month, 
-        minutes=minutes
+        date=date
     )
 
     booking.save()

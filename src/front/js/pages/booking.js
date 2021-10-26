@@ -9,14 +9,29 @@ import Card from "react-bootstrap/Card";
 
 export const Booking = () => {
 	const { store, actions } = useContext(Context);
-
+	const [finalDate, setFinalDate] = useState(null);
 	const [date, setDate] = useState(new Date());
 	const [showModal, setShowModal] = useState(false);
 
 	const NewDate = date => {
 		setShowModal(true);
-		console.log("!!!", { date });
 	};
+	function NewHour(event) {
+		setHour(event.target.value);
+		setMinutes(event.target.value);
+	}
+
+	async function createBooking() {
+		const responsive = await fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				date: date
+			})
+		});
+	}
 
 	console.log(date);
 	return (
@@ -31,19 +46,39 @@ export const Booking = () => {
 					<Card.Body>
 						<Card.Title>Horas Disponibles</Card.Title>
 						<div>
-							<Button className="boton-hours">10:00-10:45</Button>
-							<Button className="boton-hours">10:45-11:30</Button>
-							<Button className="boton-hours">11:30-12:15</Button>
-							<Button className="boton-hours">12:15-13:00</Button>
-							<Button className="boton-hours">16:00-16:45</Button>
-							<Button className="boton-hours">16:45-17:30</Button>
-							<Button className="boton-hours">17:30-18:15</Button>
-							<Button className="boton-hours">18:15-19:00</Button>
-							<Button className="boton-hours">21:00-21:45</Button>
-							<Button className="boton-hours">21:45-22:30</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								10:00-10:45
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								10:45-11:30
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								11:30-12:15
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								12:15-13:00
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								16:00-16:45
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								16:45-17:30
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								17:30-18:15
+							</Button>
+							<Button className="boton-hours" onChange={NewHour}>
+								18:15-19:00
+							</Button>
+							<Button className="boton-hours" onChange={NewHour}>
+								21:00-21:45
+							</Button>
+							<Button className="boton-hours" onChange={NewHour}>
+								21:45-22:30
+							</Button>
 						</div>
 						<div>
-							<Button variant="primary" className="book">
+							<Button variant="primary" className="book" onClick={createBooking}>
 								Reservar
 							</Button>
 						</div>
