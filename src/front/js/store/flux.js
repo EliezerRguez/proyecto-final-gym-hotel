@@ -44,8 +44,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			addPlans: name => {
-				setStore({ plans: [...getStore().plans, name] });
+			addPlans: plan => {
+				setStore({ plans: [...getStore().plans, plan] });
+			},
+			getaPlan: () => {
+				const store = getStore();
+				//const token = localStorage.getItem("jwt-token");
+
+				fetch(process.env.BACKEND_URL + `/plans/ ${store.plans}`, {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + token
+					}
+				});
+
+				const responseJson = response.json();
+
+				return responseJson;
 			},
 			setClientToken: token => {
 				setStore({ client_token: token });

@@ -35,7 +35,7 @@ export const Plans = () => {
 					<h5>{plans.name}</h5>
 					<h5> Tiempo total de ejecución: {plans.time}</h5>
 					<h5> Nivel de dificultad: {plans.difficulty}</h5>
-					<Link to="/booking">BOOKING</Link>
+					<Link to="/PlanConfirmation">Elegir este plan</Link>
 				</Card>
 			</div>
 			<> </>

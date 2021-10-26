@@ -175,7 +175,8 @@ class Exercise(db.Model):
             "name": self.name,
             "time": self.time,
             "detail": self.detail,
-            "machine_id": self.machine_id
+            "machine_id": self.machine_id,
+            
         }
 
 class Stay(db.Model):

@@ -18,6 +18,7 @@ import { Customize } from "./pages/customize";
 import injectContext from "./store/appContext";
 import { Navbars } from "./component/navbars";
 import { Footer } from "./component/footer";
+import { PlanConfirmation } from "./pages/planConfirmation";
 
 //create your first component
 const Layout = () => {
@@ -51,6 +52,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/plans">
 							<Plans />
+						</Route>
+						<Route exact path="/planConfirmation">
+							<PlanConfirmation />
 						</Route>
 						<Route exact path="/awards">
 							<Awards />

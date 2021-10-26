@@ -165,9 +165,9 @@ def list_of_things():
      detail = "Maximas rondas de 10 repeticiones con 10kg",
      machine = machine2,
     )
-
+    
     db.session.add(exercise2)
-
+    
     exercise3= Exercise(
      name = "Flexion de triceps",
      time = 5,
@@ -282,7 +282,6 @@ def list_of_things():
      detail = "10 minutos de cardio en la eliptica",
      machine = machine4,
     )
-
     db.session.add(exercise15)
 
     exercise16= Exercise(
@@ -362,6 +361,9 @@ def list_of_things():
      time = "135",
      difficulty = "1",
     )
+    all_exercises1 = [exercise1,exercise2,exercise3,exercise4,exercise5]
+    plan1.exercises = all_exercises1
+    
     db.session.add(plan1)
     
     plan2 = Plan(
@@ -369,6 +371,9 @@ def list_of_things():
      time = "315",
      difficulty = "3",
     )
+    all_exercises2 = [exercise1,exercise2,exercise3,exercise4,exercise5,exercise6,exercise7,exercise8,exercise9,exercise10]
+    plan2.exercises = all_exercises2
+   
     db.session.add(plan2)
 
     plan3 = Plan(
@@ -376,6 +381,9 @@ def list_of_things():
      time = "540",
      difficulty = "5",
     )
+    all_exercises3 = [exercise1,exercise2,exercise3,exercise4,exercise5,exercise6,exercise7,exercise8,exercise9,exercise10,exercise11,exercise12,exercise13,exercise14,exercise15,exercise16]
+    plan3.exercises = all_exercises3
+    
     db.session.add(plan3)
 
     stay1 = Stay(
@@ -490,25 +498,38 @@ def select_a_plan():
    
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-    print(client)
-    print(client.stay)
-    print(client.stay.plans)
-   
+       
     plan = client.stay.plans[0]
     
 
     return jsonify(plan.serialize()), 200
 
-@api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
+@api.route('/plan-selected', methods=['GET'])
 @jwt_required()
-def get_one_exercise_from_profile(client_id, plan_id, exercise_id):
+def plan_selected():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    client.plan = client.stay.plans[0]
+    
+    print(client.plan)
+    client.save()
+    
 
-    #current_client_id = get_jwt_identity()
-    #client = Client.query.get(current_client_id)
-    #plan = Client.plan
-    exercise = Exercise.query.get(exercise_id)
+    return jsonify( client.serialize()), 200
+ 
+
+@api.route("/plans/<int:plan_id>/exercises", methods=["GET"])
+@jwt_required()
+def get_one_exercise_from_profile():
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    exercises = exercises.plan[0]
    
-    return jsonify(exercise.serialize()), 200
+   
+    return jsonify(exercises.serialize()), 200
 
 @api.route("/client-time", methods=["POST"])
 @jwt_required()
