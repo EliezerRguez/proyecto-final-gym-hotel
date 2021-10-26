@@ -22,20 +22,31 @@ const Time = () => {
 		setPulse("");
 	};
 
-	const handleResume = () => {
-		setIsPaused(false);
-		increment.current = setInterval(() => {
-			setTimer(timer => timer + 1);
-		}, 1000);
-		setPulse("");
-	};
-
 	const handleReset = () => {
 		clearInterval(increment.current);
 		setIsActive(false);
 		setIsPaused(true);
 		setTimer(0);
 	};
+
+	async function saveTime(event) {
+		event.preventDefault();
+		console.log("hasta qui llega");
+		const token = localStorage.getItem("jwt-token");
+		const response = await fetch(process.env.BACKEND_URL + "/api/client-time", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			},
+			body: JSON.stringify({
+				total_time: timer
+			})
+		});
+		console.log(response);
+		const responseJson = await response.json();
+		setTimer(responseJson);
+	}
 
 	const formatTime = () => {
 		const getSeconds = `0${timer % 60}`.slice(-2);
@@ -52,9 +63,14 @@ const Time = () => {
 				<p>{formatTime()}</p>
 			</div>
 			<div className="buttons">
-				<button onClick={handleStart}>Start</button>
-				<button onClick={handleStop}>Stop</button>
-				<button onClick={handleReset}>Reset</button>
+				{!isActive && isPaused ? (
+					<button onClick={handleStart}>Start</button>
+				) : !isPaused ? (
+					<button onClick={handleStop}>Stop</button>
+				) : (
+					<button onClick={saveTime}>Save time</button>
+				)}
+				<button onClick={handleReset}>reset</button>
 			</div>
 		</div>
 	);
