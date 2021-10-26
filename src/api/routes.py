@@ -510,11 +510,13 @@ def plan_selected():
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
     
-    client.plan_id = client.stay.plans[0]
-    selected_plan = client.plan_id
+    client.plan = client.stay.plans[0]
+    
+    print(client.plan)
+    client.save()
     
 
-    return jsonify(selected_plan.serialize()), 200
+    return jsonify( client.serialize()), 200
  
 
 @api.route("/plans/<int:plan_id>/exercises", methods=["GET"])
