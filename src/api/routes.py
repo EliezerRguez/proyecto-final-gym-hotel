@@ -423,7 +423,7 @@ def list_of_things():
     client2 = Client(
         email = "eliezer@gmail.com",
         room = 506,
-        stay =  stay2
+        stay =  stay3
     )
     db.session.add(client2)
 
@@ -531,18 +531,19 @@ def get_one_exercise_from_profile():
    
     return jsonify(exercises.serialize()), 200
 
-@api.route("/time", methods=["GET"])
-def get_time(client_id):
+@api.route("/client-time", methods=["POST"])
+@jwt_required()
+def send_time():
 
-    time = Time.query.all()
+    json= request.get_json()
+    time = json.get("total_time", None)
 
-    return jsonify(time.serialize()), 200
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    print(client)
+        
+    client.total_time += time
 
-@api.route("/profile/<int:client_id>/time", methods=["GET"])
-def get_a_time(time_id):
+    client.save()
 
-    client = Client.query.get(time_id)
-
-
-
-    return jsonify(time.serialize()), 200
+    return jsonify({}), 200
