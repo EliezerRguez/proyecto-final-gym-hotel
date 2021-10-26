@@ -12,6 +12,7 @@ export const Booking = () => {
 	const [finalDate, setFinalDate] = useState(null);
 	const [date, setDate] = useState(new Date());
 	const [showModal, setShowModal] = useState(false);
+	const [error, setError] = useState("");
 
 	const NewDate = date => {
 		setShowModal(true);
@@ -21,19 +22,89 @@ export const Booking = () => {
 		setMinutes(event.target.value);
 	}
 
+	// OTRA MANERA DE HACER EL FETCH
+	// async function createBooking2() {
+	// 	return await fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 			"Accept": "application/json"
+	// 		},
+	// 		body: JSON.stringify({
+	// 			date: finalDate
+	// 		})
+	// 	});
+	// }
+
+	// // controla el boton
+	// async function makeBooking() {
+
+	// 	createBooking()
+	// 		.then((response) => response.json())
+	// 		.then((booking) => {
+
+	// 			//pones la reserva donde sea
+
+	// 			// indicas que la reserva se realizao correctamente
+
+	// 			//redireccionas
+
+	// 		}).catch((err) => {
+
+	// 			//gestionas el error porque la reserva ha fallado
+	// 			setError(err);
+
+	// 		});
+
+	// }
+
 	async function createBooking() {
-		const responsive = await fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
+
+		/*
+		NO VALIDO PORQUE NO GESTIONAS LA RESPUESTA DEL FETCH
+		*/
+
+		// const response = await fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 		"Accept": "application/json"
+		// 	},
+		// 	body: JSON.stringify({
+		// 		date: finalDate
+		// 	})
+		// });
+
+ 		fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"Accept": "application/json"
 			},
 			body: JSON.stringify({
-				date: date
+				date: finalDate
 			})
+		}).then((response) => { //2xx 200-299
+			console.log(response.ok);
+			response.json();
+		}).then((booking) => {
+
+			//pones la reserva donde sea
+
+			// indicas que la reserva se realizao correctamente
+
+			//redireccionas
+
+		}).catch((err) => {
+
+			//gestionas el error porque la reserva ha fallado
+			setError(err);
+
 		});
+
 	}
 
-	console.log(date);
+	// console.log(date);
 	return (
 		<div className="text-center mt-5">
 			<h1>BOOKING</h1>
@@ -78,6 +149,7 @@ export const Booking = () => {
 							</Button>
 						</div>
 						<div>
+							<h1>{error}</h1>
 							<Button variant="primary" className="book" onClick={createBooking}>
 								Reservar
 							</Button>
