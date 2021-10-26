@@ -9,16 +9,106 @@ import Card from "react-bootstrap/Card";
 
 export const Booking = () => {
 	const { store, actions } = useContext(Context);
-
+	const [finalDate, setFinalDate] = useState(null);
 	const [date, setDate] = useState(new Date());
 	const [showModal, setShowModal] = useState(false);
+	const [error, setError] = useState("");
 
 	const NewDate = date => {
 		setShowModal(true);
+		setMonth(date.target.value);
+		setYear();
+		setDay();
 		console.log("!!!", { date });
 	};
+	function NewHour(event) {
+		setHour(event.target.value);
+		setMinutes(event.target.value);
+	}
 
-	console.log(date);
+	// OTRA MANERA DE HACER EL FETCH
+	// async function createBooking2() {
+	// 	return await fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 			"Accept": "application/json"
+	// 		},
+	// 		body: JSON.stringify({
+	// 			date: finalDate
+	// 		})
+	// 	});
+	// }
+
+	// // controla el boton
+	// async function makeBooking() {
+
+	// 	createBooking()
+	// 		.then((response) => response.json())
+	// 		.then((booking) => {
+
+	// 			//pones la reserva donde sea
+
+	// 			// indicas que la reserva se realizao correctamente
+
+	// 			//redireccionas
+
+	// 		}).catch((err) => {
+
+	// 			//gestionas el error porque la reserva ha fallado
+	// 			setError(err);
+
+	// 		});
+
+	// }
+
+	async function createBooking() {
+
+		/*
+		NO VALIDO PORQUE NO GESTIONAS LA RESPUESTA DEL FETCH
+		*/
+
+		// const response = await fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 		"Accept": "application/json"
+		// 	},
+		// 	body: JSON.stringify({
+		// 		date: finalDate
+		// 	})
+		// });
+
+ 		fetch(`${process.env.BACKEND_URL}/api/create-booking`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Accept": "application/json"
+			},
+			body: JSON.stringify({
+				date: finalDate
+			})
+		}).then((response) => { //2xx 200-299
+			console.log(response.ok);
+			response.json();
+		}).then((booking) => {
+
+			//pones la reserva donde sea
+
+			// indicas que la reserva se realizao correctamente
+
+			//redireccionas
+
+		}).catch((err) => {
+
+			//gestionas el error porque la reserva ha fallado
+			setError(err);
+
+		});
+
+	}
+
+	// console.log(date);
 	return (
 		<div className="text-center mt-5">
 			<h1>BOOKING</h1>
@@ -31,19 +121,40 @@ export const Booking = () => {
 					<Card.Body>
 						<Card.Title>Horas Disponibles</Card.Title>
 						<div>
-							<Button className="boton-hours">10:00-10:45</Button>
-							<Button className="boton-hours">10:45-11:30</Button>
-							<Button className="boton-hours">11:30-12:15</Button>
-							<Button className="boton-hours">12:15-13:00</Button>
-							<Button className="boton-hours">16:00-16:45</Button>
-							<Button className="boton-hours">16:45-17:30</Button>
-							<Button className="boton-hours">17:30-18:15</Button>
-							<Button className="boton-hours">18:15-19:00</Button>
-							<Button className="boton-hours">21:00-21:45</Button>
-							<Button className="boton-hours">21:45-22:30</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								10:00-10:45
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								10:45-11:30
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								11:30-12:15
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								12:15-13:00
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								16:00-16:45
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								16:45-17:30
+							</Button>
+							<Button className="boton-hours" onClick={NewHour}>
+								17:30-18:15
+							</Button>
+							<Button className="boton-hours" onChange={NewHour}>
+								18:15-19:00
+							</Button>
+							<Button className="boton-hours" onChange={NewHour}>
+								21:00-21:45
+							</Button>
+							<Button className="boton-hours" onChange={NewHour}>
+								21:45-22:30
+							</Button>
 						</div>
 						<div>
-							<Button variant="primary" className="book">
+							<h1>{error}</h1>
+							<Button variant="primary" className="book" onClick={createBooking}>
 								Reservar
 							</Button>
 						</div>
