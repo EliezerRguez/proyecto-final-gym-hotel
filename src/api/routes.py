@@ -519,9 +519,10 @@ def send_time():
 
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
+    print(client)
         
     client.total_time += time
 
     client.save()
 
-    
+    return jsonify({}), 200

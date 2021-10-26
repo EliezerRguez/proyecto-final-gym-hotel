@@ -68,8 +68,9 @@ const Time = () => {
 				) : !isPaused ? (
 					<button onClick={handleStop}>Stop</button>
 				) : (
-					<button onClick={saveTime}>Reset</button>
+					<button onClick={saveTime}>Save time</button>
 				)}
+				<button onClick={handleReset}>reset</button>
 			</div>
 		</div>
 	);
