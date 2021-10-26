@@ -57,6 +57,7 @@ class Client(db.Model,SaveAll):
        backref=db.backref('clients', lazy=True))
     awards = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
+    total_time = db.Column(db.Integer, unique=False, nullable=True)
    
 
 
