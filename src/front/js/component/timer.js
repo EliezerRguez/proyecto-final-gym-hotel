@@ -22,13 +22,6 @@ const Time = () => {
 		setPulse("");
 	};
 
-	const handleReset = () => {
-		clearInterval(increment.current);
-		setIsActive(false);
-		setIsPaused(true);
-		setTimer(0);
-	};
-
 	async function saveTime(event) {
 		event.preventDefault();
 		console.log("hasta qui llega");
@@ -46,6 +39,10 @@ const Time = () => {
 		console.log(response);
 		const responseJson = await response.json();
 		setTimer(responseJson);
+		clearInterval(increment.current);
+		setIsActive(false);
+		setIsPaused(true);
+		setTimer(0);
 	}
 
 	const formatTime = () => {
@@ -70,7 +67,6 @@ const Time = () => {
 				) : (
 					<button onClick={saveTime}>Save time</button>
 				)}
-				<button onClick={handleReset}>reset</button>
 			</div>
 		</div>
 	);
