@@ -19,6 +19,7 @@ bookings_client = db.Table('bookings',
 )
 
 
+
 exercises_plan = db.Table('exercises',
 
     db.Column('exercise_id', db.Integer, db.ForeignKey('exercise.id'), primary_key=True),
@@ -56,7 +57,8 @@ class Client(db.Model,SaveAll):
        backref=db.backref('clients', lazy=True))
     awards = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
-    
+    total_time = db.Column(db.Integer, unique=False, nullable=True)
+   
 
 
     def __repr__(self):
