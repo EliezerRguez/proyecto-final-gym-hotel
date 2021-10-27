@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 export const Exercise = () => {
 	const [singleExercise, setSingleExercise] = useState([]);
 	const params = useParams();
+	//const params2 = useParams();
 
 	console.log(params);
 
 	async function getSingleExercise() {
-		const response = await fetch(process.env.BACKEND_URL + `/api/exercises/${params.id}`);
+		const response = await fetch(process.env.BACKEND_URL + `/api/plans/${params.id}/exercises/${params.id}`);
 		console.log(response);
 		const responseJson = await response.json();
 		setSingleExercise(responseJson);

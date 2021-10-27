@@ -533,6 +533,20 @@ def get_one_exercise_from_profile(plan_id, exercise_id):
    
     return jsonify(exercise.serialize()), 200
 
+@api.route("/plans/<int:plan_id>/exercises", methods=["GET"])
+@jwt_required()
+def get_one_exercise_from_profile(plan_id):
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    exercises = client.plan.exercises[0]
+    print(client.plan)
+    print(client.plan.exercises)
+    
+   
+    return jsonify(exercises.serialize()), 200
+
 @api.route("/client-time", methods=["POST"])
 @jwt_required()
 def send_time():

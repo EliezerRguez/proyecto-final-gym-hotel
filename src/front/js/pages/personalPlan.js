@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
@@ -9,26 +10,20 @@ import { Plans } from "./plans";
 export const PersonalPlan = () => {
 	const { store, actions } = useContext(Context);
 	const [exercises, setExercises] = useState([]);
-	//const token = localStorage.getItem("jwt-token");
-
-	//async function getExercises() {
-	//	const response = await fetch(store.plans, {
-	//		headers: {
-	//			"Content-Type": "application/json",
-	//			Authorization: "Bearer " + token
-	//		}
-	//	});
-	//	console.log(response);
-	//	const responseJson = await response.json();
-	//	setExercises(responseJson);
-	//	console.log(responseJson);
-	//}
-	//useEffect(() => {
-	//	state.actions.getaPlan();
-	//}, []);
+	const token = localStorage.getItem("jwt-token");
+	const params = useParams();
 
 	async function getExercises() {
+		const response = await fetch(process.env.BACKEND_URL + `/api/plans/${params.id}/exercises`, {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		console.log(response);
+		const responseJson = await response.json();
 		setExercises(responseJson);
+		console.log(responseJson);
 	}
 
 	useEffect(() => {
