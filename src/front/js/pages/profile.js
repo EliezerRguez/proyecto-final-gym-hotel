@@ -13,13 +13,13 @@ import { Col } from "react-bootstrap";
 import "../../styles/home.scss";
 
 export const Profile = () => {
-	const [plans, setPlans] = useState([]);
+	const [plan, setPlan] = useState([]);
 	const [time, setTime] = useState([]);
 	const { store, actions } = useContext(Context);
 	const token = localStorage.getItem("jwt-token");
 
 	async function getPlan() {
-		const response = await fetch(process.env.BACKEND_URL + "/api/plans", {
+		const response = await fetch(process.env.BACKEND_URL + "/api/plan-selected", {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + token
@@ -27,7 +27,7 @@ export const Profile = () => {
 		});
 		console.log(response);
 		const responseJson = await response.json();
-		setPlans(responseJson);
+		setPlan(responseJson);
 		console.log(responseJson);
 	}
 	useEffect(() => {
@@ -39,11 +39,11 @@ export const Profile = () => {
 	return (
 		<div className="container">
 			<h1>PROFILE</h1>
-			<CardGroup className="mb-4">
+			<CardGroup className="mb-4" key={plan.id}>
 				<Card>
 					<Card.Img variant="top" src="holder.js/100px160" />
 					<Card.Body>
-						<h5>{plans.id}</h5>
+						<h5>{plan.name}</h5>
 						<Card.Title>Imagen plan chulo elegido</Card.Title>
 					</Card.Body>
 				</Card>
@@ -52,7 +52,7 @@ export const Profile = () => {
 						<Card.Text>Este es el plan que vas a relizar durante tu estancia en el hotel </Card.Text>
 
 						<small className="text-muted">
-							<Link to="/personal-plan">
+							<Link to={`/plan/${plan.id}/exercises`}>
 								<Button variant="outline-dark">Empezar</Button>
 							</Link>
 						</small>

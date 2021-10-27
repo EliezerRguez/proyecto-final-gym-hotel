@@ -12,7 +12,7 @@ export const PersonalPlan = () => {
 	const [exercises, setExercises] = useState([]);
 	const token = localStorage.getItem("jwt-token");
 	const params = useParams();
-
+	console.log(params);
 	async function getExercises() {
 		const response = await fetch(process.env.BACKEND_URL + `/api/plans/${params.id}/exercises`, {
 			headers: {
@@ -35,12 +35,12 @@ export const PersonalPlan = () => {
 			<h1>PERSONAL PLAN</h1>
 			{exercises.map(exercise => {
 				return (
-					<Accordion defaultActiveKey="0" flush key={exercise.id}>
+					<Accordion defaultActiveKey="0" key={exercise.id}>
 						<Accordion.Item eventKey="0">
-							<Accordion.Header>{`Ejercicio ${exercise.id}`}</Accordion.Header>
+							<Accordion.Header>Ejercicio: {exercise.name} </Accordion.Header>
 							<Accordion.Body>
-								<p>{`Tiempo total de ejecución: ${exercise.time} minutos`}</p>
-								<Link to={`/exercise/${exercise.id}`}>
+								<p>Tiempo total de ejecución: {exercise.time} </p>
+								<Link to={`/exercises/${exercise.id}`}>
 									<Button variant="outline-dark">Apptivate!</Button>
 								</Link>
 							</Accordion.Body>
@@ -48,6 +48,7 @@ export const PersonalPlan = () => {
 					</Accordion>
 				);
 			})}
+			;
 		</div>
 	);
 };
