@@ -547,3 +547,14 @@ def send_time():
     client.save()
 
     return jsonify({}), 200
+
+@api.route("/get-client-time", methods=["GET"])
+@jwt_required()
+def get_client_time():
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+
+    client.total_time = Client.query.get(total_time)
+
+    return jsonify({client.total_time.serialize()})
