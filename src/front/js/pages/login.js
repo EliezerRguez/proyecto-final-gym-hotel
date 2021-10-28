@@ -36,7 +36,7 @@ export const Login = () => {
 		localStorage.setItem("jwt-token", data.token);
 		actions.setClientToken(data.token);
 
-		if (data.client_gender != null) {
+		if (data.client_gender !== null) {
 			history.push("/homepage");
 		} else {
 			history.push("/personal-data");

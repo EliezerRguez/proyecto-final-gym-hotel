@@ -512,11 +512,31 @@ def plan_selected():
     
     return jsonify(client.plan.serialize()), 200
  
+@api.route('/define-customized', methods=['GET'])
+def define_customized():
+
+    exercises = Exercise.query.all()
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    
+    return jsonify(exercises), 200
+
+@api.route('/customized-exercises', methods=['GET'])
+def customized_exercises():
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    client.plan = client.stay.plans[0]
+    exercises = client.plan.exercises
+    print(client.plan)
+    client.save()
+    
+    return jsonify(client.plan.serialize()), 200
+
 
 @api.route("/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(exercise_id):
-  
-   
+     
     exercise = Exercise.query.get(exercise_id)
    
     return jsonify(exercise.serialize()), 200
