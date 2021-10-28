@@ -30,8 +30,23 @@ export const Profile = () => {
 		setPlan(responseJson);
 		console.log(responseJson);
 	}
+
+	async function getAwards() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/get-client-awards", {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		console.log(response);
+		const responseJson = await response.json();
+		setTime(responseJson);
+		console.log(responseJson);
+	}
+
 	useEffect(() => {
 		getPlan();
+		getAwards();
 	}, []);
 
 	//REALIZAR FECTH DE LOS DATOS DE USUARIO CON EL PLAN ELEGIDO PARA COGER LOS DATOS DEL PLAN
@@ -75,7 +90,7 @@ export const Profile = () => {
 				<Container>
 					<Row className="mx-3">
 						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" roundedCircle />
+							<Image src="/src/front/img/002-sport.png" roundedCircle />
 						</Col>
 						<Col xs={4} md={4}>
 							<Image src="holder.js/171x180" roundedCircle />

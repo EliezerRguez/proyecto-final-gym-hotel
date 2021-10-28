@@ -12,7 +12,7 @@ export const Exercise = () => {
 	const params = useParams();
 
 	async function getSingleExercise() {
-		const response = await fetch(process.env.BACKEND_URL + `/api/exercises/${params.id}`);
+		const response = await fetch(process.env.BACKEND_URL + `/api/exercises/${params.id_exercise}`);
 		console.log(response);
 		const responseJson = await response.json();
 		setExercise(responseJson);
@@ -66,11 +66,11 @@ export const Exercise = () => {
 				<Row>
 					<Col xs={6} className="text-center my-4">
 						<Button variant="outline-primary">
-							<Link to="/personal-plan">List of exercises</Link>
+							<Link to={`/plan/${params.id_plan}/exercises`}>List of exercises</Link>
 						</Button>
 					</Col>
 					<Col xs={6} className="text-center my-4">
-						<Button variant="primary">Next exercise</Button>
+						<Link to={`/exercises/${exercise.id}`}>Next exercise</Link>
 					</Col>
 				</Row>
 			</Container>

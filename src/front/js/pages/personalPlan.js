@@ -40,7 +40,7 @@ export const PersonalPlan = () => {
 							<Accordion.Header>Ejercicio: {exercise.name} </Accordion.Header>
 							<Accordion.Body>
 								<p>Tiempo total de ejecución: {exercise.time} </p>
-								<Link to={`/exercises/${exercise.id}`}>
+								<Link to={`/plan/${params.id}/exercises/${exercise.id}`}>
 									<Button variant="outline-dark">Apptivate!</Button>
 								</Link>
 							</Accordion.Body>
