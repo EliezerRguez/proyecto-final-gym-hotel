@@ -5,11 +5,16 @@ import Card from "react-bootstrap/Card";
 import { CardGroup } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { Modal } from "react-bootstrap";
 //import Accordion from "react-bootstrap/Accordion";
 import Image from "react-bootstrap/Image";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
-
+import award2 from "../../img/013-trainers.png";
+import award3 from "../../img/020-muscle.png";
+import award4 from "../../img/024-diet.png";
+import award5 from "../../img/031-calendar.png";
+import award6 from "../../img/032-energy-drink.png";
 import "../../styles/home.scss";
 
 export const Profile = () => {
@@ -17,6 +22,11 @@ export const Profile = () => {
 	const [time, setTime] = useState([]);
 	const { store, actions } = useContext(Context);
 	const token = localStorage.getItem("jwt-token");
+	const [show, setShow] = useState(false);
+	const [awards, setAwards] = useState([]);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 	async function getPlan() {
 		const response = await fetch(process.env.BACKEND_URL + "/api/plans", {
@@ -31,26 +41,20 @@ export const Profile = () => {
 		console.log(responseJson);
 	}
 
-	async function getAwards() {
-		const response = await fetch(process.env.BACKEND_URL + "/api/get-client-awards", {
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + token
-			}
-		});
-		console.log(response);
+	async function getAward() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/awards");
 		const responseJson = await response.json();
-		setTime(responseJson);
-		console.log(responseJson);
+		setAwards(responseJson);
 	}
 
 	useEffect(() => {
 		getPlan();
-		getAwards();
+		getAward();
 	}, []);
 
 	//REALIZAR FECTH DE LOS DATOS DE USUARIO CON EL PLAN ELEGIDO PARA COGER LOS DATOS DEL PLAN
 	//REALIZAR FECHT DEL PLAN ELEGIDO
+	//crear if award.time >= time.total_time mostrar imagen a color
 	return (
 		<div className="container">
 			<h1>PROFILE</h1>
@@ -89,37 +93,32 @@ export const Profile = () => {
 				<h1> AWARDS </h1>
 				<Container>
 					<Row className="mx-3">
-						<Col xs={4} md={4}>
-							<Image src="/src/front/img/002-sport.png" roundedCircle />
-						</Col>
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" roundedCircle />
-						</Col>
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" thumbnailCircle />
-						</Col>
-					</Row>
-					<Row className="mx-3">
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" roundedCircle />
-						</Col>
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" roundedCircle />
-						</Col>
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" thumbnailCircle />
-						</Col>
-					</Row>
-					<Row className="mx-3">
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" roundedCircle />
-						</Col>
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" roundedCircle />
-						</Col>
-						<Col xs={4} md={4}>
-							<Image src="holder.js/171x180" thumbnailCircle />
-						</Col>
+						{awards.map(award => {
+							return (
+								<Col xs={4} md={1} key={award.id}>
+									<Image
+										src={require(`../../img/${award.image_name}.png`)}
+										width="75"
+										onClick={handleShow}
+										className="mb-3"
+									/>
+									<Modal show={show} onHide={handleClose}>
+										<Modal.Header closeButton>
+											<Modal.Title>Cógigo descuento</Modal.Title>
+										</Modal.Header>
+										<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
+										<Modal.Footer>
+											<Button variant="secondary" onClick={handleClose}>
+												Close
+											</Button>
+											<Button variant="primary" onClick={handleClose}>
+												Save Changes
+											</Button>
+										</Modal.Footer>
+									</Modal>
+								</Col>
+							);
+						})}
 					</Row>
 				</Container>
 			</Row>
