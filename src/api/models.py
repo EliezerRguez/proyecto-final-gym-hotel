@@ -80,8 +80,8 @@ class Client(db.Model,SaveAll):
 class Plan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    time = db.Column(db.String(120), unique=False, nullable=False)
-    difficulty = db.Column(db.Integer, unique=False, nullable=False)
+    time = db.Column(db.String(120), unique=False, nullable=True)
+    difficulty = db.Column(db.Integer, unique=False, nullable=True)
     exercises = db.relationship('Exercise', secondary=exercises_plan, lazy='subquery',
        backref=db.backref('plans', lazy=True))
     

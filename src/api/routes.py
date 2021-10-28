@@ -487,11 +487,6 @@ def get_one_plan(plan_id):
     plan = Plan.query.get(plan_id)
     return jsonify(plan.serialize()), 200
 
-@api.route("/exercises/<int:exercise_id>", methods=["GET"])
-def get_one_exercise(exercise_id):
-    exercise = Exercise.query.get(exercise_id)
-    return jsonify(exercise.serialize()), 200
-
 
 @api.route('/clients', methods=['GET'])
 def get_clients():
@@ -524,21 +519,59 @@ def plan_selected():
     print(client.plan)
     client.save()
     
-
-    return jsonify( client.serialize()), 200
+    return jsonify(client.plan.serialize()), 200
  
+@api.route('/define-customized', methods=['GET'])
+def define_customized():
+
+    exercises = Exercise.query.all()
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    
+    return jsonify(exercises), 200
+
+
+@api.route('/customized-exercises',  methods=["POST"])
+@jwt_required()
+def customized_exercises():
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+
+    client_id.plan = client.plan
+   
+    #exercises = client_id.plan.exercises
+    #exercise = Exercise.query.get(exercise_id)
+    #json= request.get_json()
+   # exercises = json.get("exercises", None)
+    #client_id.plan = Plan(
+    #exercise = exercise
+    #)
+    #print(exercises)
+    #exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    #client.save()
+          
+    return jsonify(exercises),200 
+
+@api.route("/exercises/<int:exercise_id>", methods=["GET"])
+def get_one_exercise_from_profile(exercise_id):
+     
+    exercise = Exercise.query.get(exercise_id)
+   
+    return jsonify(exercise.serialize()), 200
 
 @api.route("/plans/<int:plan_id>/exercises", methods=["GET"])
 @jwt_required()
-def get_one_exercise_from_profile():
+def get_exercises_from_profile(plan_id):
 
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
     
-    exercises = exercises.plan[0]
+    exercises = client.plan.exercises
+    print(client.plan)
+    print(client.plan.exercises)
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
    
-   
-    return jsonify(exercises.serialize()), 200
+    return jsonify(exercises), 200
 
 @api.route("/client-time", methods=["POST"])
 @jwt_required()

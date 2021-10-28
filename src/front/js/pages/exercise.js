@@ -8,17 +8,15 @@ import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const Exercise = () => {
-	const [singleExercise, setSingleExercise] = useState([]);
+	const [exercise, setExercise] = useState([]);
 	const params = useParams();
 
-	console.log(params);
-
 	async function getSingleExercise() {
-		const response = await fetch(process.env.BACKEND_URL + `/api/exercises/${params.id}`);
+		const response = await fetch(process.env.BACKEND_URL + `/api/exercises/${params.id_exercise}`);
 		console.log(response);
 		const responseJson = await response.json();
-		setSingleExercise(responseJson);
-		console.log(responseJson);
+		setExercise(responseJson);
+		console.log(responseJson, "este");
 	}
 
 	useEffect(() => {
@@ -27,10 +25,10 @@ export const Exercise = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<Container>
+			<Container key={exercise.id}>
 				<Row>
 					<Col xs={6} className="mb-4">
-						<h1>{`EXERCISE ${singleExercise.id}`}</h1>
+						<h1>{`EXERCISE ${exercise.id}`}</h1>
 					</Col>
 					<Col xs={6} className="mb-4">
 						<i className="fas fa-star"></i>
@@ -51,10 +49,10 @@ export const Exercise = () => {
 				</Row>
 				<Row>
 					<Col xs={4} className="mb-4">
-						<span>{singleExercise.time}</span>
+						<span>{exercise.time}</span>
 					</Col>
 					<Col xs={4} className="mb-4">
-						<span>{singleExercise.details}</span>
+						<span>{exercise.details}</span>
 					</Col>
 					<Col xs={4} className="mb-4">
 						<span>10 reps each</span>
@@ -68,11 +66,11 @@ export const Exercise = () => {
 				<Row>
 					<Col xs={6} className="text-center my-4">
 						<Button variant="outline-primary">
-							<Link to="/personal-plan">List of exercises</Link>
+							<Link to={`/plan/${params.id_plan}/exercises`}>List of exercises</Link>
 						</Button>
 					</Col>
 					<Col xs={6} className="text-center my-4">
-						<Button variant="primary">Next exercise</Button>
+						<Link to={`/exercises/${exercise.id}`}>Next exercise</Link>
 					</Col>
 				</Row>
 			</Container>

@@ -59,14 +59,14 @@ const Layout = () => {
 						<Route exact path="/awards">
 							<Awards />
 						</Route>
-						<Route exact path="/personal-plan">
-							<PersonalPlan />
-						</Route>
 						<Route exact path="/time">
 							<Time />
 						</Route>
-						<Route path="/exercise/:id">
+						<Route path="/plan/:id_plan/exercises/:id_exercise">
 							<Exercise />
+						</Route>
+						<Route path="/plan/:id/exercises">
+							<PersonalPlan />
 						</Route>
 						<Route exact path="/booking">
 							<Booking />

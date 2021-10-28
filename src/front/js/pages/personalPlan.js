@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
@@ -9,26 +10,20 @@ import { Plans } from "./plans";
 export const PersonalPlan = () => {
 	const { store, actions } = useContext(Context);
 	const [exercises, setExercises] = useState([]);
-	//const token = localStorage.getItem("jwt-token");
-
-	//async function getExercises() {
-	//	const response = await fetch(store.plans, {
-	//		headers: {
-	//			"Content-Type": "application/json",
-	//			Authorization: "Bearer " + token
-	//		}
-	//	});
-	//	console.log(response);
-	//	const responseJson = await response.json();
-	//	setExercises(responseJson);
-	//	console.log(responseJson);
-	//}
-	//useEffect(() => {
-	//	state.actions.getaPlan();
-	//}, []);
-
+	const token = localStorage.getItem("jwt-token");
+	const params = useParams();
+	console.log(params);
 	async function getExercises() {
+		const response = await fetch(process.env.BACKEND_URL + `/api/plans/${params.id}/exercises`, {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		console.log(response);
+		const responseJson = await response.json();
 		setExercises(responseJson);
+		console.log(responseJson);
 	}
 
 	useEffect(() => {
@@ -40,12 +35,12 @@ export const PersonalPlan = () => {
 			<h1>PERSONAL PLAN</h1>
 			{exercises.map(exercise => {
 				return (
-					<Accordion defaultActiveKey="0" flush key={exercise.id}>
+					<Accordion defaultActiveKey="0" key={exercise.id}>
 						<Accordion.Item eventKey="0">
-							<Accordion.Header>{`Ejercicio ${exercise.id}`}</Accordion.Header>
+							<Accordion.Header>Ejercicio: {exercise.name} </Accordion.Header>
 							<Accordion.Body>
-								<p>{`Tiempo total de ejecución: ${exercise.time} minutos`}</p>
-								<Link to={`/exercise/${exercise.id}`}>
+								<p>Tiempo total de ejecución: {exercise.time} </p>
+								<Link to={`/plan/${params.id}/exercises/${exercise.id}`}>
 									<Button variant="outline-dark">Apptivate!</Button>
 								</Link>
 							</Accordion.Body>
@@ -53,6 +48,7 @@ export const PersonalPlan = () => {
 					</Accordion>
 				);
 			})}
+			;
 		</div>
 	);
 };
