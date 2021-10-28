@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			plans: [],
+			exercises: [],
 			client_token: null
 		},
 		actions: {
@@ -44,9 +45,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			//addPlans: plan => {
-			//	setStore({ plans: [...getStore().plans, plan] });
-			//},
+			addExercises: exercise => {
+				setStore({ exercises: [...getStore().exercises, exercise] });
+			},
 			//getaPlan: () => {
 			//	const store = getStore();
 			//const token = localStorage.getItem("jwt-token");

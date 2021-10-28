@@ -520,19 +520,28 @@ def define_customized():
     
     return jsonify(exercises), 200
 
-@api.route('/customized-exercises', methods=['GET'])
+
+@api.route('/customized-exercises',  methods=["POST"])
+@jwt_required()
 def customized_exercises():
 
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-    
-    client.plan = client.stay.plans[0]
-    exercises = client.plan.exercises
-    print(client.plan)
-    client.save()
-    
-    return jsonify(client.plan.serialize()), 200
 
+    client_id.plan = client.plan
+   
+    #exercises = client_id.plan.exercises
+    #exercise = Exercise.query.get(exercise_id)
+    #json= request.get_json()
+   # exercises = json.get("exercises", None)
+    #client_id.plan = Plan(
+    #exercise = exercise
+    #)
+    #print(exercises)
+    #exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    #client.save()
+          
+    return jsonify(exercises),200 
 
 @api.route("/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(exercise_id):

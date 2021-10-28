@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
@@ -11,6 +12,7 @@ import "../../styles/customize.scss";
 export const Customize = () => {
 	const { store, actions } = useContext(Context);
 	const [exercises, setExercises] = useState([]);
+	//const [selectExercise, setSelectExercise] = useState("");
 	const token = localStorage.getItem("jwt-token");
 
 	async function getAllExercises() {
@@ -29,6 +31,21 @@ export const Customize = () => {
 	useEffect(() => {
 		getAllExercises();
 	}, []);
+
+	async function SaveIt() {
+		const response = await fetch(process.env.BACKEND_URL + "/customized-exercises", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			},
+			body: JSON.stringify({
+				exercises: exercises
+			})
+		});
+		const responseJson = await response.json();
+		return responseJson;
+	}
 
 	return (
 		<div className="text-center mt-5">
@@ -49,9 +66,12 @@ export const Customize = () => {
 										<div className="info-check">
 											<Col sm={2}>
 												<Form.Check
-													onChange={SaveIt}
+													onChange={() => {
+														actions.addExercises(exercise.id);
+													}}
 													className="inline"
 													aria-label="option 1"
+													value="ok"
 												/>
 											</Col>
 										</div>
@@ -62,7 +82,7 @@ export const Customize = () => {
 					</div>
 				);
 			})}
-			;
+			<Button onClick={SaveIt}>Add exercises to my plan</Button>; ;
 		</div>
 	);
 };
