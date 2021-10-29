@@ -10,11 +10,6 @@ import { Modal } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
-import award2 from "../../img/013-trainers.png";
-import award3 from "../../img/020-muscle.png";
-import award4 from "../../img/024-diet.png";
-import award5 from "../../img/031-calendar.png";
-import award6 from "../../img/032-energy-drink.png";
 import "../../styles/home.scss";
 
 export const Profile = () => {
@@ -47,9 +42,21 @@ export const Profile = () => {
 		setAwards(responseJson);
 	}
 
+	async function getClientTime() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/get-client-time", {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		const responseJson = await response.json();
+		setTime(responseJson);
+	}
+
 	useEffect(() => {
 		getPlan();
 		getAward();
+		getClientTime();
 	}, []);
 
 	//REALIZAR FECTH DE LOS DATOS DE USUARIO CON EL PLAN ELEGIDO PARA COGER LOS DATOS DEL PLAN
@@ -94,30 +101,57 @@ export const Profile = () => {
 				<Container>
 					<Row className="mx-3">
 						{awards.map(award => {
-							return (
-								<Col xs={4} md={1} key={award.id}>
-									<Image
-										src={require(`../../img/${award.image_name}.png`)}
-										width="75"
-										onClick={handleShow}
-										className="mb-3"
-									/>
-									<Modal show={show} onHide={handleClose}>
-										<Modal.Header closeButton>
-											<Modal.Title>Cógigo descuento</Modal.Title>
-										</Modal.Header>
-										<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
-										<Modal.Footer>
-											<Button variant="secondary" onClick={handleClose}>
-												Close
-											</Button>
-											<Button variant="primary" onClick={handleClose}>
-												Save Changes
-											</Button>
-										</Modal.Footer>
-									</Modal>
-								</Col>
-							);
+							if (time >= award.total_time) {
+								return (
+									<Col xs={4} md={1} key={award.id}>
+										<Image
+											src={require(`../../img/${award.image_on}.png`)}
+											width="75"
+											onClick={handleShow}
+											className="mb-3"
+										/>
+										<Modal show={show} onHide={handleClose}>
+											<Modal.Header closeButton>
+												<Modal.Title>Cógigo descuento</Modal.Title>
+											</Modal.Header>
+											<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
+											<Modal.Footer>
+												<Button variant="secondary" onClick={handleClose}>
+													Close
+												</Button>
+												<Button variant="primary" onClick={handleClose}>
+													Save Changes
+												</Button>
+											</Modal.Footer>
+										</Modal>
+									</Col>
+								);
+							} else {
+								return (
+									<Col xs={4} md={1} key={award.id}>
+										<Image
+											src={require(`../../img/${award.image_off}.png`)}
+											width="75"
+											onClick={handleShow}
+											className="mb-3"
+										/>
+										<Modal show={show} onHide={handleClose}>
+											<Modal.Header closeButton>
+												<Modal.Title>Cógigo descuento</Modal.Title>
+											</Modal.Header>
+											<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
+											<Modal.Footer>
+												<Button variant="secondary" onClick={handleClose}>
+													Close
+												</Button>
+												<Button variant="primary" onClick={handleClose}>
+													Save Changes
+												</Button>
+											</Modal.Footer>
+										</Modal>
+									</Col>
+								);
+							}
 						})}
 					</Row>
 				</Container>

@@ -33,7 +33,7 @@ def create_token():
     
    
     access_token = create_access_token(identity=client.id)
-    return jsonify({ "token": access_token, "client_id": client.id })
+    return jsonify({ "token": access_token, "client_id": client.id, "client_gender":client.gender})
 
 
 @api.route("/personal-data", methods=["POST"])
@@ -297,7 +297,8 @@ def list_of_things():
      name = "Aficionado",
      total_time = "20",
      discount = "5",
-     image_name = "002-sport"
+     image_on = "002-sport",
+     image_off = "002-sport-gris"
     )
     db.session.add(award1)
 
@@ -305,7 +306,8 @@ def list_of_things():
      name = "Primera clase completa",
      total_time = "45",
      discount = "10",
-     image_name = "013-trainers"
+     image_on = "013-trainers",
+     image_off = "013-trainers-gris"
     )
     db.session.add(award2)
 
@@ -313,7 +315,8 @@ def list_of_things():
      name = "Anda, vamos mejorando",
      total_time = "75",
      discount = "12",
-     image_name = "020-muscle"
+     image_on = "020-muscle",
+     image_off = "020-muscle-gris"
     )
     db.session.add(award3)
 
@@ -321,7 +324,8 @@ def list_of_things():
      name = "WOW",
      total_time = "105",
      discount = "15",
-     image_name = "022-barbell"
+     image_on = "022-barbell",
+     image_off = "022-barbell-gris"
     )
     db.session.add(award4)
 
@@ -329,7 +333,8 @@ def list_of_things():
      name = "A mitad de lo gordo",
      total_time = "150",
      discount = "20",
-     image_name = "024-diet"
+     image_on = "024-diet",
+     image_off = "024-diet-gris"
     )
     db.session.add(award5)
 
@@ -337,7 +342,8 @@ def list_of_things():
      name = "Wapura",
      total_time = "200",
      discount = "25",
-     image_name = "030-agility"
+     image_on = "030-agility",
+     image_off = "030-agility-gris"
     )
     db.session.add(award6)
 
@@ -345,7 +351,8 @@ def list_of_things():
      name = "GYM GYM GYM",
      total_time = "250",
      discount = "30",
-     image_name = "031-calendar"
+     image_on = "031-calendar",
+     image_off = "031-calendar-gris"
     )
     db.session.add(award7)
 
@@ -353,7 +360,8 @@ def list_of_things():
      name = "uuuuuuuh",
      total_time = "350",
      discount = "35",
-     image_name = "039-whistle"
+     image_on = "039-whistle",
+     image_off = "039-whistle-gris"
     )
     db.session.add(award8)
 
@@ -361,7 +369,8 @@ def list_of_things():
      name = "Vigorexia",
      total_time = "900",
      discount = "50",
-     image_name = "044-stopwatch"
+     image_on = "044-stopwatch",
+     image_off = "044-stopwatch-gris"
     )
     db.session.add(award9)
 
@@ -425,14 +434,16 @@ def list_of_things():
     client = Client(
         email = "chiara@gmail.com",
         room = 606,
-        stay = stay1
+        stay = stay1,
+        total_time = 0
     )
     db.session.add(client)
 
     client2 = Client(
         email = "eliezer@gmail.com",
         room = 506,
-        stay =  stay3
+        stay =  stay3,
+        total_time = 0
     )
     db.session.add(client2)
 
@@ -440,7 +451,8 @@ def list_of_things():
         email = "almu@gmail.com",
         room = 806,
         stay =  stay2,
-        plan = plan2
+        plan = plan2,
+        total_time = 0
     )
     db.session.add(client3)
 
@@ -598,5 +610,6 @@ def get_client_time():
     client = Client.query.get(current_client_id)
 
     total_time = client.total_time
+    print(total_time)
 
-    return jsonify(total_time.serialize()), 200
+    return jsonify(total_time), 200
