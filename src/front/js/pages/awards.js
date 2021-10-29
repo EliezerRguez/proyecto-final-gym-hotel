@@ -28,7 +28,7 @@ export const Awards = () => {
 					{awards.map(award => {
 						return (
 							<Col xs={4} md={4} key={award.id}>
-								<Image src="holder.js/171x180" roundedCircle />
+								<Image src={require(`../../img/${award.image_on}.png`)} width="75" />
 								<p>{award.name}</p>
 								<p>{award.discount}</p>
 							</Col>
