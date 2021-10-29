@@ -552,7 +552,18 @@ def customized_exercises():
 
     return jsonify(custom_exercises),200 
 
-
+@api.route('/customize-selected', methods=['GET'])
+@jwt_required()
+def customize_selected():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    plan = client.plan
+    
+    print(client.plan)
+    client.save()
+    
+    return jsonify(client.plan.serialize()), 200
 
 @api.route("/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(exercise_id):
