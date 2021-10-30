@@ -110,20 +110,6 @@ export const Profile = () => {
 											onClick={handleShow}
 											className="mb-3"
 										/>
-										<Modal show={show} onHide={handleClose}>
-											<Modal.Header closeButton>
-												<Modal.Title>Cógigo descuento</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
-											<Modal.Footer>
-												<Button variant="secondary" onClick={handleClose}>
-													Close
-												</Button>
-												<Button variant="primary" onClick={handleClose}>
-													Save Changes
-												</Button>
-											</Modal.Footer>
-										</Modal>
 									</Col>
 								);
 							} else {
@@ -132,27 +118,26 @@ export const Profile = () => {
 										<Image
 											src={require(`../../img/${award.image_off}.png`)}
 											width="75"
-											onClick={handleShow}
 											className="mb-3"
 										/>
-										<Modal show={show} onHide={handleClose}>
-											<Modal.Header closeButton>
-												<Modal.Title>Cógigo descuento</Modal.Title>
-											</Modal.Header>
-											<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
-											<Modal.Footer>
-												<Button variant="secondary" onClick={handleClose}>
-													Close
-												</Button>
-												<Button variant="primary" onClick={handleClose}>
-													Save Changes
-												</Button>
-											</Modal.Footer>
-										</Modal>
 									</Col>
 								);
 							}
 						})}
+						<Modal show={show} onHide={handleClose}>
+							<Modal.Header closeButton>
+								<Modal.Title>Cógigo descuento</Modal.Title>
+							</Modal.Header>
+							<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
+							<Modal.Footer>
+								<Button variant="secondary" onClick={handleClose}>
+									Close
+								</Button>
+								<Button variant="primary" onClick={handleClose}>
+									Save Changes
+								</Button>
+							</Modal.Footer>
+						</Modal>
 					</Row>
 				</Container>
 			</Row>
