@@ -141,9 +141,10 @@ class Award(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     total_time = db.Column(db.Integer, unique=False, nullable=False)
-    discount = db.Column(db.Integer, unique=False, nullable=False)
+    discount = db.Column(db.String(120), unique=False, nullable=False)
     image_on = db.Column(db.String(120), unique=False, nullable=True)
     image_off = db.Column(db.String(120), unique=False, nullable=True)
+    qr_code = db.Column(db.String(120), unique=False, nullable=True)
    
     
     def __repr__(self):
@@ -164,11 +165,11 @@ class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     time =db.Column(db.Integer, unique=False, nullable=False)
-    detail = db.Column(db.String(120), unique=False, nullable=False)
+    detail = db.Column(db.Text, unique=False, nullable=False)
     machine_id = db.Column(db.Integer, db.ForeignKey('machine.id'),
         nullable=False)
     machine = db.relationship('Machine', backref='exercises', lazy=True)
-
+    video = db.Column(db.String(120), unique=False, nullable=False)
     
     def __repr__(self):
         return '<Exercise %r>' % self.name

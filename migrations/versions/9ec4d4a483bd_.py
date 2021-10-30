@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 29910171bb69
+Revision ID: 9ec4d4a483bd
 Revises: 
-Create Date: 2021-10-29 17:14:52.208997
+Create Date: 2021-10-30 17:53:24.884006
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '29910171bb69'
+revision = '9ec4d4a483bd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,8 +22,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('total_time', sa.Integer(), nullable=False),
-    sa.Column('discount', sa.Integer(), nullable=False),
-    sa.Column('image_name', sa.String(length=120), nullable=True),
+    sa.Column('discount', sa.String(length=120), nullable=False),
+    sa.Column('image_on', sa.String(length=120), nullable=True),
+    sa.Column('image_off', sa.String(length=120), nullable=True),
+    sa.Column('qr_code', sa.String(length=120), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('gym',
@@ -82,8 +84,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('time', sa.Integer(), nullable=False),
-    sa.Column('detail', sa.String(length=120), nullable=False),
+    sa.Column('detail', sa.Text(), nullable=False),
     sa.Column('machine_id', sa.Integer(), nullable=False),
+    sa.Column('video', sa.String(length=120), nullable=False),
     sa.ForeignKeyConstraint(['machine_id'], ['machine.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

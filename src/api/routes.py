@@ -153,8 +153,9 @@ def list_of_things():
     exercise1 = Exercise(
      name = "Cardio en cinta",
      time = 10,
-     detail = "velocidad 6.5",
+     detail = "Es un ejercicio dentro de la categoria HIIT (ejercicios de alta intensidad) para mejorar la resistencia y capacidad cardiovascular.",
      machine = machine1,
+     video = "https://www.youtube.com/watch?v=QY3PhsJ7d08"
     )
 
     db.session.add(exercise1)
@@ -162,8 +163,9 @@ def list_of_things():
     exercise2= Exercise(
      name = "Curl de biceps",
      time = 5,
-     detail = "Maximas rondas de 10 repeticiones con 10kg",
+     detail = "En este ejercicio intentaremos realizar las maximas rondas posibles de 10 repeticiones, con dos mancuernas con 10kg",
      machine = machine2,
+     video = "https://www.youtube.com/watch?v=COzFAWnbdPY"
     )
     
     db.session.add(exercise2)
@@ -171,8 +173,9 @@ def list_of_things():
     exercise3= Exercise(
      name = "Flexion de triceps",
      time = 5,
-     detail = "5 rondas de 10 repeticiones",
+     detail = "Para poder fortalecer los tríceps, uno de los ejercicios más recomendables es la flexión de tríceps. Para este ejercicio realizrás 5 rondas de 10 repeticiones cada una",
      machine = machine7,
+     video = "https://www.youtube.com/watch?v=hTPkT1pZpdk"
     )
 
     db.session.add(exercise3)
@@ -180,8 +183,9 @@ def list_of_things():
     exercise4= Exercise(
      name = "Extension de triceps",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con disco de 10kg",
+     detail = "Otro ejercicio muy útil para fortalecer los tríceps es la extensión. Para ello realizarás 5 rondas de 12 repeticiones con un peso de 10kg",
      machine = machine3,
+     video = "https://www.youtube.com/watch?v=6_C4IohqulY"
     )
 
     db.session.add(exercise4)
@@ -189,8 +193,9 @@ def list_of_things():
     exercise5= Exercise(
      name = "Remo vertical",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con disco de 24kg",
+     detail = "En este ejercicio realizaremos 5 rondas de 12 repeticiones con un peso de 24kg",
      machine = machine3,
+     video = "https://www.youtube.com/watch?v=ZszxnckeOT0"
     )
 
     db.session.add(exercise5)
@@ -198,17 +203,19 @@ def list_of_things():
     exercise6= Exercise(
      name = "Press banca",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con 40kg",
+     detail = "Este ejercicio es uno de los reyes para el fortaleimiento de los pectorales. Para ello 5 rondas de 12 repeticiones con 40kg",
      machine = machine7,
+     video = "https://www.youtube.com/watch?v=GeLq8cMODLc"
     )
 
     db.session.add(exercise6)
 
     exercise7= Exercise(
-     name = "Flexiones",
+     name = "Lounges",
      time = 5,
-     detail = "5 rondas de 20 flexiones",
+     detail = "Con este ejercicio fortaleceremos los cuadríceps y el glúteo. Un ejercicio sencillo para poder trabajar el tren inferior. Para ello realizarás 5 rondas de 20 repeticiones (10 con cada pierna)",
      machine = machine8,
+     video = "https://www.youtube.com/watch?v=FtNBlVNKrs0"
     )
 
     db.session.add(exercise7)
@@ -216,8 +223,9 @@ def list_of_things():
     exercise8= Exercise(
      name = "Plancha",
      time = 5,
-     detail = "4 rondas de un minuto de plancha isometrica",
+     detail = "En este ejercicio trabajaremos el abdomen realizando 4 rondas de un minuto de plancha isometrica",
      machine = machine8,
+     video = "https://www.youtube.com/watch?v=mMieHCr-H0c"
     )
 
     db.session.add(exercise8)
@@ -225,8 +233,9 @@ def list_of_things():
     exercise9= Exercise(
      name = "Thruster con barra",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con 20kg",
+     detail = "Con este ejercicio vamos a trabajar tanto piernas como hombros. Para ello realizarás 5 rondas de 12 repeticiones con 20kg",
      machine = machine3,
+     video ="https://www.youtube.com/watch?v=L219ltL15zk"
     )
 
     db.session.add(exercise9)
@@ -234,8 +243,9 @@ def list_of_things():
     exercise10= Exercise(
      name = "Cargadas",
      time = 10,
-     detail = "5 rondas de 10 repeticiones con 20kg",
+     detail = "Para realizar las cargadas harás 5 rondas de 10 repeticiones con 20kg",
      machine = machine3,
+     video = "https://www.youtube.com/watch?v=G7A3kC8yoLI"
     )
 
     db.session.add(exercise10)
@@ -243,8 +253,9 @@ def list_of_things():
     exercise11= Exercise(
      name = "Front squat con barra",
      time = 5,
-     detail = "5 rondas de 10 front squat con peso de 20kg",
+     detail = "Lo que conocemos como sentadilla con peso. Es un gran ejercicio para trabajar el tren inferior. Para ello, realizaremos 5 rondas de 10 front squat con peso de 20kg",
      machine = machine3,
+     video = "https://www.youtube.com/watch?v=uYumuL_G_V0"
     )
 
     db.session.add(exercise11)
@@ -252,8 +263,9 @@ def list_of_things():
     exercise12= Exercise(
      name = "Back squat con barra",
      time = 5,
-     detail = "5 rondas de 10 back squat con peso de 20kg",
+     detail = "Al igual que el front squat, este ejercicio nos ayuda a fortalecer el tren inferior. Para ello, realizaremos 5 rondas de 10 back squat con peso de 20kg",
      machine = machine3,
+     video = "https://www.youtube.com/watch?v=QmZAiBqPvZw"
     )
 
     db.session.add(exercise12)
@@ -261,8 +273,9 @@ def list_of_things():
     exercise13= Exercise(
      name = "Swing de Kettlebell",
      time = 10,
-     detail = "5 rondas de 20 repeticiones (10 swing de kettlebell con cada mano)",
+     detail = "En este ejercicio trabajaremos la espalda. Pra ello realizaremos 5 rondas de 20 repeticiones (10 swing de kettlebell con cada mano)",
      machine = machine2,
+     video = "https://www.youtube.com/watch?v=mKDIuUbH94Q"
     )
 
     db.session.add(exercise13)
@@ -270,8 +283,9 @@ def list_of_things():
     exercise14= Exercise(
      name = "Abdominales",
      time = 10,
-     detail = "5 rondas de 30 abdominales",
+     detail = "Este es un clásico para trabajar el core. Realizaremos 5 rondas de 30 abdominales cada una, con un descanso de 20 segundos entre rondas",
      machine = machine6,
+     video = "https://www.youtube.com/watch?v=2tXQbi16EdI"
     )
 
     db.session.add(exercise14)
@@ -279,16 +293,18 @@ def list_of_things():
     exercise15= Exercise(
      name = "Cardio con eliptica",
      time = 10,
-     detail = "10 minutos de cardio en la eliptica",
+     detail = "Realizaremos 10 minutos de cardio en la eliptica",
      machine = machine4,
+     video = "https://www.youtube.com/watch?v=JgS5RLAHoBw"
     )
     db.session.add(exercise15)
 
     exercise16= Exercise(
      name = "Cardio con bicicleta",
      time = 10,
-     detail = "10 minutos de cardio en la bicicleta estatica",
+     detail = "Realizaremos 10 minutos de cardio en la bicicleta estatica",
      machine = machine5,
+     video = "https://www.youtube.com/watch?v=YIy3PY_fdYQ"
     )
 
     db.session.add(exercise16)
@@ -298,7 +314,8 @@ def list_of_things():
      total_time = "20",
      discount = "5",
      image_on = "002-sport",
-     image_off = "002-sport-gris"
+     image_off = "002-sport-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award1)
 
@@ -307,7 +324,8 @@ def list_of_things():
      total_time = "45",
      discount = "10",
      image_on = "013-trainers",
-     image_off = "013-trainers-gris"
+     image_off = "013-trainers-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award2)
 
@@ -316,7 +334,8 @@ def list_of_things():
      total_time = "75",
      discount = "12",
      image_on = "020-muscle",
-     image_off = "020-muscle-gris"
+     image_off = "020-muscle-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award3)
 
@@ -325,7 +344,8 @@ def list_of_things():
      total_time = "105",
      discount = "15",
      image_on = "022-barbell",
-     image_off = "022-barbell-gris"
+     image_off = "022-barbell-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award4)
 
@@ -334,7 +354,8 @@ def list_of_things():
      total_time = "150",
      discount = "20",
      image_on = "024-diet",
-     image_off = "024-diet-gris"
+     image_off = "024-diet-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award5)
 
@@ -343,7 +364,8 @@ def list_of_things():
      total_time = "200",
      discount = "25",
      image_on = "030-agility",
-     image_off = "030-agility-gris"
+     image_off = "030-agility-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award6)
 
@@ -352,7 +374,8 @@ def list_of_things():
      total_time = "250",
      discount = "30",
      image_on = "031-calendar",
-     image_off = "031-calendar-gris"
+     image_off = "031-calendar-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award7)
 
@@ -361,7 +384,8 @@ def list_of_things():
      total_time = "350",
      discount = "35",
      image_on = "039-whistle",
-     image_off = "039-whistle-gris"
+     image_off = "039-whistle-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award8)
 
@@ -370,7 +394,8 @@ def list_of_things():
      total_time = "900",
      discount = "50",
      image_on = "044-stopwatch",
-     image_off = "044-stopwatch-gris"
+     image_off = "044-stopwatch-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award9)
 
