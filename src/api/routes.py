@@ -565,6 +565,21 @@ def customize_selected():
     
     return jsonify(client.plan.serialize()), 200
 
+@api.route('/profile', methods=['GET'])
+@jwt_required()
+def profile():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    exercises = client.plan.exercises 
+    
+    print(client.plan)
+   
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    print(exercises)
+
+    return jsonify(exercises), 200
+
 @api.route("/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(exercise_id):
      

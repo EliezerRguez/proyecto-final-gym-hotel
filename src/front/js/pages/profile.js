@@ -19,7 +19,7 @@ export const Profile = () => {
 	const token = localStorage.getItem("jwt-token");
 
 	async function getPlan() {
-		const response = await fetch(process.env.BACKEND_URL + "/api/plan-selected", {
+		const response = await fetch(process.env.BACKEND_URL + "/api/profile", {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + token
