@@ -40,11 +40,7 @@ export const Exercise = () => {
 				</Row>
 				<Row>
 					<Col xs={12} className="mb-4">
-						<iframe
-							width="100%"
-							height="100%"
-							src="https://www.youtube.com/embed/i27K2ry9jEo"
-							title="YouTube video player"></iframe>
+						<iframe width="100%" height="100%" src={exercise.video} title="YouTube video player"></iframe>
 					</Col>
 				</Row>
 				<Row>
@@ -52,7 +48,7 @@ export const Exercise = () => {
 						<span>{exercise.time}</span>
 					</Col>
 					<Col xs={4} className="mb-4">
-						<span>{exercise.details}</span>
+						<span>{exercise.detail}</span>
 					</Col>
 					<Col xs={4} className="mb-4">
 						<span>10 reps each</span>
