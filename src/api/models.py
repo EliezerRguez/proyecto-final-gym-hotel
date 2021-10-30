@@ -142,6 +142,8 @@ class Award(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     total_time = db.Column(db.Integer, unique=False, nullable=False)
     discount = db.Column(db.Integer, unique=False, nullable=False)
+    image_on = db.Column(db.String(120), unique=False, nullable=True)
+    image_off = db.Column(db.String(120), unique=False, nullable=True)
    
     
     def __repr__(self):
@@ -152,7 +154,9 @@ class Award(db.Model):
             "id": self.id,
             "name": self.name,
             "total_time": self.total_time,
-            "discount": self.discount
+            "discount": self.discount,
+            "image_on": self.image_on,
+            "image_off": self.image_off
         }
 
 
