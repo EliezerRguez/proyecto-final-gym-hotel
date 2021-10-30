@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import "../../styles/inicio.scss";
+import "../../styles/inicio-login.scss";
 import Button from "react-bootstrap/Button";
 
 export const Inicio = () => {
