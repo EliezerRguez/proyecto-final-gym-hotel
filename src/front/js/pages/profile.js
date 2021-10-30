@@ -30,10 +30,10 @@ export const Profile = () => {
 				Authorization: "Bearer " + token
 			}
 		});
-		console.log(response);
+		console.log(response, "mira esto tb");
 		const responseJson = await response.json();
-		setPlan(responseJson);
-		console.log(responseJson);
+		setPlan(responseJson.plan);
+		console.log(responseJson.plan, "mira aqui");
 	}
 
 	async function getAward() {

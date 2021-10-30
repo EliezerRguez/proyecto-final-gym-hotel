@@ -593,13 +593,14 @@ def profile():
     client = Client.query.get(current_client_id)
     
     exercises = client.plan.exercises 
+    plan = client.plan
     
     print(client.plan)
    
     exercises = list(map(lambda exercise : exercise.serialize(), exercises))
     print(exercises)
 
-    return jsonify(exercises), 200
+    return jsonify({"exercises":exercises, "plan":plan.serialize()}), 200
 
 @api.route("/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(exercise_id):
