@@ -69,8 +69,12 @@ def create_booking():
     minutes = json.get("minutes", None)
    
     gym = Gym.query.get(1)  
+    if gym is None:
+        return jsonify({"no encontrado"})
     capacity= gym.capacity
-    Booking.query.filter_by(day=day,year=year,hour=hour,month=month, minutes=minutes).count()  
+    capacity_used = Booking.query.filter_by(
+        day=day,year=year,hour=hour,month=month, minutes=minutes, gym = gym
+    ).count()  
     
     if capacity_used >= capacity:
         return jsonify({"aforo limitado"}),401
@@ -80,7 +84,8 @@ def create_booking():
         year=year,
         hour=hour,
         month=month, 
-        minutes=minutes
+        minutes=minutes,
+        gym = gym
     )
 
     booking.save()
