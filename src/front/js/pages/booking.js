@@ -6,6 +6,7 @@ import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useHistory } from "react-router-dom";
 
 export const Booking = () => {
 	const { store, actions } = useContext(Context);
@@ -19,6 +20,7 @@ export const Booking = () => {
 	const [gym, setGym] = useState(1);
 	const [showModal, setShowModal] = useState(false);
 	const token = localStorage.getItem("jwt-token");
+	let history = useHistory();
 
 	async function createBooking() {
 		const response = await fetch(process.env.BACKEND_URL + "/api/create-booking", {
@@ -38,6 +40,7 @@ export const Booking = () => {
 		});
 		console.log(response);
 		const responseJson = await response.json();
+		history.push("/profile");
 		return responseJson;
 	}
 

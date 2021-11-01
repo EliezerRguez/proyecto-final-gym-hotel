@@ -61,6 +61,7 @@ def register_personaldata():
       
 @api.route("/create-booking", methods=["POST"])
 def create_booking():
+    
     json= request.get_json()
     day = json.get("day", None)
     hour = json.get("hour", None)
@@ -70,7 +71,7 @@ def create_booking():
    
     gym = Gym.query.get(1)  
     if gym is None:
-        return jsonify({"no encontrado"})
+        return jsonify("no encontrado")
     capacity= gym.capacity
     capacity_used = Booking.query.filter_by(
         day=day,year=year,hour=hour,month=month, minutes=minutes, gym = gym
@@ -90,7 +91,6 @@ def create_booking():
 
     booking.save()
        
-   
     return jsonify(booking.serialize()), 200
 
 @api.route('/create/gym', methods=['GET'])
@@ -517,6 +517,17 @@ def get_awards():
     awards = Award.query.all()
     awards = list(map(lambda award : award.serialize(), awards))
     return jsonify(awards), 200
+
+@api.route('/booking', methods=['GET'])
+def get_all_bookings():
+    bookings = Booking.query.all()
+    bookings = list(map(lambda booking : booking.serialize(), bookings))
+    return jsonify(bookings), 200
+
+@api.route('/booking/<int:booking_id>', methods=['GET'])
+def get_booking(booking_id):
+    booking = Booking.query.get(booking_id)
+    return jsonify(booking.serialize()), 200
 
 @api.route('/plans', methods=['GET'])
 def get_plans():
