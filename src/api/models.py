@@ -181,6 +181,7 @@ class Exercise(db.Model):
             "time": self.time,
             "detail": self.detail,
             "machine_id": self.machine_id,
+            "video": self.video
             
         }
 

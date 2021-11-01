@@ -17,6 +17,7 @@ export const Exercise = () => {
 		const responseJson = await response.json();
 		setExercise(responseJson);
 		console.log(responseJson, "este");
+		console.log(responseJson.video, "este");
 	}
 
 	useEffect(() => {
