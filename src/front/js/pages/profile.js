@@ -24,16 +24,16 @@ export const Profile = () => {
 	const handleShow = () => setShow(true);
 
 	async function getPlan() {
-		const response = await fetch(process.env.BACKEND_URL + "/api/plan-selected", {
+		const response = await fetch(process.env.BACKEND_URL + "/api/profile", {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + token
 			}
 		});
-		console.log(response);
+		console.log(response, "mira esto tb");
 		const responseJson = await response.json();
-		setPlan(responseJson);
-		console.log(responseJson);
+		setPlan(responseJson.plan);
+		console.log(responseJson.plan, "mira aqui");
 	}
 
 	async function getAward() {

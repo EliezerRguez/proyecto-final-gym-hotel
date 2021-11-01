@@ -69,8 +69,12 @@ def create_booking():
     minutes = json.get("minutes", None)
    
     gym = Gym.query.get(1)  
+    if gym is None:
+        return jsonify({"no encontrado"})
     capacity= gym.capacity
-    Booking.query.filter_by(day=day,year=year,hour=hour,month=month, minutes=minutes).count()  
+    capacity_used = Booking.query.filter_by(
+        day=day,year=year,hour=hour,month=month, minutes=minutes, gym = gym
+    ).count()  
     
     if capacity_used >= capacity:
         return jsonify({"aforo limitado"}),401
@@ -80,7 +84,8 @@ def create_booking():
         year=year,
         hour=hour,
         month=month, 
-        minutes=minutes
+        minutes=minutes,
+        gym = gym
     )
 
     booking.save()
@@ -573,21 +578,59 @@ def customized_exercises():
 
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
+    
+    json= request.get_json()
+    exercises = json.get("exercises", None)
+    print(exercises)
+    plan = Plan(
+        name= "customize"
+    )
+    
+    client.plan = plan 
+    
 
-    client_id.plan = client.plan
+    custom_exercises = []
+
+    for id in exercises: 
+        exercise = Exercise.query.get(id)
+        custom_exercises.append(exercise) 
+
+    client.plan.exercises = custom_exercises
    
-    #exercises = client_id.plan.exercises
-    #exercise = Exercise.query.get(exercise_id)
-    #json= request.get_json()
-   # exercises = json.get("exercises", None)
-    #client_id.plan = Plan(
-    #exercise = exercise
-    #)
-    #print(exercises)
-    #exercises = list(map(lambda exercise : exercise.serialize(), exercises))
-    #client.save()
-          
-    return jsonify(exercises),200 
+   
+    custom_exercises = list(map(lambda custom_exercise : custom_exercise.serialize(), custom_exercises))
+    client.save()    
+
+    return jsonify(custom_exercises),200 
+
+@api.route('/customize-selected', methods=['GET'])
+@jwt_required()
+def customize_selected():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    plan = client.plan
+    
+    print(client.plan)
+    client.save()
+    
+    return jsonify(client.plan.serialize()), 200
+
+@api.route('/profile', methods=['GET'])
+@jwt_required()
+def profile():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    exercises = client.plan.exercises 
+    plan = client.plan
+    
+    print(client.plan)
+   
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    print(exercises)
+
+    return jsonify({"exercises":exercises, "plan":plan.serialize()}), 200
 
 @api.route("/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(exercise_id):

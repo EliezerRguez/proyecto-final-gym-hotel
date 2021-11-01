@@ -33,16 +33,17 @@ export const Customize = () => {
 	}, []);
 
 	async function SaveIt() {
-		const response = await fetch(process.env.BACKEND_URL + "/customized-exercises", {
+		const response = await fetch(process.env.BACKEND_URL + "/api/customized-exercises", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + token
 			},
 			body: JSON.stringify({
-				exercises: exercises
+				exercises: store.exercises
 			})
 		});
+
 		const responseJson = await response.json();
 		return responseJson;
 	}
@@ -82,7 +83,10 @@ export const Customize = () => {
 					</div>
 				);
 			})}
-			<Button onClick={SaveIt}>Add exercises to my plan</Button>; ;
+			<Link to="/profile">
+				<Button onClick={SaveIt}>Add exercises to my plan</Button>
+			</Link>
+			; ;
 		</div>
 	);
 };
