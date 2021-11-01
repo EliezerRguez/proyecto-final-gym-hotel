@@ -48,7 +48,7 @@ export const PersonalData = () => {
 
 	return (
 		<div className="container personal-data p-0 h-100">
-			<div className="container personal-data-area">
+			<div className="container personal-data-area h-100">
 				<Form onSubmit={getPersonalData}>
 					<h1>PERSONAL DATA</h1>
 					<Form.Group as={Row} className="mb-3" controlId="formHorizontalNumber">
