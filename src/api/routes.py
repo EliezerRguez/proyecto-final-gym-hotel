@@ -160,7 +160,7 @@ def list_of_things():
      time = 10,
      detail = "Es un ejercicio dentro de la categoria HIIT (ejercicios de alta intensidad) para mejorar la resistencia y capacidad cardiovascular.",
      machine = machine1,
-     video = "https://www.youtube.com/watch?v=QY3PhsJ7d08"
+     video = "https://www.youtube.com/embed/QY3PhsJ7d08"
     )
 
     db.session.add(exercise1)
@@ -170,7 +170,7 @@ def list_of_things():
      time = 5,
      detail = "En este ejercicio intentaremos realizar las maximas rondas posibles de 10 repeticiones, con dos mancuernas con 10kg",
      machine = machine2,
-     video = "https://www.youtube.com/watch?v=COzFAWnbdPY"
+     video = "https://www.youtube.com/embed/COzFAWnbdPY"
     )
     
     db.session.add(exercise2)
@@ -180,7 +180,7 @@ def list_of_things():
      time = 5,
      detail = "Para poder fortalecer los tríceps, uno de los ejercicios más recomendables es la flexión de tríceps. Para este ejercicio realizrás 5 rondas de 10 repeticiones cada una",
      machine = machine7,
-     video = "https://www.youtube.com/watch?v=hTPkT1pZpdk"
+     video = "https://www.youtube.com/embed/hTPkT1pZpdk"
     )
 
     db.session.add(exercise3)
@@ -190,7 +190,7 @@ def list_of_things():
      time = 10,
      detail = "Otro ejercicio muy útil para fortalecer los tríceps es la extensión. Para ello realizarás 5 rondas de 12 repeticiones con un peso de 10kg",
      machine = machine3,
-     video = "https://www.youtube.com/watch?v=6_C4IohqulY"
+     video = "https://www.youtube.com/embed/6_C4IohqulY"
     )
 
     db.session.add(exercise4)
@@ -200,7 +200,7 @@ def list_of_things():
      time = 10,
      detail = "En este ejercicio realizaremos 5 rondas de 12 repeticiones con un peso de 24kg",
      machine = machine3,
-     video = "https://www.youtube.com/watch?v=ZszxnckeOT0"
+     video = "https://www.youtube.com/embed/ZszxnckeOT0"
     )
 
     db.session.add(exercise5)
@@ -210,7 +210,7 @@ def list_of_things():
      time = 10,
      detail = "Este ejercicio es uno de los reyes para el fortaleimiento de los pectorales. Para ello 5 rondas de 12 repeticiones con 40kg",
      machine = machine7,
-     video = "https://www.youtube.com/watch?v=GeLq8cMODLc"
+     video = "https://www.youtube.com/embed/GeLq8cMODLc"
     )
 
     db.session.add(exercise6)
@@ -220,7 +220,7 @@ def list_of_things():
      time = 5,
      detail = "Con este ejercicio fortaleceremos los cuadríceps y el glúteo. Un ejercicio sencillo para poder trabajar el tren inferior. Para ello realizarás 5 rondas de 20 repeticiones (10 con cada pierna)",
      machine = machine8,
-     video = "https://www.youtube.com/watch?v=FtNBlVNKrs0"
+     video = "https://www.youtube.com/embed/FtNBlVNKrs0"
     )
 
     db.session.add(exercise7)
@@ -230,7 +230,7 @@ def list_of_things():
      time = 5,
      detail = "En este ejercicio trabajaremos el abdomen realizando 4 rondas de un minuto de plancha isometrica",
      machine = machine8,
-     video = "https://www.youtube.com/watch?v=mMieHCr-H0c"
+     video = "https://www.youtube.com/embed/mMieHCr-H0c"
     )
 
     db.session.add(exercise8)
@@ -240,7 +240,7 @@ def list_of_things():
      time = 10,
      detail = "Con este ejercicio vamos a trabajar tanto piernas como hombros. Para ello realizarás 5 rondas de 12 repeticiones con 20kg",
      machine = machine3,
-     video ="https://www.youtube.com/watch?v=L219ltL15zk"
+     video ="https://www.youtube.com/embed/L219ltL15zk"
     )
 
     db.session.add(exercise9)
@@ -250,7 +250,7 @@ def list_of_things():
      time = 10,
      detail = "Para realizar las cargadas harás 5 rondas de 10 repeticiones con 20kg",
      machine = machine3,
-     video = "https://www.youtube.com/watch?v=G7A3kC8yoLI"
+     video = "https://www.youtube.com/embed/G7A3kC8yoLI"
     )
 
     db.session.add(exercise10)
@@ -260,7 +260,7 @@ def list_of_things():
      time = 5,
      detail = "Lo que conocemos como sentadilla con peso. Es un gran ejercicio para trabajar el tren inferior. Para ello, realizaremos 5 rondas de 10 front squat con peso de 20kg",
      machine = machine3,
-     video = "https://www.youtube.com/watch?v=uYumuL_G_V0"
+     video = "https://www.youtube.com/embed/uYumuL_G_V0"
     )
 
     db.session.add(exercise11)
@@ -270,7 +270,7 @@ def list_of_things():
      time = 5,
      detail = "Al igual que el front squat, este ejercicio nos ayuda a fortalecer el tren inferior. Para ello, realizaremos 5 rondas de 10 back squat con peso de 20kg",
      machine = machine3,
-     video = "https://www.youtube.com/watch?v=QmZAiBqPvZw"
+     video = "https://www.youtube.com/embed/QmZAiBqPvZw"
     )
 
     db.session.add(exercise12)
@@ -280,7 +280,7 @@ def list_of_things():
      time = 10,
      detail = "En este ejercicio trabajaremos la espalda. Pra ello realizaremos 5 rondas de 20 repeticiones (10 swing de kettlebell con cada mano)",
      machine = machine2,
-     video = "https://www.youtube.com/watch?v=mKDIuUbH94Q"
+     video = "https://www.youtube.com/embed/mKDIuUbH94Q"
     )
 
     db.session.add(exercise13)
@@ -290,7 +290,7 @@ def list_of_things():
      time = 10,
      detail = "Este es un clásico para trabajar el core. Realizaremos 5 rondas de 30 abdominales cada una, con un descanso de 20 segundos entre rondas",
      machine = machine6,
-     video = "https://www.youtube.com/watch?v=2tXQbi16EdI"
+     video = "https://www.youtube.com/embed/2tXQbi16EdI"
     )
 
     db.session.add(exercise14)
@@ -300,7 +300,7 @@ def list_of_things():
      time = 10,
      detail = "Realizaremos 10 minutos de cardio en la eliptica",
      machine = machine4,
-     video = "https://www.youtube.com/watch?v=JgS5RLAHoBw"
+     video = "https://www.youtube.com/embed/JgS5RLAHoBw"
     )
     db.session.add(exercise15)
 
@@ -309,7 +309,7 @@ def list_of_things():
      time = 10,
      detail = "Realizaremos 10 minutos de cardio en la bicicleta estatica",
      machine = machine5,
-     video = "https://www.youtube.com/watch?v=YIy3PY_fdYQ"
+     video = "https://www.youtube.com/embed/YIy3PY_fdYQ"
     )
 
     db.session.add(exercise16)
