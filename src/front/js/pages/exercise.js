@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 
 export const Exercise = () => {
 	const [exercise, setExercise] = useState([]);
+	const [nextExercises, setNextExercises] = useState("");
+	const [exerciseExist, setExerciseExist] = useState(false);
 	const params = useParams();
 
 	async function getSingleExercise() {
@@ -23,6 +25,26 @@ export const Exercise = () => {
 	useEffect(() => {
 		getSingleExercise();
 	}, []);
+
+	useEffect(() => {
+		let position = exercise.findIndex(exercise => {
+			return exercise.id === nextExercises;
+		});
+
+		if (position === -1) {
+			setExerciseExist(false);
+		} else {
+			setExerciseExist(true);
+		}
+	}, [setNextExercises]);
+
+	function goToNextExercise(exercise, exercise_id) {
+		let position = (position = exercise.findIndex(exercise == 1));
+		if (position === -1) {
+			setExercise([...exercise, exercise.id++]);
+			setNextExercises("");
+		}
+	}
 
 	return (
 		<div className="text-center mt-5">
@@ -67,7 +89,8 @@ export const Exercise = () => {
 						</Button>
 					</Col>
 					<Col xs={6} className="text-center my-4">
-						<Link to={`/exercises/${exercise.id}`}>Next exercise</Link>
+						<Button onClick={goToNextExercise}> prueba esto</Button>
+						<Link to={`/plan/${params.id_plan}/exercises/${params.id_exercise}`}>Next exercise</Link>
 					</Col>
 				</Row>
 			</Container>
