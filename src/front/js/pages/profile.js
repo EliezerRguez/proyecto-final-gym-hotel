@@ -19,6 +19,7 @@ export const Profile = () => {
 	const token = localStorage.getItem("jwt-token");
 	const [show, setShow] = useState(false);
 	const [awards, setAwards] = useState([]);
+	const [bookings, setBookings] = useState([]);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -53,10 +54,22 @@ export const Profile = () => {
 		setTime(responseJson);
 	}
 
+	async function getBooking() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/booking", {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		const responseJson = await response.json();
+		setBookings(responseJson);
+	}
+
 	useEffect(() => {
 		getPlan();
 		getAward();
 		getClientTime();
+		getBooking();
 	}, []);
 
 	//REALIZAR FECTH DE LOS DATOS DE USUARIO CON EL PLAN ELEGIDO PARA COGER LOS DATOS DEL PLAN
@@ -85,7 +98,21 @@ export const Profile = () => {
 					</Card.Body>
 				</Card>
 			</CardGroup>
-
+			<Card className="mb-4">
+				<Card.Body>
+					<Card.Title>
+						{bookings.map(booking => {
+							return (
+								<h5 key={booking.id}>
+									{" "}
+									Your Booking time is: {booking.day} of {booking.month} at {booking.hour}{" "}
+									{booking.minutes}{" "}
+								</h5>
+							);
+						})}
+					</Card.Title>
+				</Card.Body>
+			</Card>
 			<Card className="mb-4">
 				<Card.Img variant="top" src="holder.js/100px160" />
 				<Card.Body>
