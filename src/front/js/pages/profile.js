@@ -43,7 +43,7 @@ export const Profile = () => {
 		setAwards(responseJson);
 	}
 
-	async function getClientTime() {
+	async function getTime() {
 		const response = await fetch(process.env.BACKEND_URL + "/api/get-client-time", {
 			headers: {
 				"Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const Profile = () => {
 	useEffect(() => {
 		getPlan();
 		getAward();
-		getClientTime();
+		getTime();
 		getBooking();
 	}, []);
 
