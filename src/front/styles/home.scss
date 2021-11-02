@@ -1,0 +1,46 @@
+.perfil {
+    background-image:url("../img/home-bloque-1.jpg");
+    background-position: center;
+    background-size: cover;}
+.info {
+    background-image:url("../img/home-bloque-2.jpg");
+    background-position: center;
+    background-size: cover;}
+.plan {
+    background-image:url("../img/home-bloque-3.jpg");
+    background-position: top;
+    background-size: cover;}
+
+    .award {background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+        background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+        background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1); color:#fff;border-radius: 12px 12px 12px 12px;border:none}
+
+.perfil, .info, .plan{
+/*background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1);
+*/height:150px;
+position: relative;
+
+border-radius: 12px 12px 12px 12px;
+border: none;
+box-shadow: 5px 10px 20px #ccc;
+}
+
+.faldon-perfil, .faldon-info, .faldon-plan {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+   
+    left:12px;
+    height:50px;
+    border-radius: 0 0 12px 12px;
+    color:#fff
+}
+
+.faldon-award h2 {font-size: 16px;}
+
+.faldon-perfil h2, .faldon-info h2, .faldon-plan h2, .faldon-award h2 {padding-top:10px;font-weight: 700;}
+
