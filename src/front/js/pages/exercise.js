@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 
 export const Exercise = () => {
 	const [exercise, setExercise] = useState([]);
+	const [exerciseExist, setExerciseExist] = useState([]);
+	const [next_exercise_id, setNext_exercise_id] = useState("");
+	const token = localStorage.getItem("jwt-token");
 	const params = useParams();
 
 	async function getSingleExercise() {
@@ -22,7 +25,49 @@ export const Exercise = () => {
 
 	useEffect(() => {
 		getSingleExercise();
+		getAllExercises();
 	}, []);
+
+	useEffect(() => {
+		SaveItAll(exerciseExist);
+	}, [exerciseExist, exercise]);
+
+	useEffect(() => {
+		getSingleExercise();
+	}, [params]);
+
+	async function getAllExercises() {
+		const response = await fetch(process.env.BACKEND_URL + `/api/plans/${params.id_plan}/exercises`, {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		console.log(response);
+		const responseJson = await response.json();
+		setExerciseExist(responseJson);
+
+		console.log(responseJson, "Esto que es");
+	}
+
+	function SaveItAll(exercisesInPlan) {
+		if (exercise.id === undefined || exercisesInPlan.length == 0) {
+			return;
+		}
+
+		console.log(exercisesInPlan, "QUE MIERDA DE ARRAY ES ESE");
+		let position = findPosition(exercisesInPlan, exercise.id);
+		console.log(position, "position");
+		let nextPositionExercise = position + 1;
+		console.log(exercisesInPlan[nextPositionExercise]);
+		setNext_exercise_id(exercisesInPlan[nextPositionExercise].id);
+		return exercisesInPlan[nextPositionExercise];
+	}
+
+	function findPosition(array, exercise_id) {
+		console.log(exercise_id, "exerciseid");
+		return array.findIndex(exercise => exercise.id == exercise_id);
+	}
 
 	return (
 		<div className="text-center mt-5">
@@ -67,7 +112,7 @@ export const Exercise = () => {
 						</Button>
 					</Col>
 					<Col xs={6} className="text-center my-4">
-						<Link to={`/exercises/${exercise.id}`}>Next exercise</Link>
+						<Link to={`/plan/${params.id_plan}/exercises/${next_exercise_id}`}>Next exercise</Link>
 					</Col>
 				</Row>
 			</Container>

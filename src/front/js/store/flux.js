@@ -48,21 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addExercises: exercise => {
 				setStore({ exercises: [...getStore().exercises, exercise] });
 			},
-			//getaPlan: () => {
-			//	const store = getStore();
-			//const token = localStorage.getItem("jwt-token");
 
-			//	fetch(process.env.BACKEND_URL + `/plans/ ${store.plans}`, {
-			//		headers: {
-			//			"Content-Type": "application/json",
-			//			Authorization: "Bearer " + token
-			//		}
-			//	});
-
-			//	const responseJson = response.json();
-
-			//	return responseJson;
-			//},
 			setClientToken: token => {
 				setStore({ client_token: token });
 			}
