@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Badge from "react-bootstrap/Badge";
@@ -11,12 +11,29 @@ import "../../styles/home.scss";
 
 export const Time = () => {
 	const { store, actions } = useContext(Context);
+	const [times, setTimes] = useState("");
+	const token = localStorage.getItem("jwt-token");
+
+	async function getTimeClient() {
+		const response = await fetch(process.env.BACKEND_URL + "api/get-client-time", {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		const responseJson = await response.json();
+		setTimes(responseJson);
+		console.log(setTimes);
+	}
+	useEffect(() => {
+		getTimeClient();
+	}, []);
 
 	return (
 		<div className="text-center mt-5">
 			<h1>TIME</h1>
 			<Badge className="mb-2" bg="success">
-				tiempo total
+				{times.total_time}
 			</Badge>
 			<ProgressBar className="mx-4" animated now={45} />
 			<Badge className="my-3" bg="warning" text="dark">
