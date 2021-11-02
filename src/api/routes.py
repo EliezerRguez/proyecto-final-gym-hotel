@@ -687,7 +687,7 @@ def get_client_time():
 
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-
+    
     total_time = client.total_time
     print(total_time)
 

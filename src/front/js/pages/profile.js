@@ -103,11 +103,11 @@ export const Profile = () => {
 					<Card.Title>
 						{bookings.map(booking => {
 							return (
-								<h5 key={booking.id}>
+								<p key={booking.id}>
 									{" "}
-									Your Booking time is: {booking.day} of {booking.month} at {booking.hour}{" "}
-									{booking.minutes}{" "}
-								</h5>
+									Your Booking is: {booking.day}/{booking.month}/{booking.year} at {booking.hour}:
+									{booking.minutes}
+								</p>
 							);
 						})}
 					</Card.Title>
