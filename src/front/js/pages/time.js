@@ -11,11 +11,12 @@ import "../../styles/home.scss";
 
 export const Time = () => {
 	const { store, actions } = useContext(Context);
-	const [times, setTimes] = useState("");
+	const [times, setTimes] = useState(" ");
 	const token = localStorage.getItem("jwt-token");
 
 	async function getTimeClient() {
-		const response = await fetch(process.env.BACKEND_URL + "api/get-client-time", {
+		console.log("hola11");
+		const response = await fetch(process.env.BACKEND_URL + "/api/get-client-time", {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + token
@@ -23,23 +24,17 @@ export const Time = () => {
 		});
 		const responseJson = await response.json();
 		setTimes(responseJson);
-		console.log(setTimes);
+		console.log(responseJson);
 	}
 	useEffect(() => {
 		getTimeClient();
 	}, []);
-
+	console.log(times);
 	return (
 		<div className="text-center mt-5">
 			<h1>TIME</h1>
-			<Badge className="mb-2" bg="success">
-				{times.total_time}
-			</Badge>
-			<ProgressBar className="mx-4" animated now={45} />
-			<Badge className="my-3" bg="warning" text="dark">
-				tiempo del día
-			</Badge>
-			<ProgressBar className="mx-4" animated now={20} />
+			<Badge className="mb-2" bg="success"></Badge>
+			<ProgressBar className="mx-4" animated now={times} />
 			<div className="mt-4">
 				<h3>Las siguientes insignias que puedes ganar son:</h3>
 			</div>
