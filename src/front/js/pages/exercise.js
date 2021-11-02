@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "../../styles/ejercicio.scss";
 
 export const Exercise = () => {
 	const [exercise, setExercise] = useState([]);
@@ -25,34 +26,28 @@ export const Exercise = () => {
 	}, []);
 
 	return (
-		<div className="text-center mt-5">
+		<div className="p-4">
 			<Container key={exercise.id}>
-				<Row>
-					<Col xs={6} className="mb-4">
-						<h1>{`EXERCISE ${exercise.id}`}</h1>
-					</Col>
-					<Col xs={6} className="mb-4">
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-					</Col>
-				</Row>
+				<span>Ejercicio {exercise.id}</span>
+				<h1>{exercise.name}</h1>
 				<Row>
 					<Col xs={12} className="mb-4">
-						<iframe width="100%" height="100%" src={exercise.video} title="YouTube video player"></iframe>
+						<iframe
+							width="100%"
+							height="100%"
+							src={exercise.video}
+							title="YouTube video player"
+							className="video-ejercicio"></iframe>
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={4} className="mb-4">
-						<span>{exercise.time}</span>
+					<Col xs={12} className="mb-4 tiempo-ejercicio">
+						<span>
+							<span className="fw-bold">Duración del ejercicio:</span> {exercise.time} minutos
+						</span>
 					</Col>
-					<Col xs={4} className="mb-4">
+					<Col xs={12} className="mb-4 detalles-ejercicio">
 						<span>{exercise.detail}</span>
-					</Col>
-					<Col xs={4} className="mb-4">
-						<span>10 reps each</span>
 					</Col>
 				</Row>
 				<Row>

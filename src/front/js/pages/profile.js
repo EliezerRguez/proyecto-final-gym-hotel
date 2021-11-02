@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import { CardGroup } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
