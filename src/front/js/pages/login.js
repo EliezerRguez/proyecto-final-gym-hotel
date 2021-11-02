@@ -4,6 +4,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../../styles/home.scss";
 import { useHistory } from "react-router-dom";
+import Image from "react-bootstrap/Image";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
@@ -45,30 +48,36 @@ export const Login = () => {
 
 	return (
 		<div className="container h-100 login p-0">
-			<div className="login-area text-light h-100 p-4 text-center">
-				<h1>WELCOME TO APPTIVATE</h1>
-				<Form onSubmit={login}>
-					<Form.Group className="my-4" controlId="formBasicEmail">
-						<Form.Control
-							type="email"
-							placeholder="Enter email"
-							onChange={event => setEmail(event.target.value)}
-							required
-						/>
-					</Form.Group>
+			<div className="login-area text-dark h-100 p-4 text-center">
+				<Row>
+					<Col xs={12} sm={6}>
+						<Image src={require(`../../img/imagen-gym-inicio.png`)} width="90%" />
+					</Col>
+					<Col xs={12} sm={6}>
+						<Form onSubmit={login}>
+							<Form.Group className="my-4" controlId="formBasicEmail">
+								<Form.Control
+									type="email"
+									placeholder="Enter email"
+									onChange={event => setEmail(event.target.value)}
+									required
+								/>
+							</Form.Group>
 
-					<Form.Group className="mb-4" controlId="formBasicPassword">
-						<Form.Control
-							type="password"
-							placeholder="Room Number"
-							onChange={event => setRoom(event.target.value)}
-							required
-						/>
-					</Form.Group>
-					<Button className="w-100 button-login" type="submit" size="lg">
-						<span className="text-dark fw-bold">LOG ME IN!</span>
-					</Button>
-				</Form>
+							<Form.Group className="mb-4" controlId="formBasicPassword">
+								<Form.Control
+									type="password"
+									placeholder="Room Number"
+									onChange={event => setRoom(event.target.value)}
+									required
+								/>
+							</Form.Group>
+							<Button className="w-100 button-login" type="submit" size="lg">
+								<span>LOG ME IN!</span>
+							</Button>
+						</Form>
+					</Col>
+				</Row>
 			</div>
 		</div>
 	);
