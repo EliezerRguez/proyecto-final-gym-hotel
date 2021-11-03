@@ -18,6 +18,7 @@ import { Customize } from "./pages/customize";
 import injectContext from "./store/appContext";
 import { Navbars } from "./component/navbars";
 import { Footer } from "./component/footer";
+import { PlanConfirmation } from "./pages/planConfirmation";
 
 //create your first component
 const Layout = () => {
@@ -52,17 +53,20 @@ const Layout = () => {
 						<Route exact path="/plans">
 							<Plans />
 						</Route>
+						<Route exact path="/planConfirmation">
+							<PlanConfirmation />
+						</Route>
 						<Route exact path="/awards">
 							<Awards />
-						</Route>
-						<Route exact path="/personal-plan">
-							<PersonalPlan />
 						</Route>
 						<Route exact path="/time">
 							<Time />
 						</Route>
-						<Route path="/exercise/:id">
+						<Route path="/plan/:id_plan/exercises/:id_exercise">
 							<Exercise />
+						</Route>
+						<Route path="/plan/:id/exercises">
+							<PersonalPlan />
 						</Route>
 						<Route exact path="/booking">
 							<Booking />

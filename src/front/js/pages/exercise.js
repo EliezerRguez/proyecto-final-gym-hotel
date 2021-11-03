@@ -6,58 +6,91 @@ import { Button } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "../../styles/ejercicio.scss";
 
 export const Exercise = () => {
-	const [singleExercise, setSingleExercise] = useState([]);
+	const [exercise, setExercise] = useState([]);
+	const [exerciseExist, setExerciseExist] = useState([]);
+	const [next_exercise_id, setNext_exercise_id] = useState("");
+	const token = localStorage.getItem("jwt-token");
 	const params = useParams();
 
-	console.log(params);
-
 	async function getSingleExercise() {
-		const response = await fetch(process.env.BACKEND_URL + `/api/exercises/${params.id}`);
+		const response = await fetch(process.env.BACKEND_URL + `/api/exercises/${params.id_exercise}`);
 		console.log(response);
 		const responseJson = await response.json();
-		setSingleExercise(responseJson);
-		console.log(responseJson);
+		setExercise(responseJson);
+		console.log(responseJson, "este");
+		console.log(responseJson.video, "este");
 	}
 
 	useEffect(() => {
 		getSingleExercise();
+		getAllExercises();
 	}, []);
 
+	useEffect(() => {
+		SaveItAll(exerciseExist);
+	}, [exerciseExist, exercise]);
+
+	useEffect(() => {
+		getSingleExercise();
+	}, [params]);
+
+	async function getAllExercises() {
+		const response = await fetch(process.env.BACKEND_URL + `/api/plans/${params.id_plan}/exercises`, {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		console.log(response);
+		const responseJson = await response.json();
+		setExerciseExist(responseJson);
+
+		console.log(responseJson, "Esto que es");
+	}
+
+	function SaveItAll(exercisesInPlan) {
+		if (exercise.id === undefined || exercisesInPlan.length == 0) {
+			return;
+		}
+
+		console.log(exercisesInPlan, "QUE MIERDA DE ARRAY ES ESE");
+		let position = findPosition(exercisesInPlan, exercise.id);
+		console.log(position, "position");
+		let nextPositionExercise = position + 1;
+		console.log(exercisesInPlan[nextPositionExercise]);
+		setNext_exercise_id(exercisesInPlan[nextPositionExercise].id);
+		return exercisesInPlan[nextPositionExercise];
+	}
+
+	function findPosition(array, exercise_id) {
+		console.log(exercise_id, "exerciseid");
+		return array.findIndex(exercise => exercise.id == exercise_id);
+	}
+
 	return (
-		<div className="text-center mt-5">
-			<Container>
+		<div className="p-4">
+			<Container key={exercise.id}>
+				<span>Ejercicio {exercise.id}</span>
+				<h1>{exercise.name}</h1>
 				<Row>
-					<Col xs={6} className="mb-4">
-						<h1>{`EXERCISE ${singleExercise.id}`}</h1>
-					</Col>
-					<Col xs={6} className="mb-4">
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-					</Col>
-				</Row>
-				<Row>
-					<Col xs={12} className="mb-4">
+					<Col xs={12} className="mb-4 p-0">
 						<iframe
 							width="100%"
 							height="100%"
-							src="https://www.youtube.com/embed/i27K2ry9jEo"
-							title="YouTube video player"></iframe>
+							src={exercise.video}
+							title="YouTube video player"
+							className="video-ejercicio"></iframe>
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={4} className="mb-4">
-						<span>{singleExercise.time}</span>
-					</Col>
-					<Col xs={4} className="mb-4">
-						<span>{singleExercise.details}</span>
-					</Col>
-					<Col xs={4} className="mb-4">
-						<span>10 reps each</span>
+					<Col xs={12} className="mb-4 tiempo-ejercicio">
+						<p>
+							<span className="fw-bold">Duración del ejercicio:</span> {exercise.time} minutos
+						</p>
+						<p>{exercise.detail}</p>
 					</Col>
 				</Row>
 				<Row>
@@ -66,13 +99,15 @@ export const Exercise = () => {
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={6} className="text-center my-4">
-						<Button variant="outline-primary">
-							<Link to="/personal-plan">List of exercises</Link>
+					<Col xs={6} className="text-center my-4 boton-lista">
+						<Button>
+							<Link to={`/plan/${params.id_plan}/exercises`}>Lista</Link>
 						</Button>
 					</Col>
-					<Col xs={6} className="text-center my-4">
-						<Button variant="primary">Next exercise</Button>
+					<Col xs={6} className="text-center my-4 boton-next">
+						<Button>
+							<Link to={`/plan/${params.id_plan}/exercises/${next_exercise_id}`}>Siguiente</Link>
+						</Button>
 					</Col>
 				</Row>
 			</Container>

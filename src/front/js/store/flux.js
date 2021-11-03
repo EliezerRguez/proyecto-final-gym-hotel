@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			plans: [],
+			exercises: [],
 			client_token: null
 		},
 		actions: {
@@ -44,9 +45,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			addPlans: name => {
-				setStore({ plans: [...getStore().plans, name] });
+			addExercises: exercise => {
+				setStore({ exercises: [...getStore().exercises, exercise] });
 			},
+
 			setClientToken: token => {
 				setStore({ client_token: token });
 			}

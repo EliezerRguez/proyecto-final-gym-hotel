@@ -1,1 +1,54 @@
 * a {text-decoration: none;}
+
+/* CSS CRONOMETRO */
+.timer-area {background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+  background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+  background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1);
+  color:#fff;
+  border-radius: 12px 12px 12px 12px
+  ;border:none;
+  box-shadow: 5px 10px 20px #ccc;
+padding:15px 10px}
+
+.timer {
+    margin: 0 auto;
+    padding-top: 7px;
+  p{font-size: 25px;margin:0} }
+  
+
+.buttons button {border-radius: 12px;
+  border:3px solid #fff;
+  background: transparent;
+  color:#fff;padding:10px;float: right;
+  }
+
+
+.blob {
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    animation: pulse-black 1s infinite;
+}
+
+.blob.red {
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+    animation: pulse-red 1s infinite;
+}
+  
+@keyframes pulse-red {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+    }
+    
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+    }
+    
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+    }
+  }

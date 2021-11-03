@@ -4,73 +4,51 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import "../../styles/home.scss";
-
 export const Homepage = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>HOMEPAGE</h1>
+		<div className="p-4">
 			<>
-				<Card className="mx-4">
-					<Card.Img variant="top" src="holder.js/100px180" />
-					Imagen de perfil persona
-					<Card.Body>
-						<Card.Text>
-							<Link to="/profile">
-								<Button variant="primary" type="submit">
-									My Profile
-								</Button>
-							</Link>
-						</Card.Text>
-					</Card.Body>
-				</Card>
+				<Link to="/profile">
+					<Card className="perfil">
+						<Card.Body>
+							<Card.Text className="faldon-perfil">
+								<h2>Perfil</h2>
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Link>
 				<br />
-
-				<Card className="mx-4">
-					<Card.Img variant="top" src="holder.js/100px180" />
-					Imagen de info
-					<Card.Body>
-						<Card.Text>
-							<Link to="/info">
-								<Button variant="primary" type="submit">
-									Cómo funciona y detalles gimnasio
-								</Button>
-							</Link>
-						</Card.Text>
-					</Card.Body>
-				</Card>
+				<Link to="/info">
+					<Card className="info">
+						<Card.Body>
+							<Card.Text className="faldon-perfil">
+								<h2>Gimnasio</h2>
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Link>
 				<br />
-
-				<Card className="mx-4">
-					<Card.Img variant="top" src="holder.js/100px180" />
-					Imagen de gente haciendo cosas
-					<Card.Body>
-						<Card.Text>
-							<Link to="/plans">
-								<Button variant="primary" type="submit">
-									Plan que te proponemos y plan customize
-								</Button>
-							</Link>
-						</Card.Text>
-					</Card.Body>
-				</Card>
+				<Link to="/plans">
+					<Card className="plan">
+						<Card.Body>
+							<Card.Text className="faldon-plan">
+								<h2>Plan</h2>
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Link>
 				<br />
-
-				<Card className="mx-4">
-					<Card.Img variant="top" src="holder.js/100px180" />
-					Imagen insignias pokedex
-					<Card.Body>
-						<Card.Text>
-							<Link to="/awards">
-								<Button variant="primary" type="submit">
-									Todas las insignias disponibles y breve descripción premios
-								</Button>
-							</Link>
-						</Card.Text>
-					</Card.Body>
-				</Card>
+				<Link to="/awards">
+					<Card className="award text-center">
+						<Card.Body>
+							<Card.Text className="faldon-award">
+								<h2>Programa de insignias</h2>
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Link>
 				<br />
 			</>
 		</div>

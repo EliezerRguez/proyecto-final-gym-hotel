@@ -1,0 +1,12 @@
+.carouselCards {
+    display: flex;
+    padding: 25px;
+    width: 100%;
+    overflow: auto;
+
+}
+
+.personal-plan {min-width:90%;height: 280px;
+        margin-right: 15px; position: relative;border-radius: 12px;border:none;box-shadow: 5px 10px 20px #ccc;}
+
+.personal-plan .card-text {position: absolute; bottom: 8%;left:0;right: 0;}

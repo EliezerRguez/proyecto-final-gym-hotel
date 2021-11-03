@@ -57,6 +57,7 @@ class Client(db.Model,SaveAll):
        backref=db.backref('clients', lazy=True))
     awards = db.relationship('Award', secondary=awards_client, lazy='subquery',
        backref=db.backref('clients', lazy=True))
+    total_time = db.Column(db.Integer, unique=False, nullable=False, default=0)
    
 
 
@@ -79,8 +80,8 @@ class Client(db.Model,SaveAll):
 class Plan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    time = db.Column(db.String(120), unique=False, nullable=False)
-    difficulty = db.Column(db.Integer, unique=False, nullable=False)
+    time = db.Column(db.String(120), unique=False, nullable=True)
+    difficulty = db.Column(db.Integer, unique=False, nullable=True)
     exercises = db.relationship('Exercise', secondary=exercises_plan, lazy='subquery',
        backref=db.backref('plans', lazy=True))
     
@@ -140,7 +141,10 @@ class Award(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     total_time = db.Column(db.Integer, unique=False, nullable=False)
-    discount = db.Column(db.Integer, unique=False, nullable=False)
+    discount = db.Column(db.String(120), unique=False, nullable=False)
+    image_on = db.Column(db.String(120), unique=False, nullable=True)
+    image_off = db.Column(db.String(120), unique=False, nullable=True)
+    qr_code = db.Column(db.String(120), unique=False, nullable=True)
    
     
     def __repr__(self):
@@ -151,7 +155,9 @@ class Award(db.Model):
             "id": self.id,
             "name": self.name,
             "total_time": self.total_time,
-            "discount": self.discount
+            "discount": self.discount,
+            "image_on": self.image_on,
+            "image_off": self.image_off
         }
 
 
@@ -159,11 +165,12 @@ class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     time =db.Column(db.Integer, unique=False, nullable=False)
-    detail = db.Column(db.String(120), unique=False, nullable=False)
+    detail = db.Column(db.Text, unique=False, nullable=False)
     machine_id = db.Column(db.Integer, db.ForeignKey('machine.id'),
         nullable=False)
     machine = db.relationship('Machine', backref='exercises', lazy=True)
-
+    video = db.Column(db.String(120), unique=False, nullable=False)
+    imagen = db.Column(db.String(120), unique=False, nullable=False)
     
     def __repr__(self):
         return '<Exercise %r>' % self.name
@@ -174,7 +181,10 @@ class Exercise(db.Model):
             "name": self.name,
             "time": self.time,
             "detail": self.detail,
-            "machine_id": self.machine_id
+            "machine_id": self.machine_id,
+            "video": self.video,
+            "imagen": self.imagen
+            
         }
 
 class Stay(db.Model):

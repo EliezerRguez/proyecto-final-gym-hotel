@@ -33,7 +33,7 @@ def create_token():
     
    
     access_token = create_access_token(identity=client.id)
-    return jsonify({ "token": access_token, "client_id": client.id })
+    return jsonify({ "token": access_token, "client_id": client.id, "client_gender":client.gender})
 
 
 @api.route("/personal-data", methods=["POST"])
@@ -61,6 +61,7 @@ def register_personaldata():
       
 @api.route("/create-booking", methods=["POST"])
 def create_booking():
+    
     json= request.get_json()
     day = json.get("day", None)
     hour = json.get("hour", None)
@@ -69,8 +70,12 @@ def create_booking():
     minutes = json.get("minutes", None)
    
     gym = Gym.query.get(1)  
+    if gym is None:
+        return jsonify("no encontrado")
     capacity= gym.capacity
-    Booking.query.filter_by(day=day,year=year,hour=hour,month=month, minutes=minutes).count()  
+    capacity_used = Booking.query.filter_by(
+        day=day,year=year,hour=hour,month=month, minutes=minutes, gym = gym
+    ).count()  
     
     if capacity_used >= capacity:
         return jsonify({"aforo limitado"}),401
@@ -80,12 +85,12 @@ def create_booking():
         year=year,
         hour=hour,
         month=month, 
-        minutes=minutes
+        minutes=minutes,
+        gym = gym
     )
 
     booking.save()
        
-   
     return jsonify(booking.serialize()), 200
 
 @api.route('/create/gym', methods=['GET'])
@@ -153,8 +158,10 @@ def list_of_things():
     exercise1 = Exercise(
      name = "Cardio en cinta",
      time = 10,
-     detail = "velocidad 6.5",
+     detail = "Es un ejercicio dentro de la categoria HIIT (ejercicios de alta intensidad) para mejorar la resistencia y capacidad cardiovascular.",
      machine = machine1,
+     video = "https://www.youtube.com/embed/QY3PhsJ7d08",
+     imagen = "exercise-1"
     )
 
     db.session.add(exercise1)
@@ -162,17 +169,21 @@ def list_of_things():
     exercise2= Exercise(
      name = "Curl de biceps",
      time = 5,
-     detail = "Maximas rondas de 10 repeticiones con 10kg",
+     detail = "En este ejercicio intentaremos realizar las maximas rondas posibles de 10 repeticiones, con dos mancuernas con 10kg",
      machine = machine2,
+     video = "https://www.youtube.com/embed/COzFAWnbdPY",
+     imagen = "exercise-2"
     )
-
+    
     db.session.add(exercise2)
-
+    
     exercise3= Exercise(
      name = "Flexion de triceps",
      time = 5,
-     detail = "5 rondas de 10 repeticiones",
+     detail = "Para poder fortalecer los tríceps, uno de los ejercicios más recomendables es la flexión de tríceps. Para este ejercicio realizrás 5 rondas de 10 repeticiones cada una",
      machine = machine7,
+     video = "https://www.youtube.com/embed/hTPkT1pZpdk",
+     imagen = "exercise-3"
     )
 
     db.session.add(exercise3)
@@ -180,8 +191,10 @@ def list_of_things():
     exercise4= Exercise(
      name = "Extension de triceps",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con disco de 10kg",
+     detail = "Otro ejercicio muy útil para fortalecer los tríceps es la extensión. Para ello realizarás 5 rondas de 12 repeticiones con un peso de 10kg",
      machine = machine3,
+     video = "https://www.youtube.com/embed/6_C4IohqulY",
+     imagen = "exercise-4"
     )
 
     db.session.add(exercise4)
@@ -189,8 +202,10 @@ def list_of_things():
     exercise5= Exercise(
      name = "Remo vertical",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con disco de 24kg",
+     detail = "En este ejercicio realizaremos 5 rondas de 12 repeticiones con un peso de 24kg",
      machine = machine3,
+     video = "https://www.youtube.com/embed/ZszxnckeOT0",
+     imagen = "exercise-5"
     )
 
     db.session.add(exercise5)
@@ -198,17 +213,21 @@ def list_of_things():
     exercise6= Exercise(
      name = "Press banca",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con 40kg",
+     detail = "Este ejercicio es uno de los reyes para el fortaleimiento de los pectorales. Para ello 5 rondas de 12 repeticiones con 40kg",
      machine = machine7,
+     video = "https://www.youtube.com/embed/GeLq8cMODLc",
+     imagen = "exercise-6"
     )
 
     db.session.add(exercise6)
 
     exercise7= Exercise(
-     name = "Flexiones",
+     name = "Lounges",
      time = 5,
-     detail = "5 rondas de 20 flexiones",
+     detail = "Con este ejercicio fortaleceremos los cuadríceps y el glúteo. Un ejercicio sencillo para poder trabajar el tren inferior. Para ello realizarás 5 rondas de 20 repeticiones (10 con cada pierna)",
      machine = machine8,
+     video = "https://www.youtube.com/embed/FtNBlVNKrs0",
+     imagen = "exercise-7"
     )
 
     db.session.add(exercise7)
@@ -216,8 +235,10 @@ def list_of_things():
     exercise8= Exercise(
      name = "Plancha",
      time = 5,
-     detail = "4 rondas de un minuto de plancha isometrica",
+     detail = "En este ejercicio trabajaremos el abdomen realizando 4 rondas de un minuto de plancha isometrica",
      machine = machine8,
+     video = "https://www.youtube.com/embed/mMieHCr-H0c",
+     imagen = "exercise-8"
     )
 
     db.session.add(exercise8)
@@ -225,8 +246,10 @@ def list_of_things():
     exercise9= Exercise(
      name = "Thruster con barra",
      time = 10,
-     detail = "5 rondas de 12 repeticiones con 20kg",
+     detail = "Con este ejercicio vamos a trabajar tanto piernas como hombros. Para ello realizarás 5 rondas de 12 repeticiones con 20kg",
      machine = machine3,
+     video ="https://www.youtube.com/embed/L219ltL15zk",
+     imagen = "exercise-9"
     )
 
     db.session.add(exercise9)
@@ -234,8 +257,10 @@ def list_of_things():
     exercise10= Exercise(
      name = "Cargadas",
      time = 10,
-     detail = "5 rondas de 10 repeticiones con 20kg",
+     detail = "Para realizar las cargadas harás 5 rondas de 10 repeticiones con 20kg",
      machine = machine3,
+     video = "https://www.youtube.com/embed/G7A3kC8yoLI",
+     imagen = "exercise-10"
     )
 
     db.session.add(exercise10)
@@ -243,8 +268,10 @@ def list_of_things():
     exercise11= Exercise(
      name = "Front squat con barra",
      time = 5,
-     detail = "5 rondas de 10 front squat con peso de 20kg",
+     detail = "Lo que conocemos como sentadilla con peso. Es un gran ejercicio para trabajar el tren inferior. Para ello, realizaremos 5 rondas de 10 front squat con peso de 20kg",
      machine = machine3,
+     video = "https://www.youtube.com/embed/uYumuL_G_V0",
+     imagen = "exercise-11"
     )
 
     db.session.add(exercise11)
@@ -252,8 +279,10 @@ def list_of_things():
     exercise12= Exercise(
      name = "Back squat con barra",
      time = 5,
-     detail = "5 rondas de 10 back squat con peso de 20kg",
+     detail = "Al igual que el front squat, este ejercicio nos ayuda a fortalecer el tren inferior. Para ello, realizaremos 5 rondas de 10 back squat con peso de 20kg",
      machine = machine3,
+     video = "https://www.youtube.com/embed/QmZAiBqPvZw",
+     imagen = "exercise-12"
     )
 
     db.session.add(exercise12)
@@ -261,8 +290,10 @@ def list_of_things():
     exercise13= Exercise(
      name = "Swing de Kettlebell",
      time = 10,
-     detail = "5 rondas de 20 repeticiones (10 swing de kettlebell con cada mano)",
+     detail = "En este ejercicio trabajaremos la espalda. Pra ello realizaremos 5 rondas de 20 repeticiones (10 swing de kettlebell con cada mano)",
      machine = machine2,
+     video = "https://www.youtube.com/embed/mKDIuUbH94Q",
+     imagen = "exercise-13"
     )
 
     db.session.add(exercise13)
@@ -270,8 +301,10 @@ def list_of_things():
     exercise14= Exercise(
      name = "Abdominales",
      time = 10,
-     detail = "5 rondas de 30 abdominales",
+     detail = "Este es un clásico para trabajar el core. Realizaremos 5 rondas de 30 abdominales cada una, con un descanso de 20 segundos entre rondas",
      machine = machine6,
+     video = "https://www.youtube.com/embed/2tXQbi16EdI",
+     imagen = "exercise-14"
     )
 
     db.session.add(exercise14)
@@ -279,17 +312,20 @@ def list_of_things():
     exercise15= Exercise(
      name = "Cardio con eliptica",
      time = 10,
-     detail = "10 minutos de cardio en la eliptica",
+     detail = "Realizaremos 10 minutos de cardio en la eliptica",
      machine = machine4,
+     video = "https://www.youtube.com/embed/JgS5RLAHoBw",
+     imagen = "exercise-15"
     )
-
     db.session.add(exercise15)
 
     exercise16= Exercise(
      name = "Cardio con bicicleta",
      time = 10,
-     detail = "10 minutos de cardio en la bicicleta estatica",
+     detail = "Realizaremos 10 minutos de cardio en la bicicleta estatica",
      machine = machine5,
+     video = "https://www.youtube.com/embed/YIy3PY_fdYQ",
+     imagen = "exercise-16"
     )
 
     db.session.add(exercise16)
@@ -298,6 +334,9 @@ def list_of_things():
      name = "Aficionado",
      total_time = "20",
      discount = "5",
+     image_on = "002-sport",
+     image_off = "002-sport-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award1)
 
@@ -305,6 +344,9 @@ def list_of_things():
      name = "Primera clase completa",
      total_time = "45",
      discount = "10",
+     image_on = "013-trainers",
+     image_off = "013-trainers-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award2)
 
@@ -312,6 +354,9 @@ def list_of_things():
      name = "Anda, vamos mejorando",
      total_time = "75",
      discount = "12",
+     image_on = "020-muscle",
+     image_off = "020-muscle-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award3)
 
@@ -319,6 +364,9 @@ def list_of_things():
      name = "WOW",
      total_time = "105",
      discount = "15",
+     image_on = "022-barbell",
+     image_off = "022-barbell-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award4)
 
@@ -326,6 +374,9 @@ def list_of_things():
      name = "A mitad de lo gordo",
      total_time = "150",
      discount = "20",
+     image_on = "024-diet",
+     image_off = "024-diet-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award5)
 
@@ -333,6 +384,9 @@ def list_of_things():
      name = "Wapura",
      total_time = "200",
      discount = "25",
+     image_on = "030-agility",
+     image_off = "030-agility-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award6)
 
@@ -340,6 +394,9 @@ def list_of_things():
      name = "GYM GYM GYM",
      total_time = "250",
      discount = "30",
+     image_on = "031-calendar",
+     image_off = "031-calendar-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award7)
 
@@ -347,6 +404,9 @@ def list_of_things():
      name = "uuuuuuuh",
      total_time = "350",
      discount = "35",
+     image_on = "039-whistle",
+     image_off = "039-whistle-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award8)
 
@@ -354,6 +414,9 @@ def list_of_things():
      name = "Vigorexia",
      total_time = "900",
      discount = "50",
+     image_on = "044-stopwatch",
+     image_off = "044-stopwatch-gris",
+     qr_code = "qr_code"
     )
     db.session.add(award9)
 
@@ -362,6 +425,9 @@ def list_of_things():
      time = "135",
      difficulty = "1",
     )
+    all_exercises1 = [exercise1,exercise2,exercise3,exercise4,exercise5]
+    plan1.exercises = all_exercises1
+    
     db.session.add(plan1)
     
     plan2 = Plan(
@@ -369,6 +435,9 @@ def list_of_things():
      time = "315",
      difficulty = "3",
     )
+    all_exercises2 = [exercise1,exercise2,exercise3,exercise4,exercise5,exercise6,exercise7,exercise8,exercise9,exercise10]
+    plan2.exercises = all_exercises2
+   
     db.session.add(plan2)
 
     plan3 = Plan(
@@ -376,6 +445,9 @@ def list_of_things():
      time = "540",
      difficulty = "5",
     )
+    all_exercises3 = [exercise1,exercise2,exercise3,exercise4,exercise5,exercise6,exercise7,exercise8,exercise9,exercise10,exercise11,exercise12,exercise13,exercise14,exercise15,exercise16]
+    plan3.exercises = all_exercises3
+    
     db.session.add(plan3)
 
     stay1 = Stay(
@@ -408,14 +480,16 @@ def list_of_things():
     client = Client(
         email = "chiara@gmail.com",
         room = 606,
-        stay = stay1
+        stay = stay1,
+        total_time = 0
     )
     db.session.add(client)
 
     client2 = Client(
         email = "eliezer@gmail.com",
         room = 506,
-        stay =  stay3
+        stay =  stay3,
+        total_time = 0
     )
     db.session.add(client2)
 
@@ -423,7 +497,8 @@ def list_of_things():
         email = "almu@gmail.com",
         room = 806,
         stay =  stay2,
-        plan = plan2
+        plan = plan2,
+        total_time = 0
     )
     db.session.add(client3)
 
@@ -459,6 +534,17 @@ def get_awards():
     awards = list(map(lambda award : award.serialize(), awards))
     return jsonify(awards), 200
 
+@api.route('/booking', methods=['GET'])
+def get_all_bookings():
+    bookings = Booking.query.all()
+    bookings = list(map(lambda booking : booking.serialize(), bookings))
+    return jsonify(bookings), 200
+
+@api.route('/booking/<int:booking_id>', methods=['GET'])
+def get_booking(booking_id):
+    booking = Booking.query.get(booking_id)
+    return jsonify(booking.serialize()), 200
+
 @api.route('/plans', methods=['GET'])
 def get_plans():
     plans = Plan.query.all()
@@ -469,11 +555,6 @@ def get_plans():
 def get_one_plan(plan_id):
     plan = Plan.query.get(plan_id)
     return jsonify(plan.serialize()), 200
-
-@api.route("/exercises/<int:exercise_id>", methods=["GET"])
-def get_one_exercise(exercise_id):
-    exercise = Exercise.query.get(exercise_id)
-    return jsonify(exercise.serialize()), 200
 
 
 @api.route('/clients', methods=['GET'])
@@ -490,22 +571,140 @@ def select_a_plan():
    
     current_client_id = get_jwt_identity()
     client = Client.query.get(current_client_id)
-    print(client)
-    print(client.stay)
-    print(client.stay.plans)
-   
+       
     plan = client.stay.plans[0]
     
 
     return jsonify(plan.serialize()), 200
 
-@api.route("/plans/<int:plan_id>/exercises/<int:exercise_id>", methods=["GET"])
+@api.route('/plan-selected', methods=['GET'])
 @jwt_required()
-def get_one_exercise_from_profile(client_id, plan_id, exercise_id):
+def plan_selected():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    client.plan = client.stay.plans[0]
+    
+    print(client.plan)
+    client.save()
+    
+    return jsonify(client.plan.serialize()), 200
+ 
+@api.route('/define-customized', methods=['GET'])
+def define_customized():
 
-    #current_client_id = get_jwt_identity()
-    #client = Client.query.get(current_client_id)
-    #plan = Client.plan
+    exercises = Exercise.query.all()
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    
+    return jsonify(exercises), 200
+
+
+@api.route('/customized-exercises',  methods=["POST"])
+@jwt_required()
+def customized_exercises():
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    json= request.get_json()
+    exercises = json.get("exercises", None)
+    print(exercises)
+    plan = Plan(
+        name= "customize"
+    )
+    
+    client.plan = plan 
+    
+
+    custom_exercises = []
+
+    for id in exercises: 
+        exercise = Exercise.query.get(id)
+        custom_exercises.append(exercise) 
+
+    client.plan.exercises = custom_exercises
+   
+   
+    custom_exercises = list(map(lambda custom_exercise : custom_exercise.serialize(), custom_exercises))
+    client.save()    
+
+    return jsonify(custom_exercises),200 
+
+@api.route('/customize-selected', methods=['GET'])
+@jwt_required()
+def customize_selected():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    plan = client.plan
+    
+    print(client.plan)
+    client.save()
+    
+    return jsonify(client.plan.serialize()), 200
+
+@api.route('/profile', methods=['GET'])
+@jwt_required()
+def profile():
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    exercises = client.plan.exercises 
+    plan = client.plan
+    
+    print(client.plan)
+   
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+    print(exercises)
+
+    return jsonify({"exercises":exercises, "plan":plan.serialize()}), 200
+
+@api.route("/exercises/<int:exercise_id>", methods=["GET"])
+def get_one_exercise_from_profile(exercise_id):
+     
     exercise = Exercise.query.get(exercise_id)
    
     return jsonify(exercise.serialize()), 200
+
+@api.route("/plans/<int:plan_id>/exercises", methods=["GET"])
+@jwt_required()
+def get_exercises_from_profile(plan_id):
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    exercises = client.plan.exercises
+    print(client.plan)
+    print(client.plan.exercises)
+    exercises = list(map(lambda exercise : exercise.serialize(), exercises))
+   
+    return jsonify(exercises), 200
+
+@api.route("/client-time", methods=["POST"])
+@jwt_required()
+def send_time():
+
+    json= request.get_json()
+    time = json.get("total_time", None)
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    print(client)
+        
+    client.total_time += time
+
+    client.save()
+
+    return jsonify({}), 200
+
+@api.route("/get-client-time", methods=["GET"])
+@jwt_required()
+def get_client_time():
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+    
+    total_time = client.total_time
+    print(total_time)
+
+    return jsonify(total_time), 200
