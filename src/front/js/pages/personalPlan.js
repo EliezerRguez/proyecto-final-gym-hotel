@@ -2,10 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
-import "../../styles/home.scss";
-import { Plans } from "./plans";
+import Card from "react-bootstrap/Card";
+import "../../styles/plan.scss";
 
 export const PersonalPlan = () => {
 	const { store, actions } = useContext(Context);
@@ -32,22 +31,24 @@ export const PersonalPlan = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1>PERSONAL PLAN</h1>
-			{exercises.map(exercise => {
-				return (
-					<Accordion defaultActiveKey="0" key={exercise.id}>
-						<Accordion.Item eventKey="0">
-							<Accordion.Header>Ejercicio: {exercise.name} </Accordion.Header>
-							<Accordion.Body>
-								<p>Tiempo total de ejecución: {exercise.time} </p>
-								<Link to={`/plan/${params.id}/exercises/${exercise.id}`}>
-									<Button variant="outline-dark">Apptivate!</Button>
-								</Link>
-							</Accordion.Body>
-						</Accordion.Item>
-					</Accordion>
-				);
-			})}
+			<h1>Tu plan de trabajo</h1>
+			<div className="carouselCards">
+				{exercises.map(exercise => {
+					return (
+						<Card className="personal-plan" key={exercise.id}>
+							<Card.Body>
+								<Card.Text>
+									Ejercicio: {exercise.name}
+									<p>Tiempo total de ejecución: {exercise.time} minutos </p>
+									<Link to={`/plan/${params.id}/exercises/${exercise.id}`}>
+										<Button variant="outline-dark">Apptivate!</Button>
+									</Link>
+								</Card.Text>
+							</Card.Body>
+						</Card>
+					);
+				})}
+			</div>
 			;
 		</div>
 	);
