@@ -58,11 +58,17 @@ export const Exercise = () => {
 
 		console.log(exercisesInPlan, "QUE MIERDA DE ARRAY ES ESE");
 		let position = findPosition(exercisesInPlan, exercise.id);
+
 		console.log(position, "position");
+
 		let nextPositionExercise = position + 1;
 		console.log(exercisesInPlan[nextPositionExercise]);
-		setNext_exercise_id(exercisesInPlan[nextPositionExercise].id);
-		return exercisesInPlan[nextPositionExercise];
+		if (exercisesInPlan[nextPositionExercise] === undefined) {
+			return;
+		} else setNext_exercise_id(exercisesInPlan[nextPositionExercise].id);
+		{
+			return exercisesInPlan[nextPositionExercise];
+		}
 	}
 
 	function findPosition(array, exercise_id) {

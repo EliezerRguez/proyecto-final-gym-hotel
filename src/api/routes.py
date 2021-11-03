@@ -60,7 +60,13 @@ def register_personaldata():
     return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise}), 200
       
 @api.route("/create-booking", methods=["POST"])
+@jwt_required()
 def create_booking():
+
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+
     
     json= request.get_json()
     day = json.get("day", None)
