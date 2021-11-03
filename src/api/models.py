@@ -170,6 +170,7 @@ class Exercise(db.Model):
         nullable=False)
     machine = db.relationship('Machine', backref='exercises', lazy=True)
     video = db.Column(db.String(120), unique=False, nullable=False)
+    imagen = db.Column(db.String(120), unique=False, nullable=False)
     
     def __repr__(self):
         return '<Exercise %r>' % self.name
@@ -181,7 +182,8 @@ class Exercise(db.Model):
             "time": self.time,
             "detail": self.detail,
             "machine_id": self.machine_id,
-            "video": self.video
+            "video": self.video,
+            "imagen": self.imagen
             
         }
 
