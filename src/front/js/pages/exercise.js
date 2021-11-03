@@ -76,7 +76,7 @@ export const Exercise = () => {
 				<span>Ejercicio {exercise.id}</span>
 				<h1>{exercise.name}</h1>
 				<Row>
-					<Col xs={12} className="mb-4">
+					<Col xs={12} className="mb-4 p-0">
 						<iframe
 							width="100%"
 							height="100%"
@@ -87,12 +87,10 @@ export const Exercise = () => {
 				</Row>
 				<Row>
 					<Col xs={12} className="mb-4 tiempo-ejercicio">
-						<span>
+						<p>
 							<span className="fw-bold">Duración del ejercicio:</span> {exercise.time} minutos
-						</span>
-					</Col>
-					<Col xs={12} className="mb-4 detalles-ejercicio">
-						<span>{exercise.detail}</span>
+						</p>
+						<p>{exercise.detail}</p>
 					</Col>
 				</Row>
 				<Row>
@@ -101,13 +99,15 @@ export const Exercise = () => {
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={6} className="text-center my-4">
-						<Button variant="outline-primary">
-							<Link to={`/plan/${params.id_plan}/exercises`}>List of exercises</Link>
+					<Col xs={6} className="text-center my-4 boton-lista">
+						<Button>
+							<Link to={`/plan/${params.id_plan}/exercises`}>Lista</Link>
 						</Button>
 					</Col>
-					<Col xs={6} className="text-center my-4">
-						<Link to={`/plan/${params.id_plan}/exercises/${next_exercise_id}`}>Next exercise</Link>
+					<Col xs={6} className="text-center my-4 boton-next">
+						<Button>
+							<Link to={`/plan/${params.id_plan}/exercises/${next_exercise_id}`}>Siguiente</Link>
+						</Button>
 					</Col>
 				</Row>
 			</Container>

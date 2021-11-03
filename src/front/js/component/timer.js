@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
-
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 const Time = () => {
 	const [timer, setTimer] = useState(0);
 	const [isActive, setIsActive] = useState(false);
 	const [isPaused, setIsPaused] = useState(true);
-	const [pulse, setPulse] = useState("");
 	const increment = useRef(null);
 
 	const handleStart = () => {
@@ -13,13 +13,11 @@ const Time = () => {
 		increment.current = setInterval(() => {
 			setTimer(timer => timer + 1);
 		}, 1000);
-		setPulse("blob red");
 	};
 
 	const handleStop = () => {
 		clearInterval(increment.current);
 		setIsPaused(true);
-		setPulse("");
 	};
 
 	async function saveTime(event) {
@@ -56,18 +54,20 @@ const Time = () => {
 
 	return (
 		<div>
-			<div className={`text-center timer ${pulse}`}>
-				<p>{formatTime()}</p>
-			</div>
-			<div className="buttons">
-				{!isActive && isPaused ? (
-					<button onClick={handleStart}>Start</button>
-				) : !isPaused ? (
-					<button onClick={handleStop}>Stop</button>
-				) : (
-					<button onClick={saveTime}>Save time</button>
-				)}
-			</div>
+			<Row className="timer-area">
+				<Col xs={7} className="timer">
+					<p>{formatTime()}</p>
+				</Col>
+				<Col xs={5} className="buttons">
+					{!isActive && isPaused ? (
+						<button onClick={handleStart}>Start</button>
+					) : !isPaused ? (
+						<button onClick={handleStop}>Stop</button>
+					) : (
+						<button onClick={saveTime}>Save time</button>
+					)}
+				</Col>
+			</Row>
 		</div>
 	);
 };
