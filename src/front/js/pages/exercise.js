@@ -58,6 +58,9 @@ export const Exercise = () => {
 		console.log(exercisesInPlan, "QUE MIERDA DE ARRAY ES ESE");
 		let position = findPosition(exercisesInPlan, exercise.id);
 		console.log(position, "position");
+		if (exercise.id <= exercisesInPlan.length) {
+			return;
+		}
 		let nextPositionExercise = position + 1;
 		console.log(exercisesInPlan[nextPositionExercise]);
 		setNext_exercise_id(exercisesInPlan[nextPositionExercise].id);
