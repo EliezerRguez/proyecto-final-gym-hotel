@@ -113,20 +113,11 @@ export const Profile = () => {
 					</Card.Title>
 				</Card.Body>
 			</Card>
-			<Card className="mb-4 time-profile">
+			<Card className="mb-4 time-profile text-center">
 				<Card.Body>
-					<Row>
-						<Col>
-							<span>
-								<span className="fw-bold">Tiempo total:</span> {formatTime()}
-							</span>
-						</Col>
-						<Col>
-							<Link to="/time">
-								<Button className="boton-profile">Saber más</Button>
-							</Link>
-						</Col>
-					</Row>
+					<span>
+						<span className="fw-bold">Tiempo total:</span> {formatTime()}
+					</span>
 				</Card.Body>
 			</Card>
 			<Row className="mb-4">
@@ -138,7 +129,7 @@ export const Profile = () => {
 								return (
 									<Col xs={4} md={1} key={award.id}>
 										<Image
-											src={require(`../../img/${award.image_on}.png`)}
+											src={require(`../../img/icon/${award.image_on}.png`)}
 											width="75"
 											onClick={handleShow}
 											className="mb-3"
@@ -149,7 +140,7 @@ export const Profile = () => {
 								return (
 									<Col xs={4} md={1} key={award.id}>
 										<Image
-											src={require(`../../img/${award.image_off}.png`)}
+											src={require(`../../img/icon/${award.image_off}.png`)}
 											width="75"
 											className="mb-3"
 										/>

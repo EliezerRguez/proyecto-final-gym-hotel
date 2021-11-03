@@ -30,18 +30,23 @@ export const PersonalPlan = () => {
 	}, []);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Tu plan de trabajo</h1>
+		<div className="mt-5">
+			<h1 className="text-center">Tu plan de trabajo</h1>
 			<div className="carouselCards">
 				{exercises.map(exercise => {
 					return (
 						<Card className="personal-plan" key={exercise.id}>
+							<Card.Img src={require(`../../img/exercises/${exercise.imagen}.jpg`)} />
 							<Card.Body>
 								<Card.Text>
-									Ejercicio: {exercise.name}
-									<p>Tiempo total de ejecución: {exercise.time} minutos </p>
+									<span className="exercise-title text-light fw-bold">{exercise.name}</span>
+									<span className="exercise-text">
+										<span className="exercise-subtitle fw-bold">Tiempo total de ejecución: </span>
+										<br></br>
+										{exercise.time} minutos{" "}
+									</span>
 									<Link to={`/plan/${params.id}/exercises/${exercise.id}`}>
-										<Button variant="outline-dark">Apptivate!</Button>
+										<Button className="w-100 boton-ejercicio fw-bold">Apptivate!</Button>
 									</Link>
 								</Card.Text>
 							</Card.Body>
@@ -49,7 +54,6 @@ export const PersonalPlan = () => {
 					);
 				})}
 			</div>
-			;
 		</div>
 	);
 };
