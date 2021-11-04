@@ -658,6 +658,7 @@ def profile():
     exercises = client.plan.exercises 
     plan = client.plan
     
+    
     print(client.plan)
    
     exercises = list(map(lambda exercise : exercise.serialize(), exercises))
