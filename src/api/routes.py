@@ -12,15 +12,6 @@ app = Flask(__name__)
 app.config["JWT_SECRET_KEY"] = "superequipo-actimel-gimnasiohotel-apptivate"  
 jwt = JWTManager(app)
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend"
-    }
-
-    return jsonify(response_body), 200
-
 @api.route("/login", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
