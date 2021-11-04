@@ -39,7 +39,7 @@ export const PersonalData = () => {
 		console.log(response);
 		const responseJson = await response.json();
 		setData(responseJson);
-		history.push("/homepage");
+		history.push("/plans");
 	}
 
 	useEffect(() => {

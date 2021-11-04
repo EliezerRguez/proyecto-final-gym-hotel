@@ -79,9 +79,6 @@ export const Profile = () => {
 		return `${getHours} : ${getMinutes} : ${getSeconds}`;
 	};
 
-	//REALIZAR FECTH DE LOS DATOS DE USUARIO CON EL PLAN ELEGIDO PARA COGER LOS DATOS DEL PLAN
-	//REALIZAR FECHT DEL PLAN ELEGIDO
-	//crear if award.time >= time.total_time mostrar imagen a color
 	return (
 		<div className="container p-4">
 			<div key={plan.id}>
