@@ -1,10 +1,52 @@
 .boton-hours {
-    padding: 1%;
+    padding: 4%;
     margin: 1%;
     background: none;
-    color: blue;
+    color: #75c3ff;
+    border:2px solid #75c3ff;
+    font-size: 12px;
+    font-weight: bold;
 }
+
+.boton-hours:focus {
+    background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1)!important;
+    border:none
+}
+
 .book {
-    margin-top: 3%;
-    float: right;
+    width:100%;
+    background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1)!important;
+    border:none;
+    border-radius: 6px;
+    margin-top: 15px;
+
 }
+
+.calendar {
+    margin: 20px!important;
+}
+
+.react-calendar {border-radius: 12px
+    ;border:none!important;
+    box-shadow: 5px 10px 20px #ccc;
+font-size: 14px;}
+
+.react-calendar__tile--active {
+    background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1)!important;
+    color: white;
+    border-radius: 6px}
+
+.card-hours {margin:20px;
+    border-radius: 12px
+    ;border:none!important;
+    box-shadow: 5px 10px 20px #ccc;
+font-size: 14px;}

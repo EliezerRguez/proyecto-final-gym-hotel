@@ -40,7 +40,7 @@ export const Login = () => {
 		actions.setClientToken(data.token);
 
 		if (data.client_gender !== null) {
-			history.push("/homepage");
+			history.push("/plans");
 		} else {
 			history.push("/personal-data");
 		}

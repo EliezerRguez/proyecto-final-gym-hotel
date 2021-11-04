@@ -116,9 +116,6 @@ export const Profile = () => {
 		return `${getHours} : ${getMinutes} : ${getSeconds}`;
 	};
 
-	//REALIZAR FECTH DE LOS DATOS DE USUARIO CON EL PLAN ELEGIDO PARA COGER LOS DATOS DEL PLAN
-	//REALIZAR FECHT DEL PLAN ELEGIDO
-	//crear if award.time >= time.total_time mostrar imagen a color
 	return (
 		<div className="container p-4">
 			<div key={plan.id}>
@@ -160,20 +157,11 @@ export const Profile = () => {
 					</Card.Title>
 				</Card.Body>
 			</Card>
-			<Card className="mb-4 time-profile">
+			<Card className="mb-4 time-profile text-center">
 				<Card.Body>
-					<Row>
-						<Col>
-							<span>
-								<span className="fw-bold">Tiempo total:</span> {formatTime()}
-							</span>
-						</Col>
-						<Col>
-							<Link to="/time">
-								<Button className="boton-profile">Saber más</Button>
-							</Link>
-						</Col>
-					</Row>
+					<span>
+						<span className="fw-bold">Tiempo total:</span> {formatTime()}
+					</span>
 				</Card.Body>
 			</Card>
 			<Row className="mb-4">
@@ -185,7 +173,7 @@ export const Profile = () => {
 								return (
 									<Col xs={4} md={1} key={award.id}>
 										<Image
-											src={require(`../../img/${award.image_on}.png`)}
+											src={require(`../../img/icon/${award.image_on}.png`)}
 											width="75"
 											onClick={handleShow}
 											className="mb-3"
@@ -196,28 +184,20 @@ export const Profile = () => {
 								return (
 									<Col xs={4} md={1} key={award.id}>
 										<Image
-											src={require(`../../img/${award.image_off}.png`)}
+											src={require(`../../img/icon/${award.image_off}.png`)}
 											width="75"
 											className="mb-3"
 										/>
 									</Col>
 								);
 							}
+							<Modal show={show} onHide={handleClose}>
+								<Modal.Body>
+									{award.name}
+									<Image width="100%" src={require(`../../img/qr_code.png`)}></Image>
+								</Modal.Body>
+							</Modal>;
 						})}
-						<Modal show={show} onHide={handleClose}>
-							<Modal.Header closeButton>
-								<Modal.Title>Código descuento</Modal.Title>
-							</Modal.Header>
-							<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
-							<Modal.Footer>
-								<Button variant="secondary" onClick={handleClose}>
-									Close
-								</Button>
-								<Button variant="primary" onClick={handleClose}>
-									Save Changes
-								</Button>
-							</Modal.Footer>
-						</Modal>
 					</Row>
 				</Container>
 			</Row>

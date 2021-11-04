@@ -12,15 +12,6 @@ app = Flask(__name__)
 app.config["JWT_SECRET_KEY"] = "superequipo-actimel-gimnasiohotel-apptivate"  
 jwt = JWTManager(app)
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend"
-    }
-
-    return jsonify(response_body), 200
-
 @api.route("/login", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
@@ -60,7 +51,13 @@ def register_personaldata():
     return jsonify({"gender": client.gender, "weight": client.weight, "height":client.height, "weekly_exercise": client.weekly_exercise}), 200
       
 @api.route("/create-booking", methods=["POST"])
+@jwt_required()
 def create_booking():
+
+
+    current_client_id = get_jwt_identity()
+    client = Client.query.get(current_client_id)
+
     
     json= request.get_json()
     day = json.get("day", None)
@@ -651,6 +648,7 @@ def profile():
     
     exercises = client.plan.exercises 
     plan = client.plan
+    
     
     print(client.plan)
    
