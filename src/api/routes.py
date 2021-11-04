@@ -657,6 +657,20 @@ def profile():
 
     return jsonify({"exercises":exercises, "plan":plan.serialize()}), 200
 
+@api.route('/bookings/<int:booking_id>', methods=['DELETE'])
+@jwt_required()
+def delete_bookings(booking_id):
+    try: 
+        booking_to_delete = Booking.query.get(booking_id)
+        print(booking_to_delete.serialize())
+        db.session.delete(booking_to_delete)
+        db.session.commit()
+        return jsonify(booking_id), 200
+    except Exception as error:
+        print(error)
+        return jsonify("internal server error"), 500
+
+
 @api.route("/exercises/<int:exercise_id>", methods=["GET"])
 def get_one_exercise_from_profile(exercise_id):
      
