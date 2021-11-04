@@ -24,7 +24,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endCo
 */height:150px;
 position: relative;
 
-border-radius: 12px 12px 12px 12px;
+border-radius: 12px;
 border: none;
 box-shadow: 5px 10px 20px #ccc;
 }
@@ -44,3 +44,8 @@ box-shadow: 5px 10px 20px #ccc;
 
 .faldon-perfil h2, .faldon-info h2, .faldon-plan h2, .faldon-award h2 {padding-top:10px;font-weight: 700;}
 
+.contenedor-insignias {border-radius: 12px;
+    border: none;
+    box-shadow: 5px 10px 20px #ccc;padding:15px}
+
+.insignias-texto {font-size: 13px;}

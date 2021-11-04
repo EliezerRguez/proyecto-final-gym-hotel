@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import "../../styles/home.scss";
+import "../../styles/chooseplan.scss";
 
 export const Plans = () => {
 	const [plans, setPlans] = useState([]);
@@ -26,28 +27,52 @@ export const Plans = () => {
 		getPlan();
 	}, []);
 	return (
-		<div className="container">
-			<h1>PLAN</h1>
-
-			<div className="row flex-nowrap ">
-				<Card className="m-4">
-					<h5>{plans.id}</h5>
-					<h5>{plans.name}</h5>
-					<h5> Tiempo total de ejecución: {plans.time}</h5>
-					<h5> Nivel de dificultad: {plans.difficulty}</h5>
-					<Link to="/PlanConfirmation">Elegir este plan</Link>
-				</Card>
-			</div>
-			<> </>
-			<div className="row flex-nowrap ">
-				<Card className="m-4">
-					<Card.Img variant="top" src="holder.js/100px180" />
-					Imagen de perfil persona
+		<div className="container p-4">
+			<h1>Escoge tu plan </h1>
+			<div className="carouselCards-plan">
+				<Card className="plan-hotel">
+					<Card.Img src={require(`../../img/imagen-customize.jpg`)} />
 					<Card.Body>
 						<Card.Text>
+							<span className="exercise-title text-light fw-bold">{plans.name}</span>
+							<span className="exercise-text">
+								<span className="mb-3">
+									<span className="fw-bold"> Tiempo total de ejecución:</span>
+									<br></br> {plans.time} minutos
+								</span>
+								<br></br>
+								<span>
+									<span className="fw-bold">Nivel de dificultad:</span> {plans.difficulty}
+								</span>
+							</span>
+							<Link to="/PlanConfirmation">
+								<Button className="w-100 boton-ejercicio" size="lg">
+									Elige este plan
+								</Button>
+							</Link>
+						</Card.Text>
+					</Card.Body>
+				</Card>
+				<Card className="plan-hotel">
+					<Card.Img src={require(`../../img/imagen-customize.jpg`)} />
+					<Card.Body>
+						<Card.Text>
+							<span className="exercise-title text-light fw-bold">
+								Tú eliges que ejercicio quieres hacer
+							</span>
+							<span className="exercise-text">
+								<span className="mb-3">
+									<span className="fw-bold"> Tiempo total de ejecución:</span>
+									<br></br> Depende de ti
+								</span>
+								<br></br>
+								<span>
+									<span className="fw-bold">Nivel de dificultad:</span> Depende
+								</span>
+							</span>
 							<Link to="/customize">
-								<Button className="mt-5" size="lg">
-									PLAN CUSTOMIZE
+								<Button className="w-100 boton-ejercicio" size="lg">
+									Elige este plan
 								</Button>
 							</Link>
 						</Card.Text>

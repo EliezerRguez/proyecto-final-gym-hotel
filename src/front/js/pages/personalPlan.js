@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import "../../styles/plan.scss";
+import "../../styles/plan-ejercicios.scss";
 
 export const PersonalPlan = () => {
 	const { store, actions } = useContext(Context);

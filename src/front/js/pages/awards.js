@@ -21,19 +21,32 @@ export const Awards = () => {
 	}, []);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>INSIGNIAS</h1>
+		<div className="p-4">
+			<h1 className="text-center my-3">INSIGNIAS</h1>
 			<Container>
-				<Row>
+				<Row className="text-center">
 					{awards.map(award => {
 						return (
 							<Col xs={4} md={4} key={award.id}>
-								<Image src={require(`../../img/icon/${award.image_on}.png`)} width="75" />
-								<p>{award.name}</p>
-								<p>{award.discount}</p>
+								<Image
+									src={require(`../../img/icon/${award.image_on}.png`)}
+									width="50"
+									className="mb-3"
+								/>
 							</Col>
 						);
 					})}
+				</Row>
+				<Row className="contenedor-insignias">
+					<Col>
+						<p className="insignias-texto">
+							Estos son algunas de las insignias que puedes ganar con tus entrenamientos, pero... ¿qué es
+							una insignia? Para recompensar tu esfuerzo y dedicación hemos creado un sistema de
+							recompensa para que puedas obtener beneficios en el hotel por hacer uso del gym. Cada
+							insignia contiene un código único con un regalo diferente, desde descuentos en la tienda de
+							souvenirs, hasta descuento en nuestro restaurante. No lo dudes y consiguelas todas.
+						</p>
+					</Col>
 				</Row>
 			</Container>
 		</div>
