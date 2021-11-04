@@ -10,7 +10,7 @@ export const Info = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1>INFORMACION</h1>
+			<h1>INFORMACIÓN</h1>
 			<br />
 
 			<Card className="mx-4 covid-protocol">

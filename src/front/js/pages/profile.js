@@ -147,21 +147,13 @@ export const Profile = () => {
 									</Col>
 								);
 							}
+							<Modal show={show} onHide={handleClose}>
+								<Modal.Body>
+									{award.name}
+									<Image width="100%" src={require(`../../img/qr_code.png`)}></Image>
+								</Modal.Body>
+							</Modal>;
 						})}
-						<Modal show={show} onHide={handleClose}>
-							<Modal.Header closeButton>
-								<Modal.Title>Cógigo descuento</Modal.Title>
-							</Modal.Header>
-							<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
-							<Modal.Footer>
-								<Button variant="secondary" onClick={handleClose}>
-									Close
-								</Button>
-								<Button variant="primary" onClick={handleClose}>
-									Save Changes
-								</Button>
-							</Modal.Footer>
-						</Modal>
 					</Row>
 				</Container>
 			</Row>
