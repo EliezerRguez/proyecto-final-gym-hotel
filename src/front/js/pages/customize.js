@@ -49,44 +49,40 @@ export const Customize = () => {
 	}
 
 	return (
-		<div className="text-center mt-5">
-			<h1>CUSTOMIZE</h1>
-			<Link to="/booking">Book</Link>
-			{exercises.map(exercise => {
-				return (
-					<div className="text-center mt-5 container" key={exercise.id}>
-						<Card className="mt-2">
-							<Card.Header className="text-start" as="h5">
-								{exercise.name}
-							</Card.Header>
-							<Row>
-								<Card.Body>
-									<div className="info-plan">
-										{exercise.detail}
-										{exercise.time}
-										<div className="info-check">
-											<Col sm={2}>
-												<Form.Check
-													onChange={() => {
-														actions.addExercises(exercise.id);
-													}}
-													className="inline"
-													aria-label="option 1"
-													value="ok"
-												/>
-											</Col>
-										</div>
-									</div>
-								</Card.Body>
-							</Row>
+		<div className="p-4">
+			<h1>Elige tus ejercicios</h1>
+			<div className="carouselCards">
+				{exercises.map(exercise => {
+					return (
+						<Card className="personal-plan" key={exercise.id}>
+							<Card.Img src={require(`../../img/exercises/${exercise.imagen}.jpg`)} />
+							<Card.Body>
+								<Card.Text>
+									<span className="exercise-title text-light fw-bold">{exercise.name}</span>
+									<span className="exercise-text">
+										<span className="exercise-subtitle fw-bold">Tiempo total de ejecución: </span>
+										<br></br>
+										{exercise.time} minutos{" "}
+									</span>
+									<Form.Check
+										onChange={() => {
+											actions.addExercises(exercise.id);
+										}}
+										className="inline"
+										aria-label="option 1"
+										value="ok"
+									/>
+								</Card.Text>
+							</Card.Body>
 						</Card>
-					</div>
-				);
-			})}
+					);
+				})}
+			</div>
 			<Link to="/profile">
-				<Button onClick={SaveIt}>Add exercises to my plan</Button>
+				<Button className="w-100 boton-ejercicio fw-bold mt-4" onClick={SaveIt}>
+					Añade los ejercicios a mi plan
+				</Button>
 			</Link>
-			; ;
 		</div>
 	);
 };

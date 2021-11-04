@@ -6,7 +6,7 @@
     box-shadow: 5px 10px 20px #ccc;
     padding:15px}
 
-.boton-lista button{
+.boton-lista button, .boton-next:hover button{
     background: #75c3ff;
     padding:10px 50px;
     border: none;
@@ -14,7 +14,7 @@
     box-shadow: 5px 10px 30px #ccc;
 }
 
-.boton-next button{
+.boton-next button, .boton-lista:hover button{
     background: 
     #45c6c8
     ;
@@ -43,7 +43,7 @@
     p{font-size: 25px;margin:0} }
     
   
-  .buttons button {border-radius: 12px;
+  .buttons button, .buttons:hover button {border-radius: 12px;
     border:3px solid #fff;
     background: transparent;
     color:#fff;padding:10px;float: right;

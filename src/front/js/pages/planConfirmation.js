@@ -26,19 +26,22 @@ export const PlanConfirmation = () => {
 		getConfirmPlan();
 	}, []);
 	return (
-		<div className="container">
-			<h1>PLAN</h1>
+		<div className="container p-4">
+			<h5> Has seleccionado: </h5>
 
-			<div className="row flex-nowrap ">
-				<Card className="m-4">
-					<h5> Has seleccionado el plan: </h5>
-					<h5>{myplan.id}</h5>
-					<h5>{myplan.name}</h5>
-
-					<h5> A entrenar! </h5>
-					<Link to="/booking">Reserva tu entrenamiento</Link>
-				</Card>
-			</div>
+			<Card className="plan-hotel">
+				<Card.Img src={require(`../../img/imagen-customize.jpg`)} />
+				<Card.Body>
+					<Card.Text>
+						<span className="exercise-title-confirmation text-light fw-bold">{myplan.name}</span>
+						<Link to="/booking">
+							<Button className="w-100 boton-ejercicio-confirmar" size="lg">
+								Reserva tu entrenamiento
+							</Button>
+						</Link>
+					</Card.Text>
+				</Card.Body>
+			</Card>
 		</div>
 	);
 };

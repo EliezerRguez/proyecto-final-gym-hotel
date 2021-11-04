@@ -7,3 +7,21 @@
     margin: 10px;
     width: auto;
 }
+
+div.customize, .customize { border-radius:12px;
+    border:none;
+    box-shadow: 5px 10px 20px #ccc;}
+
+.customize-title {border-radius:12px;background-color: #75c3ff; color:#fff}
+
+.customize-text {font-size:13px;padding: 5px 15px 5px 5px;}
+
+.form-check-input:checked {
+    background-color: #75c3ff;
+    border-color: #75c3ff;
+}
+
+.form-check-input {
+    width: 2em;
+    height: 2em
+;}

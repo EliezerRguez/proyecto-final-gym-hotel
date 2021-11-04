@@ -1,0 +1,45 @@
+.carouselCards-plan {
+    display: flex;
+    padding: 25px;
+    width: 100%;
+    overflow: auto;
+
+}
+
+.plan-hotel {min-width:90%;
+    margin-right: 15px;
+     position: relative;
+     border-radius: 12px;
+     border:none;
+     box-shadow: 5px 10px 20px #ccc;}
+
+.card-img {border-radius: 12px 12px 0 0;}
+
+.plan-hotel .exercise-title {
+    position: absolute;
+    top: 34%;
+    left: 13px;
+    font-size: 15px;
+}
+
+.plan-hotel .exercise-title-confirmation {position: absolute;
+    top: 48%;
+    left: 13px;
+    font-size: 15px;
+}
+
+.plan-hotel .exercise-subtitle, .plan-hotel .exercise-text {font-size: 13px;}
+
+.boton-ejercicio {
+    background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+    background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+    background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1); color:#fff;border-radius: 6px;border:none;
+
+}
+
+.boton-ejercicio-confirmar {background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+    background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+    background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1); color:#fff;border-radius: 6px;border:none;
+font-size:14px}
