@@ -35,4 +35,11 @@ ul {padding:0;list-style: none;}
 .time-profile {background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
     background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
     background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1); color:#fff;border-radius: 12px 12px 12px 12px;border:none;box-shadow: 5px 10px 20px #ccc;}
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1);
+     color:#fff;
+     border-radius: 12px 12px 12px 12px;
+     border:none;
+     box-shadow: 5px 10px 20px #ccc;
+    }
+
+    .modal-body {padding:60px}

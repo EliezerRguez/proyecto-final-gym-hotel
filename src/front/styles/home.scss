@@ -40,9 +40,11 @@ box-shadow: 5px 10px 20px #ccc;
     color:#fff
 }
 
-.faldon-award h2 {font-size: 16px;}
+.faldon-award span {font-size: 16px;}
 
-.faldon-perfil h2, .faldon-info h2, .faldon-plan h2, .faldon-award h2 {padding-top:10px;font-weight: 700;}
+.faldon-perfil span, .faldon-info span, .faldon-plan span, .faldon-award span {padding-top:10px;font-weight: 700;}
+
+.faldon-perfil span, .faldon-info span, .faldon-plan span{font-size: 30px}
 
 .contenedor-insignias {border-radius: 12px;
     border: none;

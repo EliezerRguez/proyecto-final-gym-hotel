@@ -77,7 +77,7 @@ export const Booking = () => {
 
 	console.log(date);
 	return (
-		<div className="text-center mt-3">
+		<div className="text-center pt-4">
 			<h1>BOOKING</h1>
 			<div>
 				<Calendar value={date} onChange={NewDate} className="calendar" />

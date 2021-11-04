@@ -11,7 +11,7 @@ export const Inicio = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="p-4 inicio text-center">
+		<div className="p-4 pt-5 inicio h-100 text-center">
 			<Row>
 				<Col xs={12} sm={6}>
 					<Image src={require(`../../img/imagen-gym-inicio.png`)} width="90%" />

@@ -78,7 +78,7 @@ export const Customize = () => {
 					);
 				})}
 			</div>
-			<Link to="/profile">
+			<Link to="/booking">
 				<Button className="w-100 boton-ejercicio fw-bold mt-4" onClick={SaveIt}>
 					Añade los ejercicios a mi plan
 				</Button>

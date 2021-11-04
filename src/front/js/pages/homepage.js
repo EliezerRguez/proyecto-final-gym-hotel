@@ -14,7 +14,7 @@ export const Homepage = () => {
 					<Card className="perfil">
 						<Card.Body>
 							<Card.Text className="faldon-perfil">
-								<h2>Perfil</h2>
+								<span>Perfil</span>
 							</Card.Text>
 						</Card.Body>
 					</Card>
@@ -24,7 +24,7 @@ export const Homepage = () => {
 					<Card className="info">
 						<Card.Body>
 							<Card.Text className="faldon-perfil">
-								<h2>Gimnasio</h2>
+								<span>Gimnasio</span>
 							</Card.Text>
 						</Card.Body>
 					</Card>
@@ -34,7 +34,7 @@ export const Homepage = () => {
 					<Card className="plan">
 						<Card.Body>
 							<Card.Text className="faldon-plan">
-								<h2>Plan</h2>
+								<span>Plan</span>
 							</Card.Text>
 						</Card.Body>
 					</Card>
@@ -44,7 +44,7 @@ export const Homepage = () => {
 					<Card className="award text-center">
 						<Card.Body>
 							<Card.Text className="faldon-award">
-								<h2>Programa de insignias</h2>
+								<span>Programa de insignias</span>
 							</Card.Text>
 						</Card.Body>
 					</Card>

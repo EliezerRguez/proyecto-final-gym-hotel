@@ -191,14 +191,13 @@ export const Profile = () => {
 									</Col>
 								);
 							}
-							<Modal show={show} onHide={handleClose}>
-								<Modal.Body>
-									{award.name}
-									<Image width="100%" src={require(`../../img/qr_code.png`)}></Image>
-								</Modal.Body>
-							</Modal>;
 						})}
 					</Row>
+					<Modal show={show} onHide={handleClose}>
+						<Modal.Body>
+							<Image width="100%" src={require(`../../img/qr_code.png`)}></Image>
+						</Modal.Body>
+					</Modal>
 				</Container>
 			</Row>
 		</div>
