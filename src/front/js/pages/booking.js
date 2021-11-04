@@ -22,6 +22,20 @@ export const Booking = () => {
 	const token = localStorage.getItem("jwt-token");
 	let history = useHistory();
 
+	function selectBooking(yearSelected, monthSelected, daySelected) {
+		let actualDate = new Date();
+		let actualYear = actualDate.getFullYear();
+		let actualMonth = actualDate.getMonth() + 1;
+		let actualDay = actualDate.getDate();
+		if (yearSelected >= actualYear) {
+			if (monthSelected >= actualMonth) {
+				if (daySelected > actualDay) {
+					setShowModal(true);
+				}
+			}
+		}
+	}
+
 	async function createBooking() {
 		const response = await fetch(process.env.BACKEND_URL + "/api/create-booking", {
 			method: "POST",
@@ -45,10 +59,10 @@ export const Booking = () => {
 	}
 
 	const NewDate = date => {
-		setShowModal(true);
 		setYear(date.getFullYear());
 		setMonth(date.getMonth());
 		setDay(date.getDate());
+		selectBooking(date.getFullYear(), date.getMonth() + 1, date.getDate());
 		console.log("!!!", { date });
 	};
 

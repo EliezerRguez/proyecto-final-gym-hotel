@@ -29,10 +29,10 @@ export const Profile = () => {
 				Authorization: "Bearer " + token
 			}
 		});
-		console.log(response, "mira esto tb");
+		//console.log(response, "mira esto tb");
 		const responseJson = await response.json();
 		setPlan(responseJson.plan);
-		console.log(responseJson.plan, "mira aqui");
+		//console.log(responseJson.plan, "mira aqui");
 	}
 
 	async function getAward() {
@@ -61,6 +61,43 @@ export const Profile = () => {
 		});
 		const responseJson = await response.json();
 		setBookings(responseJson);
+	}
+
+	function getBookingDate({ year, month, day, hour, minutes }) {
+		return new Date(year, month - 1, day, hour, minutes);
+	}
+
+	function bookingSorter(a, b) {
+		return getBookingDate(a) - getBookingDate(b);
+	}
+
+	function formatBooking(booking) {
+		return getBookingDate(booking).toLocaleString("sv");
+	}
+
+	const sortedBookings = [...bookings].sort(bookingSorter);
+
+	async function deleteBooking(indexToRemove, bookingID) {
+		console.log(indexToRemove, bookingID);
+
+		// Es un array de objetos por lo que booking.id es undefined
+		//ordenar los bookins por día y hora .sort()????(done)
+		//una vez pasada la fecha, que no aparezca más en el perfil
+
+		try {
+			let response = await fetch(process.env.BACKEND_URL + `/api/bookings/${bookingID}`, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: "Bearer " + token
+				},
+				method: "DELETE"
+			});
+			const responseJson = response.json();
+			getBooking();
+		} catch (error) {
+			console.log("un error"); //informar al usuario
+			console.log(error);
+		}
 	}
 
 	useEffect(() => {
@@ -101,13 +138,23 @@ export const Profile = () => {
 			<Card className="my-4 booking-profile">
 				<Card.Body>
 					<Card.Title>
-						{bookings.map(booking => {
+						{sortedBookings.map((booking, index) => {
+							console.log(index);
 							return (
-								<span key={booking.id}>
-									{" "}
-									Tu reserva: {booking.day}/{booking.month}/{booking.year} a las {booking.hour}:
-									{booking.minutes}
-								</span>
+								<ul key={booking.id}>
+									<li>
+										<span>
+											{" "}
+											Tu reserva: {booking.day}/{booking.month}/{booking.year} a las{" "}
+											{booking.hour}:{booking.minutes}
+										</span>
+										<i
+											onClick={() => {
+												deleteBooking(index, booking.id);
+											}}
+											className="fas fa-trash-alt delete"></i>
+									</li>
+								</ul>
 							);
 						})}
 					</Card.Title>
@@ -159,7 +206,7 @@ export const Profile = () => {
 						})}
 						<Modal show={show} onHide={handleClose}>
 							<Modal.Header closeButton>
-								<Modal.Title>Cógigo descuento</Modal.Title>
+								<Modal.Title>Código descuento</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>valido en restaurante, sobre productos limitados</Modal.Body>
 							<Modal.Footer>
