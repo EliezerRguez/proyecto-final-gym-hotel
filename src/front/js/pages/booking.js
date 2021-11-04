@@ -33,6 +33,8 @@ export const Booking = () => {
 			if (monthSelected >= actualMonth) {
 				if (daySelected > actualDay) {
 					setShowModal(true);
+				} else {
+					setShowModal(false);
 				}
 			}
 		}
