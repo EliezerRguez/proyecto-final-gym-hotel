@@ -77,7 +77,7 @@ export const Exercise = () => {
 	}
 
 	return (
-		<div className="p-4">
+		<div className="p-3">
 			<Container key={exercise.id}>
 				<span>Ejercicio {exercise.id}</span>
 				<h1>{exercise.name}</h1>
