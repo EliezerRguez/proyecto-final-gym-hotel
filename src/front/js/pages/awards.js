@@ -21,7 +21,7 @@ export const Awards = () => {
 	}, []);
 
 	return (
-		<div className="p-4">
+		<div className="p-3">
 			<h1 className="text-center my-3">INSIGNIAS</h1>
 			<Container>
 				<Row className="text-center">
