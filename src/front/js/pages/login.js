@@ -48,7 +48,7 @@ export const Login = () => {
 
 	return (
 		<div className="container h-100 login p-0">
-			<div className="login-area text-dark h-100 p-4 text-center">
+			<div className="login-area text-dark h-100 p-4 pt-5 text-center">
 				<Row>
 					<Col xs={12} sm={6}>
 						<Image src={require(`../../img/imagen-gym-inicio.png`)} width="90%" />

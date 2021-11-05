@@ -18,12 +18,12 @@ export const Navbars = () => {
 		if (token) {
 			console.log(data.gender);
 			return (
-				<Navbar collapseOnSelect expand="sm" bg="light" variant="light" className="lx-4 p-2 text-light">
-					<Nav.Link href="/profile">
-						<i className="far fa-user text-dark"></i>
-					</Nav.Link>
+				<Navbar expand="sm" bg="light" variant="light" className="lx-4 p-2 text-light w-100">
 					<Nav.Link href="/homepage">
 						<i className="fas fa-home text-dark"></i>
+					</Nav.Link>
+					<Nav.Link href="/profile">
+						<i className="far fa-user text-dark"></i>
 					</Nav.Link>
 					<Nav.Link href="/booking">
 						<i className="far fa-calendar-alt text-dark"></i>

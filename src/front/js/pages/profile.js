@@ -18,9 +18,13 @@ export const Profile = () => {
 	const [show, setShow] = useState(false);
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
+	const [awardselected, setAwardselected] = useState(null);
 
 	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleShow = awardselected => {
+		setAwardselected(awardselected);
+		setShow(true);
+	};
 
 	async function getPlan() {
 		const response = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -175,7 +179,9 @@ export const Profile = () => {
 										<Image
 											src={require(`../../img/icon/${award.image_on}.png`)}
 											width="75"
-											onClick={handleShow}
+											onClick={() => {
+												handleShow(award);
+											}}
 											className="mb-3"
 										/>
 									</Col>
@@ -195,7 +201,11 @@ export const Profile = () => {
 					</Row>
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Body>
-							<Image width="100%" src={require(`../../img/qr_code.png`)}></Image>
+							{awardselected != null ? (
+								<Image
+									width="100%"
+									src={require(`../../img/icon/${awardselected.image_on}.png`)}></Image>
+							) : null}
 						</Modal.Body>
 					</Modal>
 				</Container>
