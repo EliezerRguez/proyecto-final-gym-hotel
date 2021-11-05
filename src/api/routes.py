@@ -89,24 +89,7 @@ def create_booking():
     booking.save()
        
     return jsonify(booking.serialize()), 200
-
-@api.route('/create/gym', methods=['GET'])
-def list_of_gyms():
-
-    gym = Gym(
-     capacity = "10"     
-    )
-    db.session.add(gym)
-    gym2 = Gym(
-     capacity = "5"     
-    )
-    db.session.add(gym2)
-     
-    db.session.commit()
-    gyms = Gym.query.all()
-    gyms = list(map(lambda gym : gym.serialize(), gyms))
-    return jsonify(gyms), 200
-    
+  
        
 
 @api.route('/create/all-things', methods=['GET'])
@@ -498,6 +481,17 @@ def list_of_things():
         total_time = 0
     )
     db.session.add(client3)
+    
+    gym = Gym(
+     capacity = "10"     
+    )
+    db.session.add(gym)
+    
+    gym2 = Gym(
+     capacity = "5"     
+    )
+    db.session.add(gym2)
+     
 
     db.session.commit()
 
@@ -510,6 +504,13 @@ def get_machines():
     machines = list(map(lambda machine : machine.serialize(), machines))
     return jsonify(machines), 200
 
+
+@api.route('/gyms', methods=['GET'])
+def get_gyms():
+
+    gyms = Gym.query.all()
+    gyms = list(map(lambda gym : gym.serialize(), gyms))
+    return jsonify(gyms), 200
 
 @api.route('/exercises', methods=['GET'])
 def get_exercises():
