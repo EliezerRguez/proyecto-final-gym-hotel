@@ -18,7 +18,7 @@ export const Navbars = () => {
 		if (token) {
 			console.log(data.gender);
 			return (
-				<Navbar collapseOnSelect expand="sm" bg="light" variant="light" className="lx-4 p-3 text-light">
+				<Navbar collapseOnSelect expand="sm" bg="light" variant="light" className="lx-4 p-2 text-light">
 					<Nav.Link href="/profile">
 						<i className="far fa-user text-dark"></i>
 					</Nav.Link>
@@ -35,7 +35,7 @@ export const Navbars = () => {
 			);
 		} else {
 			return (
-				<Navbar collapseOnSelect expand="sm" bg="light" variant="light" className="lx-4 p-3 text-light d-none">
+				<Navbar collapseOnSelect expand="sm" bg="light" variant="light" className="lx-4 p-2 text-light d-none">
 					<Nav.Link href="/profile">
 						<i className="far fa-user text-dark"></i>
 					</Nav.Link>
