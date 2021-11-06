@@ -9,7 +9,7 @@ export const Info = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
+		<div className="text-center mt-3 escritorio">
 			<h1>INFORMACIÓN</h1>
 			<br />
 
@@ -28,7 +28,7 @@ export const Info = () => {
 			</Card>
 			<br />
 			<div className="mx-4">
-				<Button className="boton-contacto w-100">CONTACTANOS</Button>
+				<Button className="boton-contacto">CONTACTANOS</Button>
 			</div>
 			<br />
 		</div>

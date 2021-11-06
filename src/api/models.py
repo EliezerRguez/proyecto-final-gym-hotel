@@ -157,7 +157,8 @@ class Award(db.Model):
             "total_time": self.total_time,
             "discount": self.discount,
             "image_on": self.image_on,
-            "image_off": self.image_off
+            "image_off": self.image_off, 
+            "qr-code": self.qr_code
         }
 
 

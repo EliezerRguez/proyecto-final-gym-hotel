@@ -11,21 +11,23 @@ export const Inicio = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="p-4 pt-5 inicio h-100 text-center">
-			<Row>
-				<Col xs={12} sm={6}>
-					<Image src={require(`../../img/imagen-gym-inicio.png`)} width="90%" />
-				</Col>
-				<Col xs={12} sm={6}>
-					<span className="mt-4 text-dark subtitulo">Bienvenido a</span>
-					<h1 className="text-dark titulo">APPTIVATE</h1>
-					<Link to="/login" className="text-center">
-						<Button className="button-inicio w-75" size="lg">
-							¡EMPEZAMOS!
-						</Button>
-					</Link>
-				</Col>
-			</Row>
+		<div className="container h-100 login p-0 escritorio">
+			<div className="p-4 inicio text-center">
+				<Row>
+					<Col xs={12} sm={6}>
+						<Image src={require(`../../img/imagen-gym-inicio.png`)} width="90%" />
+					</Col>
+					<Col xs={12} sm={6} className="bloque-inicio">
+						<span className="mt-4 text-dark subtitulo">Bienvenido a</span>
+						<h1 className="text-dark titulo">APPTIVATE</h1>
+						<Link to="/login" className="text-center">
+							<Button className="button-inicio w-75" size="lg">
+								¡EMPEZAMOS!
+							</Button>
+						</Link>
+					</Col>
+				</Row>
+			</div>
 		</div>
 	);
 };

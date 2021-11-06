@@ -26,10 +26,10 @@ export const PlanConfirmation = () => {
 		getConfirmPlan();
 	}, []);
 	return (
-		<div className="container p-4">
+		<div className="p-4 escritorio">
 			<h5> Has seleccionado: </h5>
 
-			<Card className="plan-hotel">
+			<Card className="plan-hotel-confirmation">
 				<Card.Img src={require(`../../img/imagen-customize.jpg`)} />
 				<Card.Body>
 					<Card.Text>
@@ -42,6 +42,9 @@ export const PlanConfirmation = () => {
 					</Card.Text>
 				</Card.Body>
 			</Card>
+			<Link to="/plans">
+				<Button className="w-100 boton-volver">Volver</Button>
+			</Link>
 		</div>
 	);
 };

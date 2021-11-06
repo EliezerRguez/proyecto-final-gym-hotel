@@ -47,13 +47,13 @@ export const Login = () => {
 	}
 
 	return (
-		<div className="container h-100 login p-0">
-			<div className="login-area text-dark h-100 p-4 pt-5 text-center">
+		<div className="container h-100 login p-0 escritorio">
+			<div className="login-area text-dark h-100 p-4 text-center">
 				<Row>
 					<Col xs={12} sm={6}>
 						<Image src={require(`../../img/imagen-gym-inicio.png`)} width="90%" />
 					</Col>
-					<Col xs={12} sm={6}>
+					<Col xs={12} sm={6} className="bloque-login">
 						<Form onSubmit={login}>
 							<Form.Group className="my-4" controlId="formBasicEmail">
 								<Form.Control

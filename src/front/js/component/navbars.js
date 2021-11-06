@@ -14,9 +14,25 @@ export const Navbars = () => {
 
 	const token = localStorage.getItem("jwt-token");
 
+	async function getData() {
+		const response = await fetch(process.env.BACKEND_URL + "/api/clients", {
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		//console.log(response, "mira esto tb");
+		const responseJson = await response.json();
+		setData(responseJson);
+		console.log(data);
+		//console.log(responseJson.plan, "mira aqui");
+	}
+
+	useEffect(() => {
+		getData();
+	}, []);
+	console.log(data);
 	function navbar() {
 		if (token) {
-			console.log(data.gender);
 			return (
 				<Navbar expand="sm" bg="light" variant="light" className="lx-4 p-2 text-light w-100">
 					<Nav.Link href="/homepage">

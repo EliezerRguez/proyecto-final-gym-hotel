@@ -27,7 +27,7 @@ export const Plans = () => {
 		getPlan();
 	}, []);
 	return (
-		<div className="container p-3">
+		<div className="container p-3 escritorio">
 			<h1>Escoge tu plan </h1>
 			<div className="carouselCards-plan">
 				<Card className="plan-hotel">

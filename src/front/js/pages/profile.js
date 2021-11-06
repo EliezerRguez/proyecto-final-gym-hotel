@@ -121,7 +121,7 @@ export const Profile = () => {
 	};
 
 	return (
-		<div className="container p-4">
+		<div className="container p-4 escritorio">
 			<div key={plan.id}>
 				<span>Empieza tu plan </span>
 				<h5>{plan.name}</h5>
@@ -204,7 +204,7 @@ export const Profile = () => {
 							{awardselected != null ? (
 								<Image
 									width="100%"
-									src={require(`../../img/icon/${awardselected.image_on}.png`)}></Image>
+									src={require(`../../img/icon/${awardselected.qr_code}.png`)}></Image>
 							) : null}
 						</Modal.Body>
 					</Modal>

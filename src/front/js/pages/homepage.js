@@ -8,7 +8,7 @@ export const Homepage = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="px-4 py-3">
+		<div className="px-4 py-3 escritorio">
 			<>
 				<Link to="/profile">
 					<Card className="perfil">
