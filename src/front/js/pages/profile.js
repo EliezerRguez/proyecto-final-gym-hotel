@@ -18,6 +18,11 @@ export const Profile = () => {
 	const [show, setShow] = useState(false);
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
+	const [date, setDate] = useState(new Date());
+	const [day, setDay] = useState(0);
+	const [year, setYear] = useState(0);
+	const [hour, setHour] = useState(0);
+	const [month, setMonth] = useState(0);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -76,6 +81,33 @@ export const Profile = () => {
 	}
 
 	const sortedBookings = [...bookings].sort(bookingSorter);
+
+	function selectBooking(yearSelected, monthSelected, daySelected) {
+		let actualDate = new Date();
+		let actualYear = actualDate.getFullYear();
+		let actualMonth = actualDate.getMonth() + 1;
+		let actualDay = actualDate.getDate();
+
+		console.log(yearSelected, monthSelected, daySelected);
+		if (yearSelected < actualYear) {
+			return false;
+		}
+		if (yearSelected > actualYear) {
+			return true;
+		}
+		if (monthSelected < actualMonth) {
+			return false;
+		}
+		if (monthSelected > actualMonth) {
+			return true;
+		}
+		if (daySelected < actualDay) {
+			return false;
+		}
+		if (daySelected >= actualDay) {
+			return true;
+		}
+	}
 
 	async function deleteBooking(indexToRemove, bookingID) {
 		console.log(indexToRemove, bookingID);
@@ -136,20 +168,23 @@ export const Profile = () => {
 				<Card.Body>
 					<Card.Title>
 						{sortedBookings.map((booking, index) => {
-							console.log(index);
 							return (
 								<ul key={booking.id}>
 									<li>
 										<span>
-											{" "}
-											Tu reserva: {booking.day}/{booking.month}/{booking.year} a las{" "}
-											{booking.hour}:{booking.minutes}
+											{selectBooking(booking.year, booking.month, booking.day)
+												? `Tu
+											reserva: ${booking.day}/${booking.month}/${booking.year} a las ${booking.hour}:
+											${booking.minutes}`
+												: null}
 										</span>
-										<i
-											onClick={() => {
-												deleteBooking(index, booking.id);
-											}}
-											className="fas fa-trash-alt delete"></i>
+										{selectBooking(booking.year, booking.month, booking.day) ? (
+											<i
+												onClick={() => {
+													deleteBooking(index, booking.id);
+												}}
+												className="fas fa-trash-alt delete"></i>
+										) : null}
 									</li>
 								</ul>
 							);

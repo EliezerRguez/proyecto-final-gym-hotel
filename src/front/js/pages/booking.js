@@ -31,7 +31,7 @@ export const Booking = () => {
 		let actualDay = actualDate.getDate();
 		if (yearSelected >= actualYear) {
 			if (monthSelected >= actualMonth) {
-				if (daySelected > actualDay) {
+				if (daySelected >= actualDay) {
 					setShowModal(true);
 				} else {
 					setShowModal(false);
@@ -51,7 +51,7 @@ export const Booking = () => {
 				day: day,
 				year: year,
 				hour: hour,
-				month: month,
+				month: month + 1,
 				minutes: minutes,
 				gym: gym
 			})
