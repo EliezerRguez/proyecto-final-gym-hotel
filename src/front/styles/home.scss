@@ -59,7 +59,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
     .navbar-expand-sm {
         justify-content: center;
     }
-
+ 
     .bloque-inicio, .bloque-login {padding-top: 15%;}
     .plan-hotel {
         min-width: 45%!important;}
@@ -67,8 +67,10 @@ and (-webkit-min-device-pixel-ratio: 1) {
             position: absolute;
             top: 65%!important;}
     .plan-hotel-confirmation {
-        min-width: 45%!important;}
+        min-width:45%!important;
+        max-width: 45%!important;}
     .personal-plan {min-width:30%!important}
     .covid-protocol {width:50%;margin: 0 auto!important}
+    .boton-volver {width:45%}
 
 }

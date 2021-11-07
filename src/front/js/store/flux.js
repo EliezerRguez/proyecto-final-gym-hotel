@@ -16,7 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			plans: [],
 			exercises: [],
-			client_token: null
+			client_token: null,
+			navbar: true
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -44,6 +45,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setClientToken: token => {
 				setStore({ client_token: token });
+			},
+			setShowNavbar: navbar => {
+				setStore({ navbar: navbar });
 			}
 		}
 	};

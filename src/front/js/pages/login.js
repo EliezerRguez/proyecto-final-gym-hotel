@@ -46,6 +46,10 @@ export const Login = () => {
 		}
 	}
 
+	useEffect(() => {
+		actions.setShowNavbar(false);
+	}, []);
+
 	return (
 		<div className="container h-100 login p-0 escritorio">
 			<div className="login-area text-dark h-100 p-4 text-center">

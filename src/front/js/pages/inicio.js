@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/inicio-login.scss";
@@ -9,6 +9,10 @@ import { Col } from "react-bootstrap";
 
 export const Inicio = () => {
 	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.setShowNavbar(false);
+	}, []);
 
 	return (
 		<div className="container h-100 login p-0 escritorio">

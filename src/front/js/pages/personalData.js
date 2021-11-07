@@ -46,6 +46,10 @@ export const PersonalData = () => {
 		if (store.client_token === null) history.push("/login");
 	}, []);
 
+	useEffect(() => {
+		actions.setShowNavbar(false);
+	}, []);
+
 	return (
 		<div className="container personal-data p-0 h-100 escritorio">
 			<div className="container personal-data-area h-100">

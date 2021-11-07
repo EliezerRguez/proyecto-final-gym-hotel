@@ -43,7 +43,7 @@ export const PlanConfirmation = () => {
 				</Card.Body>
 			</Card>
 			<Link to="/plans">
-				<Button className="w-100 boton-volver">Volver</Button>
+				<Button className="boton-volver">Volver</Button>
 			</Link>
 		</div>
 	);
