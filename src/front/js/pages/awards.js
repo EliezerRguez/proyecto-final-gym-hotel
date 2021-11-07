@@ -18,6 +18,7 @@ export const Awards = () => {
 	}
 	useEffect(() => {
 		getAward();
+		actions.setShowNavbar(true);
 	}, []);
 
 	return (

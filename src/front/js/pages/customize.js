@@ -30,6 +30,7 @@ export const Customize = () => {
 
 	useEffect(() => {
 		getAllExercises();
+		actions.setShowNavbar(true);
 	}, []);
 
 	async function SaveIt() {
@@ -88,7 +89,7 @@ export const Customize = () => {
 				</Col>
 				<Col xs={12} sm={6}>
 					<Link to="/plans">
-						<Button className="w-100 boton-volver">Volver</Button>
+						<Button className="w-100 boton-volver-customize">Volver</Button>
 					</Link>
 				</Col>
 			</Row>

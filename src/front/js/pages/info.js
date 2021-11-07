@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -7,6 +7,10 @@ import "../../styles/info.scss";
 
 export const Info = () => {
 	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.setShowNavbar(true);
+	}, []);
 
 	return (
 		<div className="text-center mt-3 escritorio">
@@ -28,7 +32,9 @@ export const Info = () => {
 			</Card>
 			<br />
 			<div className="mx-4">
-				<Button className="boton-contacto">CONTACTANOS</Button>
+				<a className="boton-contacto" href="tel:3478956387">
+					CONTACTANOS
+				</a>
 			</div>
 			<br />
 		</div>

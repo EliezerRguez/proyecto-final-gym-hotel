@@ -19,6 +19,7 @@ export const Profile = () => {
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
 	const [awardselected, setAwardselected] = useState(null);
+	const { store, actions } = useContext(Context);
 
 	const handleClose = () => setShow(false);
 	const handleShow = awardselected => {
@@ -109,6 +110,7 @@ export const Profile = () => {
 		getAward();
 		getTime();
 		getBooking();
+		actions.setShowNavbar(true);
 	}, []);
 
 	const formatTime = () => {
@@ -202,9 +204,17 @@ export const Profile = () => {
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Body>
 							{awardselected != null ? (
-								<Image
-									width="100%"
-									src={require(`../../img/icon/${awardselected.qr_code}.png`)}></Image>
+								<Row>
+									<Col xs={6} sm={3}>
+										<Image
+											className="qr"
+											src={require(`../../img/${awardselected.code}.png`)}></Image>
+									</Col>
+									<Col xs={6} sm={9}>
+										<h5>{awardselected.name}</h5>
+										<p>{awardselected.discount}% de descuento</p>
+									</Col>
+								</Row>
 							) : null}
 						</Modal.Body>
 					</Modal>
