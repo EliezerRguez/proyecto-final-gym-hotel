@@ -27,10 +27,11 @@ export const PersonalPlan = () => {
 
 	useEffect(() => {
 		getExercises();
+		actions.setShowNavbar(true);
 	}, []);
 
 	return (
-		<div className="mt-5">
+		<div className="mt-5 escritorio">
 			<h1 className="text-center">Tu plan de trabajo</h1>
 			<div className="carouselCards">
 				{exercises.map(exercise => {

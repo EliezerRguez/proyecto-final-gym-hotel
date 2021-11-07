@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -7,8 +7,12 @@ import Card from "react-bootstrap/Card";
 export const Homepage = () => {
 	const { store, actions } = useContext(Context);
 
+	useEffect(() => {
+		actions.setShowNavbar(true);
+	}, []);
+
 	return (
-		<div className="px-4 py-3">
+		<div className="px-4 py-3 escritorio">
 			<>
 				<Link to="/profile">
 					<Card className="perfil">

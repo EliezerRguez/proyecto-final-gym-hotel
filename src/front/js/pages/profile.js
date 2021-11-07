@@ -18,14 +18,16 @@ export const Profile = () => {
 	const [show, setShow] = useState(false);
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
-	const [date, setDate] = useState(new Date());
-	const [day, setDay] = useState(0);
-	const [year, setYear] = useState(0);
-	const [hour, setHour] = useState(0);
-	const [month, setMonth] = useState(0);
+
+	const [awardselected, setAwardselected] = useState(null);
+	const { store, actions } = useContext(Context);
+
 
 	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleShow = awardselected => {
+		setAwardselected(awardselected);
+		setShow(true);
+	};
 
 	async function getPlan() {
 		const response = await fetch(process.env.BACKEND_URL + "/api/profile", {
@@ -137,6 +139,7 @@ export const Profile = () => {
 		getAward();
 		getTime();
 		getBooking();
+		actions.setShowNavbar(true);
 	}, []);
 
 	const formatTime = () => {
@@ -149,7 +152,7 @@ export const Profile = () => {
 	};
 
 	return (
-		<div className="container p-4">
+		<div className="container p-4 escritorio">
 			<div key={plan.id}>
 				<span>Empieza tu plan </span>
 				<h5>{plan.name}</h5>
@@ -210,7 +213,9 @@ export const Profile = () => {
 										<Image
 											src={require(`../../img/icon/${award.image_on}.png`)}
 											width="75"
-											onClick={handleShow}
+											onClick={() => {
+												handleShow(award);
+											}}
 											className="mb-3"
 										/>
 									</Col>
@@ -230,7 +235,19 @@ export const Profile = () => {
 					</Row>
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Body>
-							<Image width="100%" src={require(`../../img/qr_code.png`)}></Image>
+							{awardselected != null ? (
+								<Row>
+									<Col xs={6} sm={3}>
+										<Image
+											className="qr"
+											src={require(`../../img/${awardselected.code}.png`)}></Image>
+									</Col>
+									<Col xs={6} sm={9}>
+										<h5>{awardselected.name}</h5>
+										<p>{awardselected.discount}% de descuento</p>
+									</Col>
+								</Row>
+							) : null}
 						</Modal.Body>
 					</Modal>
 				</Container>

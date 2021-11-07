@@ -75,9 +75,13 @@ export const Booking = () => {
 		setMinutes(minutes);
 	}
 
+	useEffect(() => {
+		actions.setShowNavbar(true);
+	}, []);
+
 	console.log(date);
 	return (
-		<div className="text-center pt-3">
+		<div className="text-center pt-3 escritorio">
 			<h2>HAZ TU RESERVA</h2>
 			<div>
 				<Calendar value={date} onChange={NewDate} className="calendar" />

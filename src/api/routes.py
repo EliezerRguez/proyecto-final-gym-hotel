@@ -89,24 +89,7 @@ def create_booking():
     booking.save()
        
     return jsonify(booking.serialize()), 200
-
-@api.route('/create/gym', methods=['GET'])
-def list_of_gyms():
-
-    gym = Gym(
-     capacity = "10"     
-    )
-    db.session.add(gym)
-    gym2 = Gym(
-     capacity = "5"     
-    )
-    db.session.add(gym2)
-     
-    db.session.commit()
-    gyms = Gym.query.all()
-    gyms = list(map(lambda gym : gym.serialize(), gyms))
-    return jsonify(gyms), 200
-    
+  
        
 
 @api.route('/create/all-things', methods=['GET'])
@@ -333,7 +316,7 @@ def list_of_things():
      discount = "5",
      image_on = "002-sport",
      image_off = "002-sport-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award1)
 
@@ -343,7 +326,7 @@ def list_of_things():
      discount = "10",
      image_on = "013-trainers",
      image_off = "013-trainers-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award2)
 
@@ -353,7 +336,7 @@ def list_of_things():
      discount = "12",
      image_on = "020-muscle",
      image_off = "020-muscle-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award3)
 
@@ -363,7 +346,7 @@ def list_of_things():
      discount = "15",
      image_on = "022-barbell",
      image_off = "022-barbell-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award4)
 
@@ -373,7 +356,7 @@ def list_of_things():
      discount = "20",
      image_on = "024-diet",
      image_off = "024-diet-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award5)
 
@@ -383,7 +366,7 @@ def list_of_things():
      discount = "25",
      image_on = "030-agility",
      image_off = "030-agility-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award6)
 
@@ -393,7 +376,7 @@ def list_of_things():
      discount = "30",
      image_on = "031-calendar",
      image_off = "031-calendar-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award7)
 
@@ -403,7 +386,7 @@ def list_of_things():
      discount = "35",
      image_on = "039-whistle",
      image_off = "039-whistle-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award8)
 
@@ -413,7 +396,7 @@ def list_of_things():
      discount = "50",
      image_on = "044-stopwatch",
      image_off = "044-stopwatch-gris",
-     qr_code = "qr_code"
+     code = "qr_code"
     )
     db.session.add(award9)
 
@@ -498,6 +481,17 @@ def list_of_things():
         total_time = 0
     )
     db.session.add(client3)
+    
+    gym = Gym(
+     capacity = "10"     
+    )
+    db.session.add(gym)
+    
+    gym2 = Gym(
+     capacity = "5"     
+    )
+    db.session.add(gym2)
+     
 
     db.session.commit()
 
@@ -510,6 +504,13 @@ def get_machines():
     machines = list(map(lambda machine : machine.serialize(), machines))
     return jsonify(machines), 200
 
+
+@api.route('/gyms', methods=['GET'])
+def get_gyms():
+
+    gyms = Gym.query.all()
+    gyms = list(map(lambda gym : gym.serialize(), gyms))
+    return jsonify(gyms), 200
 
 @api.route('/exercises', methods=['GET'])
 def get_exercises():

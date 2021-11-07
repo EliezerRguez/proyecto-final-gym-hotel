@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Time from "../component/timer";
+import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -12,6 +13,7 @@ export const Exercise = () => {
 	const [exercise, setExercise] = useState([]);
 	const [exerciseExist, setExerciseExist] = useState([]);
 	const [next_exercise_id, setNext_exercise_id] = useState("");
+	const { store, actions } = useContext(Context);
 	const token = localStorage.getItem("jwt-token");
 	const params = useParams();
 
@@ -27,6 +29,7 @@ export const Exercise = () => {
 	useEffect(() => {
 		getSingleExercise();
 		getAllExercises();
+		actions.setShowNavbar(true);
 	}, []);
 
 	useEffect(() => {
@@ -77,7 +80,7 @@ export const Exercise = () => {
 	}
 
 	return (
-		<div className="p-3">
+		<div className="p-3 escritorio">
 			<Container key={exercise.id}>
 				<span>Ejercicio {exercise.id}</span>
 				<h1>{exercise.name}</h1>

@@ -11,7 +11,6 @@ import { Info } from "./pages/info";
 import { Plans } from "./pages/plans";
 import { Awards } from "./pages/awards";
 import { PersonalPlan } from "./pages/personalPlan";
-import { Time } from "./pages/time";
 import { Exercise } from "./pages/exercise";
 import { Booking } from "./pages/booking";
 import { Customize } from "./pages/customize";
@@ -58,9 +57,6 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/awards">
 							<Awards />
-						</Route>
-						<Route exact path="/time">
-							<Time />
 						</Route>
 						<Route path="/plan/:id_plan/exercises/:id_exercise">
 							<Exercise />

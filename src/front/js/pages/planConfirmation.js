@@ -24,12 +24,13 @@ export const PlanConfirmation = () => {
 	}
 	useEffect(() => {
 		getConfirmPlan();
+		actions.setShowNavbar(true);
 	}, []);
-	return (
-		<div className="container p-4">
-			<h5> Has seleccionado: </h5>
 
-			<Card className="plan-hotel">
+	return (
+		<div className="p-4 escritorio">
+			<h5 className="titulo-plan-confirmation"> Has seleccionado: </h5>
+			<Card className="plan-hotel-confirmation">
 				<Card.Img src={require(`../../img/imagen-customize.jpg`)} />
 				<Card.Body>
 					<Card.Text>
@@ -42,6 +43,9 @@ export const PlanConfirmation = () => {
 					</Card.Text>
 				</Card.Body>
 			</Card>
+			<Link to="/plans">
+				<Button className="boton-volver">Volver</Button>
+			</Link>
 		</div>
 	);
 };
