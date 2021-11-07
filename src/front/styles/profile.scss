@@ -20,6 +20,8 @@ ul {padding:0;list-style: none;}
 .boton-profile{background: transparent;border:2px solid #fff;
     border-radius: 12px;}
 
+.boton-profile:hover{background: transparent;border:2px solid #fff;}
+
 .booking-profile {background-color: #fff;
     border-radius: 12px;
     border:none;
@@ -42,4 +44,6 @@ ul {padding:0;list-style: none;}
      box-shadow: 5px 10px 20px #ccc;
     }
 
-    .modal-body {padding:60px}
+    .modal-body {padding:30px}
+
+.qr {width:100%}

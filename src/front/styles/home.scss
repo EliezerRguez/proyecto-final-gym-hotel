@@ -55,7 +55,7 @@ box-shadow: 5px 10px 20px #ccc;
 @media only screen 
 and (min-device-width: 768px) 
 and (-webkit-min-device-pixel-ratio: 1) {
-    .escritorio {width: 1024px;margin: 0 auto;padding-top:10%!important}
+    .escritorio {width: 1024px;margin: 0 auto;padding-top:8%!important}
     .navbar-expand-sm {
         justify-content: center;
     }
@@ -68,9 +68,12 @@ and (-webkit-min-device-pixel-ratio: 1) {
             top: 65%!important;}
     .plan-hotel-confirmation {
         min-width:45%!important;
-        max-width: 45%!important;}
+        max-width: 45%!important;
+    margin-left:25%}
     .personal-plan {min-width:30%!important}
     .covid-protocol {width:50%;margin: 0 auto!important}
-    .boton-volver {width:45%}
+    .boton-volver {width:45%;margin-left:25%}
+    .boton-volver-customize{width:45%}
+    .titulo-plan-confirmation {margin-left:25%}
 
 }

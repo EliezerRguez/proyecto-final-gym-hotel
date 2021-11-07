@@ -25,7 +25,9 @@ export const Plans = () => {
 	}
 	useEffect(() => {
 		getPlan();
+		actions.setShowNavbar(true);
 	}, []);
+
 	return (
 		<div className="container p-3 escritorio">
 			<h1>Escoge tu plan </h1>

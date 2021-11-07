@@ -75,6 +75,10 @@ export const Booking = () => {
 		setMinutes(minutes);
 	}
 
+	useEffect(() => {
+		actions.setShowNavbar(true);
+	}, []);
+
 	console.log(date);
 	return (
 		<div className="text-center pt-3 escritorio">

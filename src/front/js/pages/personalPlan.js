@@ -27,6 +27,7 @@ export const PersonalPlan = () => {
 
 	useEffect(() => {
 		getExercises();
+		actions.setShowNavbar(true);
 	}, []);
 
 	return (
