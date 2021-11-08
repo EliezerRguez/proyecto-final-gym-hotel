@@ -18,13 +18,9 @@ export const Profile = () => {
 	const [show, setShow] = useState(false);
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
-<<<<<<< HEAD
-=======
 
 	const [awardselected, setAwardselected] = useState(null);
 	const { store, actions } = useContext(Context);
-
->>>>>>> 969d5676b792f25830d1e361b965a9f704cafce0
 
 	const handleClose = () => setShow(false);
 	const handleShow = awardselected => {
