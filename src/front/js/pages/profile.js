@@ -22,7 +22,6 @@ export const Profile = () => {
 	const [awardselected, setAwardselected] = useState(null);
 	const { store, actions } = useContext(Context);
 
-
 	const handleClose = () => setShow(false);
 	const handleShow = awardselected => {
 		setAwardselected(awardselected);
@@ -177,8 +176,8 @@ export const Profile = () => {
 										<span>
 											{selectBooking(booking.year, booking.month, booking.day)
 												? `Tu
-											reserva: ${booking.day}/${booking.month}/${booking.year} a las ${booking.hour}:
-											${booking.minutes}`
+											reserva: ${booking.day}/${booking.month}/${booking.year} a las ${`0${booking.hour}`.slice(-2)}:
+											${`0${booking.minutes % 60}`.slice(-2)}`
 												: null}
 										</span>
 										{selectBooking(booking.year, booking.month, booking.day) ? (
