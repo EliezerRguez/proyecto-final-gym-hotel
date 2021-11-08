@@ -36,6 +36,7 @@ export const Login = () => {
 		const data = await response.json();
 		// save your token in the localStorage
 		//also you should set your user into the store using the setStore function
+		console.log(data);
 		localStorage.setItem("jwt-token", data.token);
 		actions.setClientToken(data.token);
 
