@@ -30,6 +30,7 @@ export const Customize = () => {
 
 	useEffect(() => {
 		getAllExercises();
+		actions.setShowNavbar(true);
 	}, []);
 
 	async function SaveIt() {
@@ -49,7 +50,7 @@ export const Customize = () => {
 	}
 
 	return (
-		<div className="p-4">
+		<div className="p-4 escritorio container">
 			<h1>Elige tus ejercicios</h1>
 			<div className="carouselCards">
 				{exercises.map(exercise => {
@@ -78,11 +79,20 @@ export const Customize = () => {
 					);
 				})}
 			</div>
-			<Link to="/booking">
-				<Button className="w-100 boton-ejercicio fw-bold mt-4" onClick={SaveIt}>
-					Añade los ejercicios a mi plan
-				</Button>
-			</Link>
+			<Row>
+				<Col xs={12} sm={6}>
+					<Link to="/booking">
+						<Button className="w-100 boton-ejercicio fw-bold mt-4" onClick={SaveIt}>
+							Añade los ejercicios a mi plan
+						</Button>
+					</Link>
+				</Col>
+				<Col xs={12} sm={6}>
+					<Link to="/plans">
+						<Button className="w-100 boton-volver-customize">Volver</Button>
+					</Link>
+				</Col>
+			</Row>
 		</div>
 	);
 };

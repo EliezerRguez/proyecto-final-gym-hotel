@@ -148,7 +148,7 @@ class Award(db.Model):
     discount = db.Column(db.String(120), unique=False, nullable=False)
     image_on = db.Column(db.String(120), unique=False, nullable=True)
     image_off = db.Column(db.String(120), unique=False, nullable=True)
-    qr_code = db.Column(db.String(120), unique=False, nullable=True)
+    code = db.Column(db.String(120), unique=False, nullable=True)
    
     
     def __repr__(self):
@@ -161,7 +161,8 @@ class Award(db.Model):
             "total_time": self.total_time,
             "discount": self.discount,
             "image_on": self.image_on,
-            "image_off": self.image_off
+            "image_off": self.image_off, 
+            "code": self.code
         }
 
 

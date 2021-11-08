@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -46,14 +46,18 @@ export const Login = () => {
 		}
 	}
 
+	useEffect(() => {
+		actions.setShowNavbar(false);
+	}, []);
+
 	return (
-		<div className="container h-100 login p-0">
+		<div className="container h-100 login p-0 escritorio">
 			<div className="login-area text-dark h-100 p-4 text-center">
 				<Row>
 					<Col xs={12} sm={6}>
 						<Image src={require(`../../img/imagen-gym-inicio.png`)} width="90%" />
 					</Col>
-					<Col xs={12} sm={6}>
+					<Col xs={12} sm={6} className="bloque-login">
 						<Form onSubmit={login}>
 							<Form.Group className="my-4" controlId="formBasicEmail">
 								<Form.Control

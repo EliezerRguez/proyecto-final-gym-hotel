@@ -6,7 +6,7 @@
 
 }
 
-.plan-hotel {min-width:90%;
+.plan-hotel, .plan-hotel-confirmation {min-width:100%;
      position: relative;
      border-radius: 12px;
      border:none;
@@ -23,7 +23,7 @@
     font-size: 15px;
 }
 
-.plan-hotel .exercise-title-confirmation {position: absolute;
+.plan-hotel-confirmation .exercise-title-confirmation {position: absolute;
     top: 48%;
     left: 13px;
     font-size: 15px;
@@ -43,4 +43,7 @@
     background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
     background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1); color:#fff;border-radius: 6px;border:none;
-font-size:14px}
+font-size:16px;font-weight:bold}
+
+.boton-volver, .boton-volver-customize {background: #75c3ff;margin-top:25px; border: none;font-weight:bold}
+.boton-volver:hover, .boton-volver-customize:hover {background: #75c3ff;margin-top:25px; border: none;}
