@@ -18,11 +18,6 @@ export const Profile = () => {
 	const [show, setShow] = useState(false);
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
-	const [date, setDate] = useState(new Date());
-	const [day, setDay] = useState(0);
-	const [year, setYear] = useState(0);
-	const [hour, setHour] = useState(0);
-	const [month, setMonth] = useState(0);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -174,8 +169,8 @@ export const Profile = () => {
 										<span>
 											{selectBooking(booking.year, booking.month, booking.day)
 												? `Tu
-											reserva: ${booking.day}/${booking.month}/${booking.year} a las ${booking.hour}:
-											${booking.minutes}`
+											reserva: ${booking.day}/${booking.month}/${booking.year} a las ${`0${booking.hour}`.slice(-2)}:
+											${`0${booking.minutes % 60}`.slice(-2)}`
 												: null}
 										</span>
 										{selectBooking(booking.year, booking.month, booking.day) ? (

@@ -71,7 +71,7 @@ def create_booking():
         return jsonify("no encontrado")
     capacity= gym.capacity
     capacity_used = Booking.query.filter_by(
-        day=day,year=year,hour=hour,month=month, minutes=minutes, gym = gym
+        day=day,year=year,hour=hour,month=month, minutes=minutes, gym = gym, client_id = current_client_id
     ).count()  
     
     if capacity_used >= capacity:
@@ -83,7 +83,8 @@ def create_booking():
         hour=hour,
         month=month, 
         minutes=minutes,
-        gym = gym
+        gym = gym,
+        client_id = current_client_id
     )
 
     booking.save()
@@ -532,8 +533,10 @@ def get_awards():
     return jsonify(awards), 200
 
 @api.route('/booking', methods=['GET'])
+@jwt_required()
 def get_all_bookings():
-    bookings = Booking.query.all()
+    current_client_id = get_jwt_identity()
+    bookings = Booking.query.filter_by(client_id=current_client_id).all()
     bookings = list(map(lambda booking : booking.serialize(), bookings))
     return jsonify(bookings), 200
 

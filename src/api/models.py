@@ -120,6 +120,9 @@ class Booking(db.Model, SaveAll):
     gym_id = db.Column(db.Integer, db.ForeignKey('gym.id'),
         nullable=False)
     gym = db.relationship('Gym', backref='booking', lazy=True)
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'),
+        nullable=False)
+    client = db.relationship('Client', backref='booking', lazy=True)
     
     def __repr__(self):
         return '<Booking %r>' % self.day
@@ -132,7 +135,8 @@ class Booking(db.Model, SaveAll):
             "minutes": self.minutes,
             "month": self.month,
             "year": self.year,
-            "gym_id": self.gym_id
+            "gym_id": self.gym_id,
+            "client_id": self.client_id
            
         }
 
