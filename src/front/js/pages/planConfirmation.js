@@ -36,9 +36,7 @@ export const PlanConfirmation = () => {
 					<Card.Text>
 						<span className="exercise-title-confirmation text-light fw-bold">{myplan.name}</span>
 						<Link to="/booking">
-							<Button className="w-100 boton-ejercicio-confirmar" size="lg">
-								Reserva tu entrenamiento
-							</Button>
+							<Button className="w-100 boton-ejercicio-confirmar">Reserva tu entrenamiento</Button>
 						</Link>
 					</Card.Text>
 				</Card.Body>

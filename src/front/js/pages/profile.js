@@ -173,7 +173,7 @@ export const Profile = () => {
 							return (
 								<ul key={booking.id}>
 									<li>
-										<span>
+										<span className="reserva-profile">
 											{selectBooking(booking.year, booking.month, booking.day)
 												? `Tu
 											reserva: ${booking.day}/${booking.month}/${booking.year} a las ${`0${booking.hour}`.slice(-2)}:
@@ -185,7 +185,7 @@ export const Profile = () => {
 												onClick={() => {
 													deleteBooking(index, booking.id);
 												}}
-												className="fas fa-trash-alt delete"></i>
+												className="fas fa-trash-alt delete boton-cancelar"></i>
 										) : null}
 									</li>
 								</ul>
@@ -208,24 +208,23 @@ export const Profile = () => {
 						{awards.map(award => {
 							if (time >= award.total_time) {
 								return (
-									<Col xs={4} md={1} key={award.id}>
+									<Col xs={4} sm={1} key={award.id} className="mb-3 mr-3 text-center">
 										<Image
 											src={require(`../../img/icon/${award.image_on}.png`)}
-											width="75"
 											onClick={() => {
 												handleShow(award);
 											}}
-											className="mb-3"
+											className="insignia-profile"
 										/>
 									</Col>
 								);
 							} else {
 								return (
-									<Col xs={4} md={1} key={award.id}>
+									<Col xs={4} sm={1} key={award.id} className="mb-3 mr-3 text-center">
 										<Image
 											src={require(`../../img/icon/${award.image_off}.png`)}
 											width="75"
-											className="mb-3"
+											className="insignia-profile"
 										/>
 									</Col>
 								);
