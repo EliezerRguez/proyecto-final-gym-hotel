@@ -9,15 +9,15 @@
 .boton-lista button, .boton-next:hover button{
     background: #75c3ff;
     padding:10px 50px;
+    width:100%;
     border: none;
     border-radius: 12px;
     box-shadow: 5px 10px 30px #ccc;
 }
 
 .boton-next button, .boton-lista:hover button{
-    background: 
-    #45c6c8
-    ;
+    background:#45c6c8;
+    width:100%;
     padding:10px 30px;
     border: none;
     border-radius: 12px;

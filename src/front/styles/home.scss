@@ -1,3 +1,5 @@
+
+
 .perfil {
     background-image:url("../img/home-bloque-1.jpg");
     background-position: center;
@@ -11,12 +13,11 @@
     background-position: top;
     background-size: cover;}
 
-    .award {background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
-        background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
-        background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ec9fff",endColorstr="#45c6c8",GradientType=1); color:#fff;border-radius: 12px 12px 12px 12px;border:none}
+    .award {background-image:url("../img/home-bloque-4.jpg");
+        background-position: center;
+        background-size: cover}
 
-.perfil, .info, .plan{
+.perfil, .info, .plan, .award{
 /*background: -moz-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
 background: -webkit-linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
 background: linear-gradient(325deg, rgba(236,159,255,1) 0%, rgba(117,195,255,1) 50%, rgba(69,198,200,1) 100%);
@@ -29,7 +30,7 @@ border: none;
 box-shadow: 5px 10px 20px #ccc;
 }
 
-.faldon-perfil, .faldon-info, .faldon-plan {
+.faldon-perfil, .faldon-info, .faldon-plan, .faldon-award {
     position: absolute;
     bottom:0;
     width: 100%;
@@ -40,11 +41,9 @@ box-shadow: 5px 10px 20px #ccc;
     color:#fff
 }
 
-.faldon-award span {font-size: 16px;}
-
 .faldon-perfil span, .faldon-info span, .faldon-plan span, .faldon-award span {padding-top:10px;font-weight: 700;}
 
-.faldon-perfil span, .faldon-info span, .faldon-plan span{font-size: 30px}
+.faldon-perfil span, .faldon-info span, .faldon-plan span, .faldon-award span {font-size: 22px}
 
 .contenedor-insignias {border-radius: 12px;
     border: none;
@@ -52,28 +51,3 @@ box-shadow: 5px 10px 20px #ccc;
 
 .insignias-texto {font-size: 13px;}
 
-@media only screen 
-and (min-device-width: 768px) 
-and (-webkit-min-device-pixel-ratio: 1) {
-    .escritorio {width: 1024px;margin: 0 auto;padding-top:8%!important}
-    .navbar-expand-sm {
-        justify-content: center;
-    }
- 
-    .bloque-inicio, .bloque-login {padding-top: 15%;}
-    .plan-hotel {
-        min-width: 45%!important;}
-        .plan-hotel .exercise-title {
-            position: absolute;
-            top: 56%!important;}
-    .plan-hotel-confirmation {
-        min-width:45%!important;
-        max-width: 45%!important;
-    margin-left:25%}
-    .personal-plan {min-width:30%!important}
-    .covid-protocol {width:50%;margin: 0 auto!important}
-    .boton-volver {width:45%;margin-left:25%}
-    .boton-volver-customize{width:45%}
-    .titulo-plan-confirmation {margin-left:25%}
-
-}
