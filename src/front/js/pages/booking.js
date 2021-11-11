@@ -9,6 +9,7 @@ import Card from "react-bootstrap/Card";
 import { useHistory } from "react-router-dom";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import swal from "sweetalert";
 
 export const Booking = () => {
 	const { store, actions } = useContext(Context);
@@ -21,8 +22,13 @@ export const Booking = () => {
 	const [minutes, setMinutes] = useState(0);
 	const [gym, setGym] = useState(1);
 	const [showModal, setShowModal] = useState(false);
+
 	const token = localStorage.getItem("jwt-token");
 	let history = useHistory();
+
+	const confirmationBookingAlert = () => {
+		swal({ text: "Booking exitoso", icon: "success", button: false, timer: "2000" });
+	};
 
 	function selectBooking(yearSelected, monthSelected, daySelected) {
 		let actualDate = new Date();
@@ -56,6 +62,7 @@ export const Booking = () => {
 				gym: gym
 			})
 		});
+		confirmationBookingAlert();
 		console.log(response);
 		const responseJson = await response.json();
 		history.push("/profile");
@@ -67,7 +74,6 @@ export const Booking = () => {
 		setMonth(date.getMonth());
 		setDay(date.getDate());
 		selectBooking(date.getFullYear(), date.getMonth() + 1, date.getDate());
-		console.log("!!!", { date });
 	};
 
 	function hourClicked(hour, minutes) {
