@@ -10,17 +10,19 @@ import Image from "react-bootstrap/Image";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import "../../styles/profile.scss";
+import swal from "sweetalert";
 
 export const Profile = () => {
 	const [plan, setPlan] = useState([]);
 	const [time, setTime] = useState([]);
-	const token = localStorage.getItem("jwt-token");
 	const [show, setShow] = useState(false);
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
+	const [bookingIdToDelete, setBookingIdToDelete] = useState(null);
 
 	const [awardselected, setAwardselected] = useState(null);
 	const { store, actions } = useContext(Context);
+	const token = localStorage.getItem("jwt-token");
 
 	const handleClose = () => setShow(false);
 	const handleShow = awardselected => {
@@ -110,13 +112,7 @@ export const Profile = () => {
 		}
 	}
 
-	async function deleteBooking(indexToRemove, bookingID) {
-		console.log(indexToRemove, bookingID);
-
-		// Es un array de objetos por lo que booking.id es undefined
-		//ordenar los bookins por día y hora .sort()????(done)
-		//una vez pasada la fecha, que no aparezca más en el perfil
-
+	async function deleteBooking(bookingID) {
 		try {
 			let response = await fetch(process.env.BACKEND_URL + `/api/bookings/${bookingID}`, {
 				headers: {
@@ -130,6 +126,25 @@ export const Profile = () => {
 		} catch (error) {
 			console.log("un error"); //informar al usuario
 			console.log(error);
+		}
+	}
+
+	async function deleteBookingAlert(bookingID) {
+		let willDelete = await swal({
+			title: "Estas seguro de que quieres eliminar la reserva?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true
+		});
+		if (willDelete) {
+			deleteBooking(bookingID);
+			swal("Tú reserva sé ha eliminado", {
+				icon: "success",
+				button: false,
+				timer: "2000"
+			});
+		} else {
+			swal("Tu reserva no sé ha eliminado", { button: false, timer: "2000" });
 		}
 	}
 
@@ -149,7 +164,13 @@ export const Profile = () => {
 
 		return `${getHours} : ${getMinutes} : ${getSeconds}`;
 	};
-
+	let filteredBookings = sortedBookings.filter(sortedBooking => {
+		if (selectBooking(sortedBooking.year, sortedBooking.month, sortedBooking.day)) {
+			return true;
+		} else {
+			return false;
+		}
+	});
 	return (
 		<div className="container p-4 escritorio">
 			<div key={plan.id}>
@@ -169,7 +190,7 @@ export const Profile = () => {
 			<Card className="my-4 booking-profile">
 				<Card.Body>
 					<Card.Title>
-						{sortedBookings.map((booking, index) => {
+						{filteredBookings.map((booking, index) => {
 							return (
 								<ul key={booking.id}>
 									<li>
@@ -183,7 +204,9 @@ export const Profile = () => {
 										{selectBooking(booking.year, booking.month, booking.day) ? (
 											<i
 												onClick={() => {
-													deleteBooking(index, booking.id);
+													setBookingIdToDelete(booking.id);
+													console.log(booking.id + "holii");
+													deleteBookingAlert(booking.id);
 												}}
 												className="fas fa-trash-alt delete boton-cancelar"></i>
 										) : null}

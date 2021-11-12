@@ -22,6 +22,7 @@ export const Booking = () => {
 	const [minutes, setMinutes] = useState(0);
 	const [gym, setGym] = useState(1);
 	const [showModal, setShowModal] = useState(false);
+	const [colorCalendar, setColorCalendar] = useState("");
 
 	const token = localStorage.getItem("jwt-token");
 	let history = useHistory();
@@ -30,19 +31,36 @@ export const Booking = () => {
 		swal({ text: "Booking exitoso", icon: "success", button: false, timer: "2000" });
 	};
 
+	const confirmationBookingAlertError = () => {
+		swal({ text: "Booking erroneo", icon: "error", button: false, timer: "2000" });
+	};
+
+	function validateInput() {
+		console.log(hour, minutes);
+		if (hour != 0) {
+			createBooking();
+		} else {
+			confirmationBookingAlertError();
+		}
+	}
+
 	function selectBooking(yearSelected, monthSelected, daySelected) {
 		let actualDate = new Date();
 		let actualYear = actualDate.getFullYear();
 		let actualMonth = actualDate.getMonth() + 1;
 		let actualDay = actualDate.getDate();
-		if (yearSelected >= actualYear) {
-			if (monthSelected >= actualMonth) {
-				if (daySelected >= actualDay) {
-					setShowModal(true);
-				} else {
-					setShowModal(false);
-				}
+		if (yearSelected == actualYear) {
+			if (monthSelected > actualMonth) {
+				setShowModal(true);
+			} else if (monthSelected == actualMonth && daySelected >= actualDay) {
+				setShowModal(true);
+			} else {
+				setShowModal(false);
 			}
+		} else if (yearSelected > actualYear) {
+			setShowModal(true);
+		} else {
+			setShowModal(false);
 		}
 	}
 
@@ -63,17 +81,19 @@ export const Booking = () => {
 			})
 		});
 		confirmationBookingAlert();
-		console.log(response);
 		const responseJson = await response.json();
 		history.push("/profile");
 		return responseJson;
 	}
 
 	const NewDate = date => {
+		setHour(0);
+		setMinutes(0);
 		setYear(date.getFullYear());
 		setMonth(date.getMonth());
 		setDay(date.getDate());
 		selectBooking(date.getFullYear(), date.getMonth() + 1, date.getDate());
+		colorCalendar.classList.remove("color-date-now");
 	};
 
 	function hourClicked(hour, minutes) {
@@ -83,9 +103,11 @@ export const Booking = () => {
 
 	useEffect(() => {
 		actions.setShowNavbar(true);
+		let colorDateNow = document.querySelector(".react-calendar__tile--now");
+		setColorCalendar(colorDateNow);
+		colorDateNow.classList.add("color-date-now");
 	}, []);
 
-	console.log(date);
 	return (
 		<div className="text-center pt-3 escritorio">
 			<h2>HAZ TU RESERVA</h2>
@@ -209,7 +231,7 @@ export const Booking = () => {
 							</Row>
 						</div>
 						<div>
-							<Button className="book" onClick={createBooking}>
+							<Button className="book" onClick={validateInput}>
 								Reservar
 							</Button>
 						</div>
