@@ -131,14 +131,14 @@ export const Profile = () => {
 
 	async function deleteBookingAlert(bookingID) {
 		let willDelete = await swal({
-			title: "Estas seguro de que quieres eliminar la reserva?",
+			title: "¿Estás seguro de que quieres eliminar la reserva?",
 			icon: "warning",
 			buttons: true,
 			dangerMode: true
 		});
 		if (willDelete) {
 			deleteBooking(bookingID);
-			swal("Tú reserva se ha eliminado", {
+			swal("Tu reserva se ha eliminado", {
 				icon: "success",
 				button: false,
 				timer: "2000"
