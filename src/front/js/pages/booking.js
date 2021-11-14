@@ -28,11 +28,11 @@ export const Booking = () => {
 	let history = useHistory();
 
 	const confirmationBookingAlert = () => {
-		swal({ text: "Booking exitoso", icon: "success", button: false, timer: "2000" });
+		swal({ text: "Reserva realizada", icon: "success", button: false, timer: "2000" });
 	};
 
 	const confirmationBookingAlertError = () => {
-		swal({ text: "Booking erroneo", icon: "error", button: false, timer: "2000" });
+		swal({ text: "Selecciona una hora para reservar", icon: "error", button: false, timer: "2000" });
 	};
 
 	function validateInput() {

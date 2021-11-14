@@ -138,13 +138,13 @@ export const Profile = () => {
 		});
 		if (willDelete) {
 			deleteBooking(bookingID);
-			swal("Tú reserva sé ha eliminado", {
+			swal("Tú reserva se ha eliminado", {
 				icon: "success",
 				button: false,
 				timer: "2000"
 			});
 		} else {
-			swal("Tu reserva no sé ha eliminado", { button: false, timer: "2000" });
+			swal("Tu reserva no se ha eliminado", { button: false, timer: "2000" });
 		}
 	}
 
