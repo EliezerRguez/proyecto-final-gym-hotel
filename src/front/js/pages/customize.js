@@ -49,13 +49,19 @@ export const Customize = () => {
 		return responseJson;
 	}
 
+	const handledClick = exerciseId => {
+		const checkBox = document.querySelector(`#checkBox${exerciseId}`);
+		checkBox.checked = !checkBox.checked;
+		actions.addExercises(exerciseId);
+	};
+
 	return (
 		<div className="p-4 escritorio container">
 			<h1>Elige tus ejercicios</h1>
 			<div className="carouselCards">
 				{exercises.map(exercise => {
 					return (
-						<Card className="personal-plan" key={exercise.id}>
+						<Card className="personal-plan" key={exercise.id} onClick={() => handledClick(exercise.id)}>
 							<Card.Img src={require(`../../img/exercises/${exercise.imagen}.jpg`)} />
 							<Card.Body>
 								<Card.Text>
@@ -66,9 +72,8 @@ export const Customize = () => {
 										{exercise.time} minutos{" "}
 									</span>
 									<Form.Check
-										onChange={() => {
-											actions.addExercises(exercise.id);
-										}}
+										id={`checkBox${exercise.id}`}
+										onClick={() => handledClick(exercise.id)}
 										className="inline"
 										aria-label="option 1"
 										value="ok"
