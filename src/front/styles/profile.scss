@@ -48,7 +48,9 @@ ul {padding:0;list-style: none;}
 
 .reserva-profile {margin-right: 20px;}
 
-.boton-cancelar {padding:8px 10px;border:1px solid rgba(236,159,255,1);border-radius:6px; color:rgba(236,159,255,1)}
+.boton-cancelar {padding:8px 10px;border:1px solid rgb(223, 0, 30);border-radius:6px; color:rgb(223, 0, 30)}
+
+.boton-cancelar:hover {border:1px solid rgb(223, 0, 30); color:#fff; background-color: rgb(223, 0, 30);}
 
 .qr {width:100%}
 
