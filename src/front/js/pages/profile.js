@@ -19,6 +19,7 @@ export const Profile = () => {
 	const [awards, setAwards] = useState([]);
 	const [bookings, setBookings] = useState([]);
 	const [bookingIdToDelete, setBookingIdToDelete] = useState(null);
+	const [qr, setQr] = useState("");
 
 	const [awardselected, setAwardselected] = useState(null);
 	const { store, actions } = useContext(Context);
@@ -261,7 +262,7 @@ export const Profile = () => {
 									<Col xs={6} sm={3}>
 										<Image
 											className="qr"
-											src={require(`../../img/${awardselected.code}.png`)}></Image>
+											src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example"></Image>
 									</Col>
 									<Col xs={6} sm={9}>
 										<h5>{awardselected.name}</h5>
