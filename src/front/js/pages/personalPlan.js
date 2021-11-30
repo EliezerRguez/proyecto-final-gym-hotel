@@ -19,10 +19,9 @@ export const PersonalPlan = () => {
 				Authorization: "Bearer " + token
 			}
 		});
-		console.log(response);
+
 		const responseJson = await response.json();
 		setExercises(responseJson);
-		console.log(responseJson);
 	}
 
 	useEffect(() => {

@@ -5,7 +5,6 @@ import Card from "react-bootstrap/Card";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
-//import Accordion from "react-bootstrap/Accordion";
 import Image from "react-bootstrap/Image";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
@@ -37,10 +36,9 @@ export const Profile = () => {
 				Authorization: "Bearer " + token
 			}
 		});
-		//console.log(response, "mira esto tb");
+
 		const responseJson = await response.json();
 		setPlan(responseJson.plan);
-		//console.log(responseJson.plan, "mira aqui");
 	}
 
 	async function getAward() {
