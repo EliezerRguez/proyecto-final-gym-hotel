@@ -259,7 +259,7 @@ export const Profile = () => {
 									<Col xs={6} sm={3}>
 										<Image
 											className="qr"
-											src={require(`../../img/${awardselected.code}.png`)}></Image>
+											src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${awardselected.name}`}></Image>
 									</Col>
 									<Col xs={6} sm={9}>
 										<h5>{awardselected.name}</h5>
