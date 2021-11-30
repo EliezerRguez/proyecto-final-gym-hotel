@@ -54,7 +54,11 @@ export const PersonalData = () => {
 		<div className="container personal-data p-0 h-100 escritorio">
 			<div className="container personal-data-area h-100">
 				<Form onSubmit={getPersonalData}>
-					<h1>PERSONAL DATA</h1>
+					<h1>DATOS PERSONALES</h1>
+					<p>
+						Para mostrarte el plan que más se adapta a tus necesidades, necesitamos conocer algunas
+						características físicas y tu nivel de ejercicio diario:
+					</p>
 					<Form.Group as={Row} className="mb-3" controlId="formHorizontalNumber">
 						<Form.Label column sm={2}>
 							Altura en cm
@@ -85,7 +89,7 @@ export const PersonalData = () => {
 					<fieldset>
 						<Form.Group as={Row} className="mb-3">
 							<Form.Label as="legend" column sm={2}>
-								Género
+								Cuerpo
 							</Form.Label>
 							<Col sm={10}>
 								<Form.Check
